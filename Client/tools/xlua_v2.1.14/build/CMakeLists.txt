@@ -98,6 +98,21 @@ set ( LUA_SOCKET
     luasocket/udp.c 
 )
 
+#begin sproto
+set (SPROTO_SRC
+    sproto/sproto.c
+    sproto/lsproto.c
+)
+set_property(
+    SOURCE ${SPROTO_SRC}
+    APPEND
+    PROPERTY COMPILE_DEFINITIONS
+    LUA_LIB
+)
+list(APPEND THIRDPART_INC sproto)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${SPROTO_SRC})
+#end sproto
+
 if ( WIN32 AND NOT CYGWIN )
     list (APPEND LUA_SOCKET luasocket/wsocket.c)
 else ( )
