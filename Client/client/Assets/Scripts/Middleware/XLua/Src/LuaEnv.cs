@@ -117,7 +117,8 @@ namespace XLua
 #endif
 
                 AddBuildin("CS", StaticLuaCallbacks.LoadCS);
-
+                AddBuildin("sproto", StaticLuaCallbacks.LoadSproto);
+                
                 LuaAPI.lua_newtable(rawL); //metatable of indexs and newindexs functions
                 LuaAPI.xlua_pushasciistring(rawL, "__index");
                 LuaAPI.lua_pushstdcallcfunction(rawL, StaticLuaCallbacks.MetaFuncIndex);

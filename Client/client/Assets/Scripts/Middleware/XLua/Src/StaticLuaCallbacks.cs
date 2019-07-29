@@ -652,6 +652,12 @@ namespace XLua
             return 1;
         }
 
+        [MonoPInvokeCallback(typeof(LuaDLL.lua_CSFunction))]
+        public static int LoadSproto(RealStatePtr L)
+        {
+            return LuaAPI.luaopen_sproto(L);
+        }
+
         [MonoPInvokeCallback(typeof(LuaCSFunction))]
         internal static int LoadBuiltinLib(RealStatePtr L)
         {

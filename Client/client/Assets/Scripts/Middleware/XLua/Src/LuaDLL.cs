@@ -57,7 +57,16 @@ namespace XLua.LuaDLL
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int lua_pushthread(IntPtr L);
 
-		public static bool lua_isfunction(IntPtr L, int stackPos)
+        /// <summary>
+        /// sproto
+        /// </summary>
+        /// <param name="L"></param>
+        /// <param name="stackPos"></param>
+        /// <returns></returns>
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int luaopen_sproto(IntPtr L);
+
+        public static bool lua_isfunction(IntPtr L, int stackPos)
 		{
 			return lua_type(L, stackPos) == LuaTypes.LUA_TFUNCTION;
 		}
