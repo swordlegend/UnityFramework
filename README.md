@@ -1,13 +1,16 @@
-# UnityFramework
+#UnityFramework
 
-# 1. xlua集成sproto (完成待测试)
+#1. xlua集成sproto通信协议 (完成待测试)
 
-# 2. c#增加通信模块
+#2. c#增加通信模块
 
-# 3. Unity和skynet通信
+#3. Unity和skynet通信
 
-# 4. 为lua增加mvc的ui模块  
+#4. 为lua增加mvc的ui模块  
 
-# 5. 增加日志系统
+#5. 增加日志系统
 
-  
+#6. 测试集成flatbuffer通信协议
+
+#7. 增加跨平台输入系统
+
