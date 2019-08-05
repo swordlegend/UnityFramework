@@ -262,11 +262,13 @@ namespace gtmEngine.Net
         {
             BinaryReader r = new BinaryReader(ms);
             byte[] message = r.ReadBytes((int)(ms.Length - ms.Position));
+
             ByteBuffer buffer = new ByteBuffer(message);
-            int mainId = buffer.ReadShort();
-            int pbDataLen = message.Length - 2;
-            byte[] pbData = buffer.ReadBytes(pbDataLen);
-            NetManager.instance.DispatchProto(mainId, pbData);
+
+            //int mainId = buffer.ReadShort();
+            //int pbDataLen = message.Length - 2;
+            //byte[] pbData = buffer.ReadBytes(pbDataLen);
+            //NetManager.instance.DispatchProto(mainId, pbData);
         }
 
         /// <summary>
