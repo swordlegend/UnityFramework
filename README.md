@@ -18,6 +18,8 @@
 
 9. 3dui的实现，ugui使用world space的render mode （实现如头顶气泡，头顶名字的功能）
 
+10. unity显示xlua的报错堆栈(能快速定位问题)
 
+11. 游戏加入状态机管理
 
 
