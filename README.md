@@ -1,18 +1,20 @@
 # UnityFramework
 
-1. xlua集成sproto通信协议 (完成待测试)
+1. xlua集成sproto通信协议 (完成不使用,xlua移除掉)
 
 2. c#增加通信模块 (完成待测试)
 
-3. Unity和skynet通信, 使用sproto, 参考tolua
+3. c# 集成flatbuffer
 
-4. 为lua增加mvc的ui模块 
+4. xlua集成flatbuffer通信协议(公司使用)
+
+3. Unity和skynet通信, 使用flatbuffer
+
+4. 为lua增加mvc的ui模块
 
 5. 增加日志系统 
 
-6. 测试集成flatbuffer通信协议 
-
-7. 增加跨平台输入系统(不使用ui) 
+7. 增加跨平台输入系统(不使用ui)
 
 8. 单机模式登陆（方便测试跑游戏）
 
@@ -22,7 +24,7 @@
 
 11. 游戏加入状态机管理
 
-12. TestSvn
+
 
 
 
