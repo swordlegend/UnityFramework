@@ -6,6 +6,8 @@
 
 3. c# 集成flatbuffer
 
+4. skynet集成flatbuffer
+
 4. xlua集成flatbuffer通信协议(公司使用)
 
 3. Unity和skynet通信, 使用flatbuffer
@@ -23,6 +25,12 @@
 10. unity显示xlua的报错堆栈(能快速定位问题)
 
 11. 游戏加入状态机管理
+
+12. ui增加敏感字检测
+
+13. ui增加avatar的rt显示
+
+
 
 
 
