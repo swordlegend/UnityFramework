@@ -1,4 +1,7 @@
 
 
 2019/8/10
-MsgDistribution 
+MsgDistribution
+
+public ulong HashCode { get { return Name.GetHashCode(); } }
+

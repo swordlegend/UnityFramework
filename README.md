@@ -4,7 +4,9 @@
 
 2. c#增加通信模块 (完成待测试)
 
-3. c# 集成flatbuffer
+3. c# 集成flatbuffer 
+
+4. python开发flatbuffer消息id自动生成工具
 
 4. skynet集成flatbuffer
 
