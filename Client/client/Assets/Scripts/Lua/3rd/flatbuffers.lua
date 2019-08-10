@@ -6,3 +6,4 @@ m.view = require("flatbuffers.view")
 m.binaryArray = require("flatbuffers.binaryarray")
 
 return m
+

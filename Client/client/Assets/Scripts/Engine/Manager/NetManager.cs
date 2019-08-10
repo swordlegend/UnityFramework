@@ -8,7 +8,6 @@ using gtmInterface;
 namespace gtmEngine
 {
     
-
     public class NetManager : Singleton<NetManager>, INetManager
     {
         #region 变量
