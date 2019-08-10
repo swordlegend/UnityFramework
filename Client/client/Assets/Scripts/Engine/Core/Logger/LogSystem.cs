@@ -76,7 +76,7 @@ namespace gtmEngine
     {
         public bool EnableLog = true;
         public bool EnableTime = true;
-        public bool EnableSave = true;
+        public bool EnableSave = false;
         public bool EnableStack = false;
         public string LogFileDir = "";
         public string LogFileName = "";

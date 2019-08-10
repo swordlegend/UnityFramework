@@ -18,7 +18,7 @@ namespace gtmGame
         // Start is called before the first frame update
         void Start()
         {
-            logsystem.Log("11111111111111");
+                    
         }
 
         // Update is called once per frame

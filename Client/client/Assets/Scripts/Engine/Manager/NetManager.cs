@@ -7,8 +7,6 @@ using gtmInterface;
 
 namespace gtmEngine
 {
-    //public delegate void TocHandler(object data);
-
     public class NetManager : Singleton<NetManager>, INetManager
     {
         #region 变量
@@ -17,11 +15,6 @@ namespace gtmEngine
         /// Socket
         /// </summary>
         private SocketClient mSocketClient = new SocketClient();
-
-        /// <summary>
-        /// 回调消息表
-        /// </summary>
-        //private Dictionary<Type, TocHandler> mHandlerDict = new Dictionary<Type, TocHandler>();
 
         /// <summary>
         /// 事件队列
@@ -135,6 +128,30 @@ namespace gtmEngine
         }
 
         /// <summary>
+        /// 刷新事件队列
+        /// </summary>
+        private void UpdateEventQueue()
+        {
+            if (mEventQueue.Count <= 0)
+                return;
+
+            while (mEventQueue.Count > 0)
+            {
+                KeyValuePair<int, ByteBuffer> _event = mEventQueue.Dequeue();
+                            
+            }
+        }
+
+        #endregion
+
+        //public delegate void TocHandler(object data);
+
+        /// <summary>
+        /// 回调消息表
+        /// </summary>
+        //private Dictionary<Type, TocHandler> mHandlerDict = new Dictionary<Type, TocHandler>();
+
+        /// <summary>
         /// 派发协议
         /// </summary>
         /// <param name="protoId"></param>
@@ -212,23 +229,6 @@ namespace gtmEngine
         //    buff.WriteBytes(result);
         //    SendMessage(buff);
         //}
-
-        /// <summary>
-        /// 刷新事件队列
-        /// </summary>
-        private void UpdateEventQueue()
-        {
-            if (mEventQueue.Count <= 0)
-                return;
-
-            while (mEventQueue.Count > 0)
-            {
-                KeyValuePair<int, ByteBuffer> _event = mEventQueue.Dequeue();
-                            
-            }
-        }
-
-        #endregion
 
     }
 }
