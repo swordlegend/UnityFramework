@@ -20,17 +20,8 @@ namespace gtmEngine
         /// <summary>
         /// 事件队列
         /// </summary>
-        private static Queue<ByteBuffer> mEventQueue = new Queue<ByteBuffer>();
+        private static Queue<KeyValuePair<ushort, byte[]>> mEventQueue = new Queue<KeyValuePair<ushort, byte[]>>();
 
-
-        private GameEvent<ByteBuffer> mMsgEvent = new GameEvent<ByteBuffer>();
-        /// <summary>
-        /// 消息事件
-        /// </summary>
-        public GameEvent<ByteBuffer> msgEvent
-        {
-            get { return mMsgEvent; }
-        }
         
         #endregion
 
@@ -131,13 +122,12 @@ namespace gtmEngine
         /// <summary>
         /// 增加事件
         /// </summary>
-        /// <param name="_event"></param>
-        /// <param name="data"></param>
-        public void AddEvent(ByteBuffer data)
+        /// <param name="bytearray"></param>
+        public void AddEvent(ushort msgid, byte[] bytearray)
         {
             lock (mEventQueue)
             {
-                mEventQueue.Enqueue(data);
+                mEventQueue.Enqueue(new KeyValuePair<ushort, byte[]>(msgid, bytearray));
             }
         }
 
@@ -151,8 +141,8 @@ namespace gtmEngine
 
             while (mEventQueue.Count > 0)
             {
-                ByteBuffer _event = mEventQueue.Dequeue();
-                mMsgEvent.Invoke(_event);            
+                KeyValuePair<ushort, byte[]> keyvaleupair = mEventQueue.Dequeue();
+                MsgDispatcher.instance.Dispatcher(keyvaleupair.Key, keyvaleupair.Value);                        
             }
         }
 

@@ -227,11 +227,15 @@ namespace gtmEngine.Net
                 ushort messageLen = mReader.ReadUInt16();
                 if (RemainingBytes() >= messageLen)
                 {
-                    MemoryStream ms = new MemoryStream();
-                    BinaryWriter writer = new BinaryWriter(ms);
-                    writer.Write(mReader.ReadBytes(messageLen));
-                    ms.Seek(0, SeekOrigin.Begin);
-                    OnReceivedMessage(ms);
+                    ushort msgid = mReader.ReadUInt16();
+                    byte[] bytearray = mReader.ReadBytes(messageLen);
+                    OnReceivedMessage(msgid, bytearray);
+
+                    //MemoryStream ms = new MemoryStream();
+                    //BinaryWriter writer = new BinaryWriter(ms);
+                    //writer.Write(mReader.ReadBytes(messageLen));
+                    //ms.Seek(0, SeekOrigin.Begin);
+                    //OnReceivedMessage(ms);
                 }
                 else
                 {
@@ -257,19 +261,24 @@ namespace gtmEngine.Net
         /// 接收到消息
         /// </summary>
         /// <param name="ms"></param>
-        void OnReceivedMessage(MemoryStream ms)
+        void OnReceivedMessage(ushort msgid, byte[] bytearray)
         {
-            BinaryReader r = new BinaryReader(ms);
-            byte[] message = r.ReadBytes((int)(ms.Length - ms.Position));
-
-            ByteBuffer buffer = new ByteBuffer(message);
-            NetManager.instance.AddEvent(buffer);
-
-            //int mainId = buffer.ReadShort();
-            //int pbDataLen = message.Length - 2;
-            //byte[] pbData = buffer.ReadBytes(pbDataLen);
-            //NetManager.instance.DispatchProto(mainId, pbData);
+            NetManager.instance.AddEvent(msgid, bytearray);
         }
+
+        //void OnReceivedMessage(MemoryStream ms)
+        //{
+        //    BinaryReader r = new BinaryReader(ms);
+        //    byte[] message = r.ReadBytes((int)(ms.Length - ms.Position));
+
+        //    ByteBuffer buffer = new ByteBuffer(message);
+        //    NetManager.instance.AddEvent(buffer);
+
+        //    //int mainId = buffer.ReadShort();
+        //    //int pbDataLen = message.Length - 2;
+        //    //byte[] pbData = buffer.ReadBytes(pbDataLen);
+        //    //NetManager.instance.DispatchProto(mainId, pbData);
+        //}
 
         /// <summary>
         /// 会话发送
