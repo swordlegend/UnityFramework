@@ -263,8 +263,7 @@ namespace gtmEngine.Net
             byte[] message = r.ReadBytes((int)(ms.Length - ms.Position));
 
             ByteBuffer buffer = new ByteBuffer(message);
-            int mainId = buffer.ReadShort();
-            NetManager.instance.AddEvent(mainId, buffer);
+            NetManager.instance.AddEvent(buffer);
 
             //int mainId = buffer.ReadShort();
             //int pbDataLen = message.Length - 2;

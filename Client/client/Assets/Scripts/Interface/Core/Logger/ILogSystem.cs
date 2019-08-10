@@ -9,9 +9,8 @@ namespace gtmInterface
         string LOG_TAG { get; }
     }
 
-    public interface ILogSystem
+    public interface ILogSystem : IManager
     {      
-
         void Log(object obj);
 
         void Log(string message);

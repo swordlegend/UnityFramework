@@ -9,22 +9,23 @@ namespace gtmGame
 {
     public class main : MonoBehaviour
     {
-        //NetManager netmgr = new NetManager();
-
-        INetManager netmgr = new NetManager();
-
-        ILogSystem logsystem = new LogSystem();
+        GameMgr mGameMgr = new GameMgr();
 
         // Start is called before the first frame update
         void Start()
         {
-                    
+            mGameMgr.DoInit();
         }
 
         // Update is called once per frame
         void Update()
         {
+            mGameMgr.DoUpdate();
+        }
 
+        private void OnDestroy()
+        {
+            mGameMgr.DoDestroy();
         }
     }
 }

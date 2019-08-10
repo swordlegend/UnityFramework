@@ -74,6 +74,8 @@ namespace gtmEngine
 
     public class LogSystem : Singleton<LogSystem>, ILogSystem
     {
+        #region 变量
+
         public bool EnableLog = true;
         public bool EnableTime = true;
         public bool EnableSave = false;
@@ -82,6 +84,98 @@ namespace gtmEngine
         public string LogFileName = "";
         public string Prefix = "> ";
         public StreamWriter LogFileWriter = null;
+
+        #endregion
+
+        #region 接口
+
+        public void DoInit()
+        {
+            
+        }
+
+        public void DoUpdate()
+        {
+           
+        }
+
+        public void DoClose()
+        {
+            
+        }
+
+        public void Log(object obj)
+        {
+            if (!EnableLog)
+            {
+                return;
+            }
+
+            string message = GetLogText(GetLogCaller(true), obj);
+            Internal_Log(Prefix + message);
+        }
+
+        public void Log(string message)
+        {
+            if (!EnableLog)
+            {
+                return;
+            }
+
+            message = GetLogText(GetLogCaller(true), message);
+            Internal_Log(Prefix + message);
+        }
+
+        public void Log(string format, params object[] args)
+        {
+            if (!EnableLog)
+            {
+                return;
+            }
+
+            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
+            Internal_Log(Prefix + message);
+        }
+
+        public void LogWarning(object obj)
+        {
+            string message = GetLogText(GetLogCaller(true), obj);
+            Internal_LogWarning(Prefix + message);
+        }
+
+        public void LogWarning(string message)
+        {
+            message = GetLogText(GetLogCaller(true), message);
+            Internal_LogWarning(Prefix + message);
+        }
+
+        public void LogWarning(string format, params object[] args)
+        {
+            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
+            Internal_LogWarning(Prefix + message);
+        }
+
+        public void LogError(object obj)
+        {
+            string message = GetLogText(GetLogCaller(true), obj);
+            Internal_LogError(Prefix + message);
+        }
+
+        public void LogError(string message)
+        {
+            message = GetLogText(GetLogCaller(true), message);
+            Internal_LogError(Prefix + message);
+        }
+
+        public void LogError(string format, params object[] args)
+        {
+            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
+            Internal_LogError(Prefix + message);
+        }
+
+        #endregion
+
+        #region 函数
 
         public void Init(string logFileDir = null)
         {
@@ -145,45 +239,6 @@ namespace gtmEngine
             LogToFile("[E]" + msg, true);
         }
 
-        //----------------------------------------------------------------------
-        //Log
-        //----------------------------------------------------------------------
-        //[Conditional("ENABLE_LOG")]
-        public void Log(object obj)
-        {
-            if (!EnableLog)
-            {
-                return;
-            }
-
-            string message = GetLogText(GetLogCaller(true), obj);
-            Internal_Log(Prefix + message);
-        }
-
-        //[Conditional("ENABLE_LOG")]
-        public void Log(string message)
-        {
-            if (!EnableLog)
-            {
-                return;
-            }
-
-            message = GetLogText(GetLogCaller(true), message);
-            Internal_Log(Prefix + message);
-        }
-
-        //[Conditional("ENABLE_LOG")]
-        public void Log(string format, params object[] args)
-        {
-            if (!EnableLog)
-            {
-                return;
-            }
-
-            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
-            Internal_Log(Prefix + message);
-        }
-
         ////[Conditional("ENABLE_LOG")]
         //public void Log(this ILogTag obj, string message = "")
         //{
@@ -212,23 +267,6 @@ namespace gtmEngine
         //----------------------------------------------------------------------
         //LogWarning
         //----------------------------------------------------------------------
-        public void LogWarning(object obj)
-        {
-            string message = GetLogText(GetLogCaller(true), obj);
-            Internal_LogWarning(Prefix + message);
-        }
-
-        public void LogWarning(string message)
-        {
-            message = GetLogText(GetLogCaller(true), message);
-            Internal_LogWarning(Prefix + message);
-        }
-
-        public void LogWarning(string format, params object[] args)
-        {
-            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
-            Internal_LogWarning(Prefix + message);          
-        }
 
         //public void LogWarning(this ILogTag obj, string message)
         //{
@@ -245,23 +283,6 @@ namespace gtmEngine
         //----------------------------------------------------------------------
         //LogWarning
         //----------------------------------------------------------------------
-        public void LogError(object obj)
-        {
-            string message = GetLogText(GetLogCaller(true), obj);
-            Internal_LogError(Prefix + message);
-        }
-
-        public void LogError(string message)
-        {
-            message = GetLogText(GetLogCaller(true), message);
-            Internal_LogError(Prefix + message);           
-        }
-
-        public void LogError(string format, params object[] args)
-        {
-            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
-            Internal_LogError(Prefix + message);          
-        }
 
         //public void LogError(this ILogTag obj, string message)
         //{
@@ -435,5 +456,7 @@ namespace gtmEngine
                 }
             }
         }
+
+        #endregion
     }
 }

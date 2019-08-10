@@ -7,6 +7,8 @@ using gtmInterface;
 
 namespace gtmEngine
 {
+    
+
     public class NetManager : Singleton<NetManager>, INetManager
     {
         #region 变量
@@ -19,7 +21,17 @@ namespace gtmEngine
         /// <summary>
         /// 事件队列
         /// </summary>
-        private static Queue<KeyValuePair<int, ByteBuffer>> mEventQueue = new Queue<KeyValuePair<int, ByteBuffer>>();
+        private static Queue<ByteBuffer> mEventQueue = new Queue<ByteBuffer>();
+
+
+        private GameEvent<ByteBuffer> mMsgEvent = new GameEvent<ByteBuffer>();
+        /// <summary>
+        /// 消息事件
+        /// </summary>
+        public GameEvent<ByteBuffer> msgEvent
+        {
+            get { return mMsgEvent; }
+        }
         
         #endregion
 
@@ -122,9 +134,12 @@ namespace gtmEngine
         /// </summary>
         /// <param name="_event"></param>
         /// <param name="data"></param>
-        public void AddEvent(int _event, ByteBuffer data)
+        public void AddEvent(ByteBuffer data)
         {
-            mEventQueue.Enqueue(new KeyValuePair<int, ByteBuffer>(_event, data));
+            lock (mEventQueue)
+            {
+                mEventQueue.Enqueue(data);
+            }
         }
 
         /// <summary>
@@ -137,8 +152,8 @@ namespace gtmEngine
 
             while (mEventQueue.Count > 0)
             {
-                KeyValuePair<int, ByteBuffer> _event = mEventQueue.Dequeue();
-                            
+                ByteBuffer _event = mEventQueue.Dequeue();
+                mMsgEvent.Invoke(_event);            
             }
         }
 
