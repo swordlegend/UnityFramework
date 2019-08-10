@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections;
 using System.Collections.Generic;
-using gtmEngine.Logger;
 
 namespace gtmEngine.Net
 {
@@ -97,7 +96,7 @@ namespace gtmEngine.Net
             catch (Exception e)
             {
                 Close();
-                LogSystem.LogError(e.Message);
+                LogSystem.instance.LogError(e.Message);
             }
         }
 
@@ -130,7 +129,7 @@ namespace gtmEngine.Net
                 }
                 else
                 {
-                    LogSystem.LogError("client.connected----->>false");
+                    LogSystem.instance.LogError("client.connected----->>false");
                 }
             }
         }
@@ -178,7 +177,7 @@ namespace gtmEngine.Net
         /// </summary>
         void OnDisconnected(DisType dis, string msg)
         {
-            LogSystem.Log("OnDisconnected" + msg);
+            LogSystem.instance.Log("OnDisconnected" + msg);
             Close();   //关掉客户端链接
             NetManager.instance.OnDisConnect();
         }
@@ -195,7 +194,7 @@ namespace gtmEngine.Net
                 returnStr += mByteBuffer[i].ToString("X2");
             }
 
-            LogSystem.LogError(returnStr);
+            LogSystem.instance.LogError(returnStr);
         }
 
         /// <summary>
@@ -209,7 +208,7 @@ namespace gtmEngine.Net
             }
             catch (Exception ex)
             {
-                LogSystem.LogError("OnWrite--->>>" + ex.Message);
+                LogSystem.instance.LogError("OnWrite--->>>" + ex.Message);
             }
         }
 

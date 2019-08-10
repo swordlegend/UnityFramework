@@ -6,238 +6,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using gtmInterface;
 
-namespace gtmEngine.Logger
+namespace gtmEngine
 {
-    public interface ILogTag
+    public static class LogSystemExtension
     {
-        string LOG_TAG { get; }
-    }
-
-    public static class LogSystem
-    {
-        public static bool EnableLog = true;
-        public static bool EnableTime = true;
-        public static bool EnableSave = true;
-        public static bool EnableStack = false;
-        public static string LogFileDir = "";
-        public static string LogFileName = "";
-        public static string Prefix = "> ";
-        public static StreamWriter LogFileWriter = null;
-
-        public static void Init(string logFileDir = null)
-        {
-            LogFileDir = logFileDir;
-            if (string.IsNullOrEmpty(LogFileDir))
-            {
-                string path = System.AppDomain.CurrentDomain.BaseDirectory;
-                LogFileDir = path + "/DebugerLog/";
-            }
-
-            LogLogHead();
-        }
-
-        private static void LogLogHead()
-        {
-            DateTime now = DateTime.Now;
-            string timeStr = now.ToString("HH:mm:ss.fff") + " ";
-
-            Internal_Log("================================================================================");
-            Internal_Log("                                   SGFDebuger                                   ");
-            Internal_Log("--------------------------------------------------------------------------------");
-            Internal_Log("Time:\t" + timeStr);
-            Internal_Log("Path:\t" + LogFileDir);
-            Internal_Log("================================================================================");
-        }
-
-
-        public static void Internal_Log(string msg, object context = null)
-        {
-            if (LogSystem.EnableTime)
-            {
-                DateTime now = DateTime.Now;
-                msg = now.ToString("HH:mm:ss.fff") + " " + msg;
-            }
-
-            UnityEngine.Debug.Log(msg);
-            LogToFile("[I]" + msg);
-        }
-
-        public static void Internal_LogWarning(string msg, object context = null)
-        {
-            if (LogSystem.EnableTime)
-            {
-                DateTime now = DateTime.Now;
-                msg = now.ToString("HH:mm:ss.fff") + " " + msg;
-            }
-
-            UnityEngine.Debug.LogWarning(msg);
-
-            LogToFile("[W]" + msg);
-        }
-
-        public static void Internal_LogError(string msg, object context = null)
-        {
-            if (LogSystem.EnableTime)
-            {
-                DateTime now = DateTime.Now;
-                msg = now.ToString("HH:mm:ss.fff") + " " + msg;
-            }
-
-            UnityEngine.Debug.LogError(msg);
-            LogToFile("[E]" + msg, true);
-        }
-
-        //----------------------------------------------------------------------
-        //Log
-        //----------------------------------------------------------------------
-        //[Conditional("ENABLE_LOG")]
-        public static void Log(object obj)
-        {
-            if (!LogSystem.EnableLog)
-            {
-                return;
-            }
-
-            string message = GetLogText(GetLogCaller(true), obj);
-            Internal_Log(Prefix + message);
-        }
-
-        //[Conditional("ENABLE_LOG")]
-        public static void Log(string message = "")
-        {
-            if (!LogSystem.EnableLog)
-            {
-                return;
-            }
-
-            message = GetLogText(GetLogCaller(true), message);
-            Internal_Log(Prefix + message);
-        }
-
-        //[Conditional("ENABLE_LOG")]
-        public static void Log(string format, params object[] args)
-        {
-            if (!LogSystem.EnableLog)
-            {
-                return;
-            }
-
-            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
-            Internal_Log(Prefix + message);
-        }
-
-        //[Conditional("ENABLE_LOG")]
-        public static void Log(this ILogTag obj, string message = "")
-        {
-            if (!LogSystem.EnableLog)
-            {
-                return;
-            }
-
-            message = GetLogText(GetLogTag(obj), GetLogCaller(), message);
-            Internal_Log(Prefix + message);
-            
-        }
-
-        //[Conditional("ENABLE_LOG")]
-        public static void Log(this ILogTag obj, string format, params object[] args)
-        {
-            if (!LogSystem.EnableLog)
-            {
-                return;
-            }
-
-            string message = GetLogText(GetLogTag(obj), GetLogCaller(), string.Format(format, args));
-            Internal_Log(Prefix + message);     
-        }
-
-        //----------------------------------------------------------------------
-        //LogWarning
-        //----------------------------------------------------------------------
-        public static void LogWarning(object obj)
-        {
-            string message = GetLogText(GetLogCaller(true), obj);
-            Internal_LogWarning(Prefix + message);
-        }
-
-        public static void LogWarning(string message)
-        {
-            message = GetLogText(GetLogCaller(true), message);
-            Internal_LogWarning(Prefix + message);
-        }
-
-        public static void LogWarning(string format, params object[] args)
-        {
-            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
-            Internal_LogWarning(Prefix + message);          
-        }
-
-        public static void LogWarning(this ILogTag obj, string message)
-        {
-            message = GetLogText(GetLogTag(obj), GetLogCaller(), message);
-            Internal_LogWarning(Prefix + message);        
-        }
-
-        public static void LogWarning(this ILogTag obj, string format, params object[] args)
-        {
-            string message = GetLogText(GetLogTag(obj), GetLogCaller(), string.Format(format, args));
-            Internal_LogWarning(Prefix + message);           
-        }
-
-        //----------------------------------------------------------------------
-        //LogWarning
-        //----------------------------------------------------------------------
-        public static void LogError(object obj)
-        {
-            string message = GetLogText(GetLogCaller(true), obj);
-            Internal_LogError(Prefix + message);
-        }
-
-        public static void LogError(string message)
-        {
-            message = GetLogText(GetLogCaller(true), message);
-            Internal_LogError(Prefix + message);           
-        }
-
-        public static void LogError(string format, params object[] args)
-        {
-            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
-            Internal_LogError(Prefix + message);          
-        }
-
-        public static void LogError(this ILogTag obj, string message)
-        {
-            message = GetLogText(GetLogTag(obj), GetLogCaller(), message);
-            Internal_LogError(Prefix + message);      
-        }
-
-        public static void LogError(this ILogTag obj, string format, params object[] args)
-        {
-            string message = GetLogText(GetLogTag(obj), GetLogCaller(), string.Format(format, args));
-            Internal_LogError(Prefix + message);         
-        }
-
-        //----------------------------------------------------------------------
-        //工具函数
-        //----------------------------------------------------------------------
-
-        private static string GetLogText(string tag, string methodName, string message)
-        {
-            return tag + "::" + methodName + "() " + message;
-        }
-
-        private static string GetLogText(string caller, string message)
-        {
-            return caller + "() " + message;
-        }
-
-        private static string GetLogText(string caller, object message)
-        {
-            return caller + "() " + (message != null? message.ToListString() :"null");
-        }
-
         #region Object 2 ListString 
+
         /// <summary>
         /// 将容器序列化成字符串
         /// 格式：{a, b, c}
@@ -264,8 +40,8 @@ namespace gtmEngine.Logger
 
             var s = "";
 
-            s += source.ButFirst().Aggregate(s, (res, x) => res + ", " + x.ToListString());
-            s = "[" + source.First().ToListString() + s + "]";
+            //s += source.ButFirst().Aggregate(s, (res, x) => res + ", " + x.ToListString());
+            //s = "[" + source.First().ToListString() + s + "]";
 
             return s;
         }
@@ -294,10 +70,236 @@ namespace gtmEngine.Logger
         }
 
         #endregion 
+    }
 
-        private static string GetLogTag(ILogTag obj)
+    public class LogSystem : Singleton<LogSystem>, ILogSystem
+    {
+        public bool EnableLog = true;
+        public bool EnableTime = true;
+        public bool EnableSave = true;
+        public bool EnableStack = false;
+        public string LogFileDir = "";
+        public string LogFileName = "";
+        public string Prefix = "> ";
+        public StreamWriter LogFileWriter = null;
+
+        public void Init(string logFileDir = null)
+        {
+            LogFileDir = logFileDir;
+            if (string.IsNullOrEmpty(LogFileDir))
+            {
+                string path = System.AppDomain.CurrentDomain.BaseDirectory;
+                LogFileDir = path + "/DebugerLog/";
+            }
+
+            LogLogHead();
+        }
+
+        private void LogLogHead()
+        {
+            DateTime now = DateTime.Now;
+            string timeStr = now.ToString("HH:mm:ss.fff") + " ";
+
+            Internal_Log("================================================================================");
+            Internal_Log("                                   SGFDebuger                                   ");
+            Internal_Log("--------------------------------------------------------------------------------");
+            Internal_Log("Time:\t" + timeStr);
+            Internal_Log("Path:\t" + LogFileDir);
+            Internal_Log("================================================================================");
+        }
+
+        public void Internal_Log(string msg, object context = null)
+        {
+            if (EnableTime)
+            {
+                DateTime now = DateTime.Now;
+                msg = now.ToString("HH:mm:ss.fff") + " " + msg;
+            }
+
+            UnityEngine.Debug.Log(msg);
+            LogToFile("[I]" + msg);
+        }
+
+        public void Internal_LogWarning(string msg, object context = null)
+        {
+            if (EnableTime)
+            {
+                DateTime now = DateTime.Now;
+                msg = now.ToString("HH:mm:ss.fff") + " " + msg;
+            }
+
+            UnityEngine.Debug.LogWarning(msg);
+
+            LogToFile("[W]" + msg);
+        }
+
+        public void Internal_LogError(string msg, object context = null)
+        {
+            if (EnableTime)
+            {
+                DateTime now = DateTime.Now;
+                msg = now.ToString("HH:mm:ss.fff") + " " + msg;
+            }
+
+            UnityEngine.Debug.LogError(msg);
+            LogToFile("[E]" + msg, true);
+        }
+
+        //----------------------------------------------------------------------
+        //Log
+        //----------------------------------------------------------------------
+        //[Conditional("ENABLE_LOG")]
+        public void Log(object obj)
+        {
+            if (!EnableLog)
+            {
+                return;
+            }
+
+            string message = GetLogText(GetLogCaller(true), obj);
+            Internal_Log(Prefix + message);
+        }
+
+        //[Conditional("ENABLE_LOG")]
+        public void Log(string message)
+        {
+            if (!EnableLog)
+            {
+                return;
+            }
+
+            message = GetLogText(GetLogCaller(true), message);
+            Internal_Log(Prefix + message);
+        }
+
+        //[Conditional("ENABLE_LOG")]
+        public void Log(string format, params object[] args)
+        {
+            if (!EnableLog)
+            {
+                return;
+            }
+
+            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
+            Internal_Log(Prefix + message);
+        }
+
+        ////[Conditional("ENABLE_LOG")]
+        //public void Log(this ILogTag obj, string message = "")
+        //{
+        //    if (!EnableLog)
+        //    {
+        //        return;
+        //    }
+
+        //    message = GetLogText(GetLogTag(obj), GetLogCaller(), message);
+        //    Internal_Log(Prefix + message);
+            
+        //}
+
+        ////[Conditional("ENABLE_LOG")]
+        //public void Log(this ILogTag obj, string format, params object[] args)
+        //{
+        //    if (!EnableLog)
+        //    {
+        //        return;
+        //    }
+
+        //    string message = GetLogText(GetLogTag(obj), GetLogCaller(), string.Format(format, args));
+        //    Internal_Log(Prefix + message);     
+        //}
+
+        //----------------------------------------------------------------------
+        //LogWarning
+        //----------------------------------------------------------------------
+        public void LogWarning(object obj)
+        {
+            string message = GetLogText(GetLogCaller(true), obj);
+            Internal_LogWarning(Prefix + message);
+        }
+
+        public void LogWarning(string message)
+        {
+            message = GetLogText(GetLogCaller(true), message);
+            Internal_LogWarning(Prefix + message);
+        }
+
+        public void LogWarning(string format, params object[] args)
+        {
+            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
+            Internal_LogWarning(Prefix + message);          
+        }
+
+        //public void LogWarning(this ILogTag obj, string message)
+        //{
+        //    message = GetLogText(GetLogTag(obj), GetLogCaller(), message);
+        //    Internal_LogWarning(Prefix + message);        
+        //}
+
+        //public void LogWarning(this ILogTag obj, string format, params object[] args)
+        //{
+        //    string message = GetLogText(GetLogTag(obj), GetLogCaller(), string.Format(format, args));
+        //    Internal_LogWarning(Prefix + message);           
+        //}
+
+        //----------------------------------------------------------------------
+        //LogWarning
+        //----------------------------------------------------------------------
+        public void LogError(object obj)
+        {
+            string message = GetLogText(GetLogCaller(true), obj);
+            Internal_LogError(Prefix + message);
+        }
+
+        public void LogError(string message)
+        {
+            message = GetLogText(GetLogCaller(true), message);
+            Internal_LogError(Prefix + message);           
+        }
+
+        public void LogError(string format, params object[] args)
+        {
+            string message = GetLogText(GetLogCaller(true), string.Format(format, args));
+            Internal_LogError(Prefix + message);          
+        }
+
+        //public void LogError(this ILogTag obj, string message)
+        //{
+        //    message = GetLogText(GetLogTag(obj), GetLogCaller(), message);
+        //    Internal_LogError(Prefix + message);      
+        //}
+
+        //public void LogError(this ILogTag obj, string format, params object[] args)
+        //{
+        //    string message = GetLogText(GetLogTag(obj), GetLogCaller(), string.Format(format, args));
+        //    Internal_LogError(Prefix + message);         
+        //}
+
+        //----------------------------------------------------------------------
+        //工具函数
+        //----------------------------------------------------------------------
+
+        private string GetLogText(string tag, string methodName, string message)
+        {
+            return tag + "::" + methodName + "() " + message;
+        }
+
+        private string GetLogText(string caller, string message)
+        {
+            return caller + "() " + message;
+        }
+
+        private string GetLogText(string caller, object message)
+        {
+            return caller + "() " + ("null");
+
+            //return caller + "() " + (message != null? message.ToListString() :"null");
+        }
+
+        private string GetLogTag(ILogTag obj)
         {
             return obj.LOG_TAG;
+
             /*
             ILogTag tag = obj as ILogTag;
             if (tag != null)
@@ -308,8 +310,8 @@ namespace gtmEngine.Logger
             */
         }
 
-        private static Assembly ms_Assembly;
-        private static string GetLogCaller(bool bIncludeClassName = false)
+        private Assembly ms_Assembly;
+        private string GetLogCaller(bool bIncludeClassName = false)
         {
             StackTrace st = new StackTrace(2, false);
             if (st != null)
@@ -348,7 +350,7 @@ namespace gtmEngine.Logger
         }
 
         //----------------------------------------------------------------------
-        internal static string CheckLogFileDir()
+        internal string CheckLogFileDir()
         {
             if (string.IsNullOrEmpty(LogFileDir))
             {
@@ -372,7 +374,7 @@ namespace gtmEngine.Logger
             return LogFileDir;
         }
 
-        internal static string GenLogFileName()
+        internal string GenLogFileName()
         {
             DateTime now = DateTime.Now;
             string filename = now.GetDateTimeFormats('s')[0].ToString();//2005-11-05T14:06:25
@@ -386,7 +388,7 @@ namespace gtmEngine.Logger
 
 
 
-        private static void LogToFile(string message, bool EnableStack = false)
+        private void LogToFile(string message, bool EnableStack = false)
         {
             if (!EnableSave)
             {
@@ -421,7 +423,7 @@ namespace gtmEngine.Logger
                 try
                 {
                     LogFileWriter.WriteLine(message);
-                    if ((EnableStack || LogSystem.EnableStack))
+                    if ((EnableStack || EnableStack))
                     {
                         StackTrace st = new StackTrace(2, false);
                         LogFileWriter.WriteLine(st.ToString());

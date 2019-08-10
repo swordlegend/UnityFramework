@@ -2,12 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using System.IO;
-using gtmEngine.Logger;
+using gtmEngine.Net;
 using gtmInterface;
 
-namespace gtmEngine.Net
+namespace gtmEngine
 {
-    public delegate void TocHandler(object data);
+    //public delegate void TocHandler(object data);
 
     public class NetManager : Singleton<NetManager>, INetManager
     {
@@ -21,7 +21,7 @@ namespace gtmEngine.Net
         /// <summary>
         /// 回调消息表
         /// </summary>
-        private Dictionary<Type, TocHandler> mHandlerDict = new Dictionary<Type, TocHandler>();
+        //private Dictionary<Type, TocHandler> mHandlerDict = new Dictionary<Type, TocHandler>();
 
         /// <summary>
         /// 事件队列
@@ -113,7 +113,7 @@ namespace gtmEngine.Net
         /// </summary>
         public void OnConnect()
         {
-            LogSystem.Log("======连接========");
+            LogSystem.instance.Log("======连接========");
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace gtmEngine.Net
         /// </summary>
         public void OnDisConnect()
         {
-            LogSystem.Log("======断开连接========");
+            LogSystem.instance.Log("======断开连接========");
         }
 
         /// <summary>
