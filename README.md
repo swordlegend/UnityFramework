@@ -4,19 +4,19 @@
 
 2. c#增加通信模块 (完成待测试)
 
-3. c# 集成flatbuffer 
+5. 增加日志系统 (完成待优化) 
 
-4. python开发flatbuffer消息id自动生成工具
+3. c# 集成flatbuffer (完成)
 
-4. skynet集成flatbuffer
+4. python开发flatbuffer消息id自动生成工具 (目前没需求)
 
-4. xlua集成flatbuffer通信协议(公司使用)
+4. skynet集成flatbuffer 
 
-3. Unity和skynet通信, 使用flatbuffer
+4. xlua集成flatbuffer通信协议 
 
-4. 为lua增加mvc的ui模块
+3. Unity和skynet通信, 使用flatbuffer 
 
-5. 增加日志系统 (完成待优化)
+4. 为lua增加mvc的ui模块 
 
 7. 增加跨平台输入系统(不使用ui)
 
