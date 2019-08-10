@@ -4,5 +4,9 @@ using UnityEngine;
 
 namespace gtmInterface
 {
+    public interface IMessage
+    {
+
+    }
 
 }

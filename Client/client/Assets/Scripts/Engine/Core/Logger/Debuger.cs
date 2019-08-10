@@ -14,7 +14,7 @@ namespace gtmEngine.Logger
         string LOG_TAG { get; }
     }
 
-    public static class Debuger
+    public static class LogSystem
     {
         public static bool EnableLog = true;
         public static bool EnableTime = true;
@@ -53,7 +53,7 @@ namespace gtmEngine.Logger
 
         public static void Internal_Log(string msg, object context = null)
         {
-            if (Debuger.EnableTime)
+            if (LogSystem.EnableTime)
             {
                 DateTime now = DateTime.Now;
                 msg = now.ToString("HH:mm:ss.fff") + " " + msg;
@@ -65,7 +65,7 @@ namespace gtmEngine.Logger
 
         public static void Internal_LogWarning(string msg, object context = null)
         {
-            if (Debuger.EnableTime)
+            if (LogSystem.EnableTime)
             {
                 DateTime now = DateTime.Now;
                 msg = now.ToString("HH:mm:ss.fff") + " " + msg;
@@ -78,7 +78,7 @@ namespace gtmEngine.Logger
 
         public static void Internal_LogError(string msg, object context = null)
         {
-            if (Debuger.EnableTime)
+            if (LogSystem.EnableTime)
             {
                 DateTime now = DateTime.Now;
                 msg = now.ToString("HH:mm:ss.fff") + " " + msg;
@@ -94,7 +94,7 @@ namespace gtmEngine.Logger
         //[Conditional("ENABLE_LOG")]
         public static void Log(object obj)
         {
-            if (!Debuger.EnableLog)
+            if (!LogSystem.EnableLog)
             {
                 return;
             }
@@ -106,7 +106,7 @@ namespace gtmEngine.Logger
         //[Conditional("ENABLE_LOG")]
         public static void Log(string message = "")
         {
-            if (!Debuger.EnableLog)
+            if (!LogSystem.EnableLog)
             {
                 return;
             }
@@ -118,7 +118,7 @@ namespace gtmEngine.Logger
         //[Conditional("ENABLE_LOG")]
         public static void Log(string format, params object[] args)
         {
-            if (!Debuger.EnableLog)
+            if (!LogSystem.EnableLog)
             {
                 return;
             }
@@ -130,7 +130,7 @@ namespace gtmEngine.Logger
         //[Conditional("ENABLE_LOG")]
         public static void Log(this ILogTag obj, string message = "")
         {
-            if (!Debuger.EnableLog)
+            if (!LogSystem.EnableLog)
             {
                 return;
             }
@@ -143,7 +143,7 @@ namespace gtmEngine.Logger
         //[Conditional("ENABLE_LOG")]
         public static void Log(this ILogTag obj, string format, params object[] args)
         {
-            if (!Debuger.EnableLog)
+            if (!LogSystem.EnableLog)
             {
                 return;
             }
@@ -316,7 +316,7 @@ namespace gtmEngine.Logger
             {
                 if (null == ms_Assembly)
                 {
-                    ms_Assembly = typeof(Debuger).Assembly;
+                    ms_Assembly = typeof(LogSystem).Assembly;
                 }
 
                 int currStackFrameIndex = 0;
@@ -421,7 +421,7 @@ namespace gtmEngine.Logger
                 try
                 {
                     LogFileWriter.WriteLine(message);
-                    if ((EnableStack || Debuger.EnableStack))
+                    if ((EnableStack || LogSystem.EnableStack))
                     {
                         StackTrace st = new StackTrace(2, false);
                         LogFileWriter.WriteLine(st.ToString());

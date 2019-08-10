@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using gtmEngine.Logger;
+using gtmInterface;
 
 namespace gtmEngine.Net
 {
     public delegate void TocHandler(object data);
 
-    public class NetManager : Singleton<NetManager>
+    public class NetManager : Singleton<NetManager>, INetManager
     {
         #region 变量
 
@@ -25,43 +26,37 @@ namespace gtmEngine.Net
         /// <summary>
         /// 事件队列
         /// </summary>
-        private static Queue<KeyValuePair<Type, object>> mEventQueue = new Queue<KeyValuePair<Type, object>>();
-
-        /// <summary>
-        /// Socket
-        /// </summary>
-        public SocketClient SocketClient
-        {
-            get
-            {
-                return mSocketClient;
-            }
-        }
-
+        private static Queue<KeyValuePair<int, ByteBuffer>> mEventQueue = new Queue<KeyValuePair<int, ByteBuffer>>();
+        
         #endregion
 
-        #region 内置函数
-
-        void Start()
-        {
-            Init();
-        }
-
-        void Update()
-        {
-            UpdateEventQueue();
-        }
-
-        #endregion
-
-        #region 函数
+        #region 接口函数
 
         /// <summary>
         /// 初始化
         /// </summary>
-        public void Init()
+        public void DoInit()
         {
+            if (mSocketClient == null)
+                return;
+
             mSocketClient.OnRegister();
+        }
+
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        public void DoUpdate()
+        {
+            UpdateEventQueue();
+        }
+
+        public void DoClose()
+        {
+            if (mSocketClient == null)
+                return;
+
+            mSocketClient.OnRemove();
         }
 
         /// <summary>
@@ -81,12 +76,29 @@ namespace gtmEngine.Net
         }
 
         /// <summary>
-        /// 关闭网络
+        /// 发送消息
         /// </summary>
-        public void OnRemove()
+        /// <param name="obj"></param>
+        public void SendMessage(IMessage obj)
         {
-            mSocketClient.OnRemove();
+
         }
+
+        /// <summary>
+        /// 是否连接
+        /// </summary>
+        /// <returns></returns>
+        public bool IsConnected()
+        {
+            if (mSocketClient == null)
+                return false;
+
+            return mSocketClient.IsConnected();
+        }
+
+        #endregion
+
+        #region 函数
 
         /// <summary>
         /// 发送SOCKET消息
@@ -95,6 +107,79 @@ namespace gtmEngine.Net
         {
             mSocketClient.SendMessage(buffer);
         }
+        
+        /// <summary>
+        /// 连接 
+        /// </summary>
+        public void OnConnect()
+        {
+            LogSystem.Log("======连接========");
+        }
+
+        /// <summary>
+        /// 断开连接
+        /// </summary>
+        public void OnDisConnect()
+        {
+            LogSystem.Log("======断开连接========");
+        }
+
+        /// <summary>
+        /// 增加事件
+        /// </summary>
+        /// <param name="_event"></param>
+        /// <param name="data"></param>
+        public void AddEvent(int _event, ByteBuffer data)
+        {
+            mEventQueue.Enqueue(new KeyValuePair<int, ByteBuffer>(_event, data));
+        }
+
+        /// <summary>
+        /// 派发协议
+        /// </summary>
+        /// <param name="protoId"></param>
+        /// <param name="buff"></param>
+        //public void DispatchProto(int protoId, byte[] buff)
+        //{
+        //    if (!ProtoDic.ContainProtoId(protoId))
+        //    {
+        //        Debuger.LogError("未知协议号");
+        //        return;
+        //    }
+
+        //    Type protoType = ProtoDic.GetProtoTypeByProtoId(protoId);
+
+        //    try
+        //    {
+        //        MessageParser messageParser = ProtoDic.GetMessageParser(protoType.TypeHandle);
+        //        object toc = messageParser.ParseFrom(buff);
+        //        mEventQueue.Enqueue(new KeyValuePair<Type, object>(protoType, toc));
+        //    }
+        //    catch
+        //    {
+        //        Debuger.Log("DispatchProto Error:" + protoType.ToString());
+        //    }
+        //}
+
+        //public void AddHandler(Type type, TocHandler handler)
+        //{
+        //    if (mHandlerDict.ContainsKey(type))
+        //    {
+        //        mHandlerDict[type] += handler;
+        //    }
+        //    else
+        //    {
+        //        mHandlerDict.Add(type, handler);
+        //    }
+        //}
+
+        //public void RemoveHandle(Type type, TocHandler handler)
+        //{
+        //    if (mHandlerDict.ContainsKey(type))
+        //    {
+        //        mHandlerDict[type] -= handler;
+        //    }
+        //}
 
         /// <summary>
         /// 发送SOCKET消息
@@ -129,74 +214,6 @@ namespace gtmEngine.Net
         //}
 
         /// <summary>
-        /// 连接 
-        /// </summary>
-        public void OnConnect()
-        {
-            Debuger.Log("======连接========");
-        }
-
-        /// <summary>
-        /// 断开连接
-        /// </summary>
-        public void OnDisConnect()
-        {
-            Debuger.Log("======断开连接========");
-        }
-
-        /// <summary>
-        /// 派发协议
-        /// </summary>
-        /// <param name="protoId"></param>
-        /// <param name="buff"></param>
-        public void DispatchProto(int protoId, byte[] buff)
-        {
-            //if (!ProtoDic.ContainProtoId(protoId))
-            //{
-            //    Debuger.LogError("未知协议号");
-            //    return;
-            //}
-
-            //Type protoType = ProtoDic.GetProtoTypeByProtoId(protoId);
-
-            //try
-            //{
-            //    MessageParser messageParser = ProtoDic.GetMessageParser(protoType.TypeHandle);
-            //    object toc = messageParser.ParseFrom(buff);
-            //    mEventQueue.Enqueue(new KeyValuePair<Type, object>(protoType, toc));
-            //}
-            //catch
-            //{
-            //    Debuger.Log("DispatchProto Error:" + protoType.ToString());
-            //}
-        }
-
-        /// <summary>
-        /// 增加消息回调
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="handler"></param>
-        public void AddHandler(Type type, TocHandler handler)
-        {
-            if (mHandlerDict.ContainsKey(type))
-            {
-                mHandlerDict[type] += handler;
-            }
-            else
-            {
-                mHandlerDict.Add(type, handler);
-            }
-        }
-
-        public void RemoveHandle(Type type, TocHandler handler)
-        {
-            if (mHandlerDict.ContainsKey(type))
-            {
-                mHandlerDict[type] -= handler;
-            }
-        }
-
-        /// <summary>
         /// 刷新事件队列
         /// </summary>
         private void UpdateEventQueue()
@@ -206,11 +223,8 @@ namespace gtmEngine.Net
 
             while (mEventQueue.Count > 0)
             {
-                KeyValuePair<Type, object> _event = mEventQueue.Dequeue();
-                if (mHandlerDict.ContainsKey(_event.Key))
-                {
-                    mHandlerDict[_event.Key](_event.Value);
-                }
+                KeyValuePair<int, ByteBuffer> _event = mEventQueue.Dequeue();
+                            
             }
         }
 

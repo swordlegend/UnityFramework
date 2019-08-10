@@ -97,7 +97,7 @@ namespace gtmEngine.Net
             catch (Exception e)
             {
                 Close();
-                Debuger.LogError(e.Message);
+                LogSystem.LogError(e.Message);
             }
         }
 
@@ -130,7 +130,7 @@ namespace gtmEngine.Net
                 }
                 else
                 {
-                    Debuger.LogError("client.connected----->>false");
+                    LogSystem.LogError("client.connected----->>false");
                 }
             }
         }
@@ -178,7 +178,7 @@ namespace gtmEngine.Net
         /// </summary>
         void OnDisconnected(DisType dis, string msg)
         {
-            Debuger.Log("OnDisconnected" + msg);
+            LogSystem.Log("OnDisconnected" + msg);
             Close();   //关掉客户端链接
             NetManager.instance.OnDisConnect();
         }
@@ -195,7 +195,7 @@ namespace gtmEngine.Net
                 returnStr += mByteBuffer[i].ToString("X2");
             }
 
-            Debuger.LogError(returnStr);
+            LogSystem.LogError(returnStr);
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace gtmEngine.Net
             }
             catch (Exception ex)
             {
-                Debuger.LogError("OnWrite--->>>" + ex.Message);
+                LogSystem.LogError("OnWrite--->>>" + ex.Message);
             }
         }
 
@@ -264,6 +264,8 @@ namespace gtmEngine.Net
             byte[] message = r.ReadBytes((int)(ms.Length - ms.Position));
 
             ByteBuffer buffer = new ByteBuffer(message);
+            int mainId = buffer.ReadShort();
+            NetManager.instance.AddEvent(mainId, buffer);
 
             //int mainId = buffer.ReadShort();
             //int pbDataLen = message.Length - 2;

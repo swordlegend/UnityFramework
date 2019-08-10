@@ -11,7 +11,7 @@ namespace gtmEngine
 
         protected Singleton()
         {
-            Debug.Assert(_instance == null);
+            
         }
 
         public static void Depose()
@@ -33,6 +33,7 @@ namespace gtmEngine
                         }
                     }
                 }
+
                 return _instance;
             }
         }
