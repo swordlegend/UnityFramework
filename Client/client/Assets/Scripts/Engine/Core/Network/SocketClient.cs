@@ -222,13 +222,15 @@ namespace gtmEngine.Net
 
             //Reset to beginning
             mMemStream.Seek(0, SeekOrigin.Begin);
+
             while (RemainingBytes() > 2)
             {
-                ushort messageLen = mReader.ReadUInt16();
-                if (RemainingBytes() >= messageLen)
+                ushort msglen = mReader.ReadUInt16();
+                if (RemainingBytes() >= msglen)
                 {
                     ushort msgid = mReader.ReadUInt16();
-                    byte[] bytearray = mReader.ReadBytes(messageLen);
+                    int protocollen = msglen - 2;
+                    byte[] bytearray = mReader.ReadBytes(protocollen);
                     OnReceivedMessage(msgid, bytearray);
 
                     //MemoryStream ms = new MemoryStream();

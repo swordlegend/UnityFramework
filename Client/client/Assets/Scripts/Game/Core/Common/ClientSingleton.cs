@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Diagnostics;
 
-namespace gtmEngine
+namespace gtmGame
 {
     public class ClientSingleton<T> where T : new()
     {

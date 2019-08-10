@@ -25,7 +25,7 @@ namespace gtmGame
 
         private void OnDestroy()
         {
-            mGameMgr.DoDestroy();
+            mGameMgr.DoClose();
         }
     }
 }
