@@ -6,9 +6,18 @@ echo off & color 0A
 ::指定起始文件夹
 
 set SRCDIR="../../Msg/flatbuffer/"
-set DSTDIR="../../Client/client/Assets/Scripts/Msg/"
+set CSHARP_C_DSTDIR="../../Client/client/Assets/Scripts/Msg/"
+set LUA_C_DSTDIR="../../Client/client/Assets/Scripts/Lua/msg/"
+set LUA_S_DSTDIR="../../Server/skynet-1.2.0/game/msg/"
 
+echo "SrcDir"
 echo %SRCDIR%
+
+echo "Lua_Client_DstDir"
+echo %LUA_C_DSTDIR%
+
+echo "Lua_Server_DstDir"
+echo %LUA_S_DSTDIR%
 
 :: 参数 /R 表示需要遍历子文件夹,去掉表示不遍历子文件夹
 
@@ -18,10 +27,15 @@ echo %SRCDIR%
 
 for /R %SRCDIR% %%f in (*.fbs) do ( 
     echo %%f
-    flatc --csharp -o %DSTDIR% %%f
+    flatc --csharp -o %CSHARP_C_DSTDIR% %%f
+    flatc --lua -o %LUA_C_DSTDIR% %%f
+    flatc --lua -o %LUA_S_DSTDIR% %%f
 )
 
 pause
+
+
+
 
 
 
