@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class XluaGenConfig : MonoBehaviour
+namespace gtmEditor
 {
-    // Start is called before the first frame update
-    void Start()
+    public class XluaGenConfig : Editor
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
