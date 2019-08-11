@@ -2,7 +2,8 @@
 
 namespace swm;
 
-enum MsgId:ushort16 = 
-{
+enum MsgId : uint16 
+{ 
     ReqLogin = 1000
 }
+
