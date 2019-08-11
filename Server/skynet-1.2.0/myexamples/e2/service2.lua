@@ -39,7 +39,7 @@ skynet.start(function()
             error(string.format("Unknown command %s", tostring(cmd)))
         end
     end)
-    
+
     --可以为自己注册一个别名。（别名必须在 32 个字符以内）
     skynet.register "SERVICE2"
 end)
