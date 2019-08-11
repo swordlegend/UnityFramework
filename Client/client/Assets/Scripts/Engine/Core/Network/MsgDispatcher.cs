@@ -9,7 +9,7 @@ namespace gtmEngine
 {
     public class MsgDispatcher : Singleton<MsgDispatcher>, IMsgDispatcher
     {
-        private Dictionary<uint, Action<byte[]>> mHandle = new Dictionary<uint, Action<byte[]>>();
+        private static Dictionary<uint, Action<byte[]>> mHandle = new Dictionary<uint, Action<byte[]>>();
 
         public void Dispatcher(ushort msgid, byte[] bytearray)
         {
