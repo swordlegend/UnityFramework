@@ -5,7 +5,7 @@
 ---
 
 local skynet = require "skynet"
-local socket = require "socket"
+local socket = require "skynet.socket"
 
 local function echo(id)
     -- 每当 accept 函数获得一个新的 socket id 后，并不会立即收到这个 socket 上的数据。这是因为，我们有时会希望把这个 socket 的操作权转让给别的服务去处理。
@@ -28,7 +28,7 @@ local function echo(id)
 end
 
 skynet.start(function()
-    print("==========Socket1 Start=========")
+    print("==========Socket2 Start=========")
 
     -- 监听一个端口，返回一个 id ，供 start 使用。
     local id = socket.listen("0.0.0.0", 8888)
@@ -37,7 +37,7 @@ skynet.start(function()
     socket.start(id, function(id, addr)
         -- 接收到客户端连接或发送消息()
         print("connect from " .. addr .. " " .. id)
-
+        
         -- 处理接收到的消息
         echo(id)
     end)
