@@ -1,0 +1,14 @@
+
+
+namespace swm;
+
+table ReqLogin
+{
+    account:string;
+    password:string;
+}
+
+table RspLogin
+{
+    isok:bool;
+}

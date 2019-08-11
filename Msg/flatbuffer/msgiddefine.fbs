@@ -1,0 +1,8 @@
+
+
+namespace swm;
+
+enum MsgId:ushort16 = 
+{
+    ReqLogin = 1000
+}
