@@ -91,7 +91,7 @@ namespace gtmEngine
 
         public void DoInit()
         {
-            
+            _instance = this;
         }
 
         public void DoUpdate()

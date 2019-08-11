@@ -107,7 +107,7 @@ namespace gtmEngine.Net
         {
             mNetStream = mClient.GetStream();
             mNetStream.BeginRead(mByteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
-            NetManager.instance.OnConnect();
+            LogSystem.instance.Log("======连接========");
         }
 
         /// <summary>
@@ -115,23 +115,32 @@ namespace gtmEngine.Net
         /// </summary>
         void WriteMessage(byte[] message)
         {
-            MemoryStream ms = null;
-            using (ms = new MemoryStream())
+            if (IsConnected())
             {
-                ms.Position = 0;
-                BinaryWriter writer = new BinaryWriter(ms);
-                writer.Write(message);
-                writer.Flush();
-                if (mClient != null && mClient.Connected)
-                {
-                    byte[] payload = ms.ToArray();
-                    mNetStream.BeginWrite(payload, 0, payload.Length, new AsyncCallback(OnWrite), null);
-                }
-                else
-                {
-                    LogSystem.instance.LogError("client.connected----->>false");
-                }
+                mNetStream.BeginWrite(message, 0, message.Length, new AsyncCallback(OnWrite), null);
             }
+            else
+            {
+                LogSystem.instance.LogError("client.connected----->>false");
+            }
+
+            //MemoryStream ms = null;
+            //using (ms = new MemoryStream())
+            //{
+            //    ms.Position = 0;
+            //    BinaryWriter writer = new BinaryWriter(ms);
+            //    writer.Write(message);
+            //    writer.Flush();
+            //    if (mClient != null && mClient.Connected)
+            //    {
+            //        byte[] payload = ms.ToArray();
+            //        mNetStream.BeginWrite(payload, 0, payload.Length, new AsyncCallback(OnWrite), null);
+            //    }
+            //    else
+            //    {
+            //        LogSystem.instance.LogError("client.connected----->>false");
+            //    }
+            //}
         }
 
         /// <summary>
@@ -142,6 +151,9 @@ namespace gtmEngine.Net
             int bytesRead = 0;
             try
             {
+                if (!IsConnected())
+                    return;
+
                 lock (mClient.GetStream())
                 {
                     //读取字节流到缓冲区
@@ -154,6 +166,8 @@ namespace gtmEngine.Net
                     OnDisconnected(DisType.Disconnect, "bytesRead < 1");
                     return;
                 }
+
+                LogSystem.instance.Log(bytesRead.ToString());
 
                 //分析数据包内容，抛给逻辑层
                 OnReceive(mByteBuffer, bytesRead);
@@ -178,8 +192,8 @@ namespace gtmEngine.Net
         void OnDisconnected(DisType dis, string msg)
         {
             LogSystem.instance.Log("OnDisconnected" + msg);
+            LogSystem.instance.Log("======断开连接========");
             Close();   //关掉客户端链接
-            NetManager.instance.OnDisConnect();
         }
 
         /// <summary>
@@ -301,6 +315,8 @@ namespace gtmEngine.Net
                     mClient.Close();
 
                 mClient = null;
+
+                LogSystem.instance.Log("======关闭连接========");
             }
         }
 
@@ -317,6 +333,9 @@ namespace gtmEngine.Net
         /// </summary>
         public void SendMessage(ByteBuffer buffer)
         {
+            if (!IsConnected())
+                return;
+
             SessionSend(buffer.ToBytes());
             buffer.Close();
         }

@@ -12,7 +12,7 @@ namespace gtmGame
 
         public void DoClose()
         {
-
+            GameMgr.instance.msgDispatcher.UnRegister((uint)fbs.MsgId.RspLogin, RspLogin_SC);
         }
 
         public void DoInit()
@@ -31,7 +31,7 @@ namespace gtmGame
 
         private void RspLogin_SC(byte[] bytearray)
         {
-
+            GameMgr.instance.logSystem.Log("RspLogin_SC " + bytearray.ToString());
         }
 
         #endregion

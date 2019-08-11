@@ -10,5 +10,7 @@ namespace gtmInterface
         void Register(uint rspLogin, Action<byte[]> msg);
 
         void UnRegister(uint msgid, Action<byte[]> msg);
+
+        void SendMsg(uint msgid, byte[] bytearray);
     }
 }

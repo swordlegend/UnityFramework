@@ -32,6 +32,8 @@ namespace gtmEngine
         /// </summary>
         public void DoInit()
         {
+            _instance = this;
+
             if (mSocketClient == null)
                 return;
 
@@ -104,22 +106,6 @@ namespace gtmEngine
         }
         
         /// <summary>
-        /// 连接 
-        /// </summary>
-        public void OnConnect()
-        {
-            LogSystem.instance.Log("======连接========");
-        }
-
-        /// <summary>
-        /// 断开连接
-        /// </summary>
-        public void OnDisConnect()
-        {
-            LogSystem.instance.Log("======断开连接========");
-        }
-
-        /// <summary>
         /// 增加事件
         /// </summary>
         /// <param name="bytearray"></param>
@@ -147,6 +133,22 @@ namespace gtmEngine
         }
 
         #endregion
+
+        /// <summary>
+        /// 连接 
+        /// </summary>
+        //public void OnConnect()
+        //{
+        //    LogSystem.instance.Log("======连接========");
+        //}
+
+        /// <summary>
+        /// 断开连接
+        /// </summary>
+        //public void OnDisConnect()
+        //{
+        //    LogSystem.instance.Log("======断开连接========");
+        //}
 
         //public delegate void TocHandler(object data);
 
