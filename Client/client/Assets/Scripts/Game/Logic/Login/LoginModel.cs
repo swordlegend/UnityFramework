@@ -35,6 +35,13 @@ namespace gtmGame
         private void RspLogin_SC(byte[] bytearray)
         {
             GameMgr.instance.logSystem.Log("RspLogin_SC " + bytearray.ToString());
+
+            ByteBuffer byteBuffer = new ByteBuffer(bytearray);
+            fbs.RspLogin msg = fbs.RspLogin.GetRootAsRspLogin(byteBuffer);
+
+            GameMgr.instance.logSystem.Log(msg.Account);
+            GameMgr.instance.logSystem.Log(msg.Password);
+            GameMgr.instance.logSystem.Log(msg.Isok);
         }
 
         private void ReqLogin_SC(byte[] bytearray)
