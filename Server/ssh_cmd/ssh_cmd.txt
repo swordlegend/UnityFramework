@@ -1,5 +1,5 @@
 
-// 远程连接服务器
+// 远程连接mac服务器
 ssh xieliujian@192.168.0.104
 
 // cd到指定目录
@@ -7,3 +7,4 @@ cd /Users/xieliujian/Desktop/xieliujian/unityframework/
 
 // svn 刷新
 svn update
+
