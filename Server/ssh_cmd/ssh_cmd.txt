@@ -27,3 +27,10 @@ ps -ef | grep skynet
 kill -9 PID
 
 
+// 运行自己的测试例子
+
+cd /Users/xieliujian/Desktop/xieliujian/unityframework/trunk/Server/skynet-1.2.0/
+
+./skynet myexamples/config
+
+
