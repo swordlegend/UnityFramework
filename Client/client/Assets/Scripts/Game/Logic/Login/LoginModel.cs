@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using gtmInterface;
+using fbs;
 
 namespace gtmGame
 {
@@ -11,19 +12,26 @@ namespace gtmGame
 
         public void DoClose()
         {
-            GameMgr.instance.msgDispatcher.UnRegister(1, null);
-            GameMgr.instance.msgDispatcher.UnRegister(2, null);
+
         }
 
         public void DoInit()
         {
-            GameMgr.instance.msgDispatcher.Register(1, null);
-            GameMgr.instance.msgDispatcher.Register(2, null);
+            GameMgr.instance.msgDispatcher.Register((uint)fbs.MsgId.RspLogin, RspLogin_SC);
         }
 
         public void DoUpdate()
         {
             
+        }
+
+        #endregion
+
+        #region 消息
+
+        private void RspLogin_SC(byte[] bytearray)
+        {
+
         }
 
         #endregion

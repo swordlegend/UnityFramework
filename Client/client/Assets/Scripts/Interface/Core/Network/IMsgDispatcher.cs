@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace gtmInterface
 {
-    public interface IMsgDispatcher
+    public interface IMsgDispatcher : IManager
     {
-        void Register(uint msgid, GameEvent<byte[]> msg);
+        void Register(uint rspLogin, Action<byte[]> msg);
 
-        void UnRegister(uint msgid, GameEvent<byte[]> msg);
+        void UnRegister(uint msgid, Action<byte[]> msg);
     }
 }

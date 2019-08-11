@@ -8,6 +8,7 @@ namespace fbs
 public enum MsgId : ushort
 {
  ReqLogin = 1000,
+ RspLogin = 1001,
 };
 
 

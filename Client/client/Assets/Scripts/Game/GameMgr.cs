@@ -39,18 +39,21 @@ namespace gtmGame
         {
             mNetMgr.DoInit();
             mLogSystem.DoInit();
+            mMsgDispatcher.DoInit();
         }
 
         public void DoUpdate()
         {
             mNetMgr.DoUpdate();
             mLogSystem.DoUpdate();
+            mMsgDispatcher.DoUpdate();
         }
 
         public void DoClose()
         {
             mNetMgr.DoClose();
             mLogSystem.DoClose();
+            mMsgDispatcher.DoClose();
         }
     }
 }
