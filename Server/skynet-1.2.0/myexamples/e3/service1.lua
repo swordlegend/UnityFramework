@@ -21,8 +21,9 @@ local function echo(id)
         -- 读取客户端发过来的数据
         local str = socket.read(id)
         if str then
+
             -- 直接打印接收到的数据
-            skynet.error(str)
+            print(str)
         else
             socket.close(id)
             return
@@ -36,12 +37,12 @@ skynet.start(function()
     -- 监听一个端口，返回一个 id ，供 start 使用。
     local id = socket.listen("127.0.0.1", 8888)
 
-    skynet.error("Listen socket :", "127.0.0.1", 8888)
+    print("Listen socket :", "127.0.0.1", 8888)
 
     socket.start(id, function(id, addr)
 
         -- 接收到客户端连接或发送消息()
-        skynet.error("connect from " .. addr .. " " .. id)
+        print("connect from " .. addr .. " " .. id)
 
         -- 处理接收到的消息
         echo(id)
