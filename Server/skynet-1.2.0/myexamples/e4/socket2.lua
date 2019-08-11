@@ -37,7 +37,7 @@ skynet.start(function()
     socket.start(id, function(id, addr)
         -- 接收到客户端连接或发送消息()
         print("connect from " .. addr .. " " .. id)
-        
+
         -- 处理接收到的消息
         echo(id)
     end)
