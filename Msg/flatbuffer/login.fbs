@@ -1,6 +1,6 @@
 
 
-namespace swm;
+namespace fbs;
 
 table ReqLogin
 {

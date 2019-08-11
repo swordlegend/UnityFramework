@@ -1,6 +1,6 @@
 
 
-namespace swm;
+namespace fbs;
 
 enum MsgId : uint16 
 { 
