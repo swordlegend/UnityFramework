@@ -16,6 +16,8 @@
 
 3. Unity和skynet通信, 使用flatbuffer 
 
+4. 测试idea emmylua 远程调试skynet 
+
 4. 为lua增加mvc的ui模块 
 
 ---
