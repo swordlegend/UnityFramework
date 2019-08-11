@@ -14,15 +14,13 @@
 
 4. skynet集成flatbuffer	(只要集成lua版本就可以了, 不用集成c++)
 
-3. Unity和skynet通信, 使用flatbuffer 
-
-4. 测试idea emmylua 远程调试skynet 
+3. Unity和skynet通信, 使用flatbuffer (要一段时间)
 
 4. 为lua增加mvc的ui模块 
 
 ---
 
-7. 增加跨平台输入系统(不使用ui)
+7. 增加跨平台输入系统(不使用ui) 
 
 8. 单机模式登陆（方便测试跑游戏）
 
@@ -30,13 +28,15 @@
 
 10. unity显示xlua的报错堆栈(能快速定位问题)
 
-11. 游戏加入状态机管理
+11. 游戏加入状态机管理   
 
 12. ui增加敏感字检测
 
 13. ui增加avatar的rt显示
 
 4. xlua集成flatbuffer通信协议 (全lua框架使用)
+
+4. 测试idea emmylua 远程调试skynet 
 
 
 
