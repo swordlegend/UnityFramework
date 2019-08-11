@@ -12,22 +12,22 @@ local db = {}
 local command = {}
 
 function command.get(key)
-    print("comman.get:" .. key)
+    skynet.error("comman.get:" .. key)
     return db[key]
 end
 
 function command.set(key, value)
-    print("comman.set:key=" .. key .. ",value:" .. value)
+    skynet.error("comman.set:key=" .. key .. ",value:" .. value)
     db[key] = value
     local last = db[key]
     return last
 end
 
 skynet.start(function()
-    print("==========Service2 Start=========")
+    skynet.error("==========Service2 Start=========")
     skynet.dispatch("lua", function(session, address, cmd, ...)
 
-        print("==========Service2 dispatch============" .. cmd)
+        skynet.error("==========Service2 dispatch============" .. cmd)
 
         local f = command[cmd]
         if f then
@@ -39,7 +39,7 @@ skynet.start(function()
             error(string.format("Unknown command %s", tostring(cmd)))
         end
     end)
-
+    
     --可以为自己注册一个别名。（别名必须在 32 个字符以内）
     skynet.register "SERVICE2"
 end)

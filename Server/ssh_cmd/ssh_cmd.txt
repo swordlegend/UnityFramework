@@ -31,6 +31,7 @@ kill -9 PID
 
 cd /Users/xieliujian/Desktop/xieliujian/unityframework/trunk/Server/skynet-1.2.0/
 
-./skynet myexamples/config
+./skynet myexamples/e1/config
 
+./skynet myexamples/e2/config
 
