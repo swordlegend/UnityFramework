@@ -35,9 +35,9 @@ skynet.start(function()
     print("==========Socket1 Start=========")
 
     -- 监听一个端口，返回一个 id ，供 start 使用。
-    local id = socket.listen("127.0.0.1", 8888)
+    local id = socket.listen("0.0.0.0", 8888)
 
-    print("Listen socket :", "127.0.0.1", 8888)
+    print("Listen socket :", "0.0.0.0", 8888)
 
     socket.start(id, function(id, addr)
 
