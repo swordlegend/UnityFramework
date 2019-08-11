@@ -8,3 +8,22 @@ cd /Users/xieliujian/Desktop/xieliujian/unityframework/
 // svn 刷新
 svn update
 
+
+
+// 运行skynet测试例子
+
+cd /Users/xieliujian/Desktop/xieliujian/unityframework/trunk/Server/skynet-1.2.0/
+
+./skynet examples/config
+
+./3rd/lua/lua examples/client.lua
+
+
+
+// 删除skynet运行实例
+
+ps -ef | grep skynet
+
+kill -9 PID
+
+
