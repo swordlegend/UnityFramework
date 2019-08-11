@@ -17,10 +17,16 @@ function handler.open(source, conf)
 end
 
 function handler.message(fd, msg, sz)
+
+	skynet.error("222222222222222222222222222222")
+
 	-- recv a package, forward it
 	local c = connection[fd]
 	local agent = c.agent
 	if agent then
+
+		skynet.error("333333333333333333333333333333333333")
+
 		-- It's safe to redirect msg directly , gateserver framework will not free msg.
 		skynet.redirect(agent, c.client, "client", fd, msg, sz)
 	else
