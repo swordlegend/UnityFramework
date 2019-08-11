@@ -55,8 +55,9 @@ namespace gtmGame
             fbs.ReqLogin.AddPassword(builder, password);
             var orc = fbs.ReqLogin.EndReqLogin(builder);
             builder.Finish(orc.Value);
-
-            mGameMgr.msgDispatcher.SendMsg((uint)fbs.MsgId.ReqLogin, builder.DataBuffer.ToFullArray());
+                    
+            byte[] bytearray = builder.DataBuffer.ToSizedArray();
+            mGameMgr.msgDispatcher.SendMsg((uint)fbs.MsgId.ReqLogin, bytearray);
         }
     }
 }

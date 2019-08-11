@@ -10,5 +10,7 @@ table ReqLogin
 
 table RspLogin
 {
+    account:string;
+    password:string;
     isok:bool;
 }

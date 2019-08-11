@@ -74,8 +74,13 @@ namespace gtmEngine.Net
         public void OnRemove()
         {
             Close();
-            mReader.Close();
-            mMemStream.Close();
+
+            if (mReader != null)
+                mReader.Close();
+
+            if (mMemStream != null)
+                mMemStream.Close();
+
         }
 
         /// <summary>
