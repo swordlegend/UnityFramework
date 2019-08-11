@@ -10,15 +10,13 @@
 
 4. python开发flatbuffer消息id自动生成工具 (目前没需求)
 
-5. 定义测试消息生成代码
+5. 定义测试消息生成代码 (完成)
 
-4. skynet集成flatbuffer
+4. skynet集成flatbuffer	
 
-4. xlua集成flatbuffer通信协议
+3. Unity和skynet通信, 使用flatbuffer 
 
-3. Unity和skynet通信, 使用flatbuffer
-
-4. 为lua增加mvc的ui模块
+4. 为lua增加mvc的ui模块 
 
 ---
 
@@ -35,6 +33,8 @@
 12. ui增加敏感字检测
 
 13. ui增加avatar的rt显示
+
+4. xlua集成flatbuffer通信协议 (全lua框架使用)
 
 
 
