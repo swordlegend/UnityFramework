@@ -12,7 +12,7 @@
 
 5. 定义测试消息生成代码 (完成)
 
-4. skynet集成flatbuffer	
+4. skynet集成flatbuffer	(只要集成lua版本就可以了, 不用集成c++)
 
 3. Unity和skynet通信, 使用flatbuffer 
 
