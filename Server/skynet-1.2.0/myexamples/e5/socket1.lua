@@ -93,7 +93,7 @@ skynet.start(function()
 
     local id = socket.listen("0.0.0.0", 8888)
     print("Listen socket :", "0.0.0.0", 8888)
-    
+
     socket.start(id, function(id, addr)
 
         -- 接收到客户端连接或发送消息()
