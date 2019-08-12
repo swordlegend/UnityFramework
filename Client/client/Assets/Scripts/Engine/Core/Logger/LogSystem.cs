@@ -72,7 +72,7 @@ namespace gtmEngine
         #endregion 
     }
 
-    public class LogSystem : Singleton<LogSystem>, ILogSystem
+    public class LogSystem : ILogSystem
     {
         #region 变量
 
@@ -89,22 +89,27 @@ namespace gtmEngine
 
         #region 接口
 
-        public void DoInit()
+        public LogSystem()
         {
             _instance = this;
         }
 
-        public void DoUpdate()
-        {
-           
-        }
-
-        public void DoClose()
+        public override void DoInit()
         {
             
         }
 
-        public void Log(object obj)
+        public override void DoUpdate()
+        {
+           
+        }
+
+        public override void DoClose()
+        {
+            
+        }
+
+        public override void Log(object obj)
         {
             if (!EnableLog)
             {
@@ -115,7 +120,7 @@ namespace gtmEngine
             Internal_Log(Prefix + message);
         }
 
-        public void Log(string message)
+        public override void Log(string message)
         {
             if (!EnableLog)
             {
@@ -126,7 +131,7 @@ namespace gtmEngine
             Internal_Log(Prefix + message);
         }
 
-        public void Log(string format, params object[] args)
+        public override void Log(string format, params object[] args)
         {
             if (!EnableLog)
             {
@@ -137,37 +142,37 @@ namespace gtmEngine
             Internal_Log(Prefix + message);
         }
 
-        public void LogWarning(object obj)
+        public override void LogWarning(object obj)
         {
             string message = GetLogText(GetLogCaller(true), obj);
             Internal_LogWarning(Prefix + message);
         }
 
-        public void LogWarning(string message)
+        public override void LogWarning(string message)
         {
             message = GetLogText(GetLogCaller(true), message);
             Internal_LogWarning(Prefix + message);
         }
 
-        public void LogWarning(string format, params object[] args)
+        public override void LogWarning(string format, params object[] args)
         {
             string message = GetLogText(GetLogCaller(true), string.Format(format, args));
             Internal_LogWarning(Prefix + message);
         }
 
-        public void LogError(object obj)
+        public override void LogError(object obj)
         {
             string message = GetLogText(GetLogCaller(true), obj);
             Internal_LogError(Prefix + message);
         }
 
-        public void LogError(string message)
+        public override void LogError(string message)
         {
             message = GetLogText(GetLogCaller(true), message);
             Internal_LogError(Prefix + message);
         }
 
-        public void LogError(string format, params object[] args)
+        public override void LogError(string format, params object[] args)
         {
             string message = GetLogText(GetLogCaller(true), string.Format(format, args));
             Internal_LogError(Prefix + message);

@@ -6,9 +6,8 @@ using gtmEngine.Net;
 using gtmInterface;
 
 namespace gtmEngine
-{
-    
-    public class NetManager : Singleton<NetManager>, INetManager
+{  
+    public class NetManager : INetManager
     {
         #region 变量
 
@@ -21,19 +20,21 @@ namespace gtmEngine
         /// 事件队列
         /// </summary>
         private static Queue<KeyValuePair<ushort, byte[]>> mEventQueue = new Queue<KeyValuePair<ushort, byte[]>>();
-
-        
+ 
         #endregion
 
         #region 接口函数
 
+        public NetManager()
+        {
+            _instance = this;
+        }
+
         /// <summary>
         /// 初始化
         /// </summary>
-        public void DoInit()
+        public override void DoInit()
         {
-            _instance = this;
-
             if (mSocketClient == null)
                 return;
 
@@ -43,12 +44,12 @@ namespace gtmEngine
         /// <summary>
         /// 刷新
         /// </summary>
-        public void DoUpdate()
+        public override void DoUpdate()
         {
             UpdateEventQueue();
         }
 
-        public void DoClose()
+        public override void DoClose()
         {
             if (mSocketClient == null)
                 return;
@@ -59,7 +60,7 @@ namespace gtmEngine
         /// <summary>
         /// 发送链接请求
         /// </summary>
-        public void SendConnect(string address, int port)
+        public override void SendConnect(string address, int port)
         {
             mSocketClient.SendConnect(address, port);
         }
@@ -67,25 +68,16 @@ namespace gtmEngine
         /// <summary>
         /// 关闭连接
         /// </summary>
-        public void CloseSocket()
+        public override void CloseSocket()
         {
             mSocketClient.Close();
-        }
-
-        /// <summary>
-        /// 发送消息
-        /// </summary>
-        /// <param name="obj"></param>
-        public void SendMessage(IMessage obj)
-        {
-
         }
 
         /// <summary>
         /// 是否连接
         /// </summary>
         /// <returns></returns>
-        public bool IsConnected()
+        public override bool IsConnected()
         {
             if (mSocketClient == null)
                 return false;
@@ -93,29 +85,29 @@ namespace gtmEngine
             return mSocketClient.IsConnected();
         }
 
-        #endregion
-
-        #region 函数
-
         /// <summary>
         /// 发送SOCKET消息
         /// </summary>
-        public void SendMessage(ByteBuffer buffer)
+        public override void SendMessage(ByteBuffer buffer)
         {
             mSocketClient.SendMessage(buffer);
         }
-        
+
         /// <summary>
         /// 增加事件
         /// </summary>
         /// <param name="bytearray"></param>
-        public void AddEvent(ushort msgid, byte[] bytearray)
+        public override void AddEvent(ushort msgid, byte[] bytearray)
         {
             lock (mEventQueue)
             {
                 mEventQueue.Enqueue(new KeyValuePair<ushort, byte[]>(msgid, bytearray));
             }
         }
+
+        #endregion
+
+        #region 函数
 
         /// <summary>
         /// 刷新事件队列

@@ -5,12 +5,23 @@ using UnityEngine;
 
 namespace gtmInterface
 {
-    public interface IMsgDispatcher : IManager
+    public abstract class IMsgDispatcher : IManager
     {
-        void Register(uint rspLogin, Action<byte[]> msg);
+        protected static IMsgDispatcher _instance = null;
 
-        void UnRegister(uint msgid, Action<byte[]> msg);
+        public static IMsgDispatcher instance
+        {
+            get { return _instance; }
+        }
 
-        void SendMsg(uint msgid, byte[] bytearray);
+        public delegate void IMsgProcFunc(byte[] bytearray);
+
+        public abstract void Register(uint rspLogin, IMsgProcFunc msg);
+
+        public abstract void UnRegister(uint msgid, IMsgProcFunc msg);
+
+        public abstract void SendMsg(uint msgid, byte[] bytearray);
+
+        public abstract void Dispatcher(ushort msgid, byte[] bytearray);
     }
 }

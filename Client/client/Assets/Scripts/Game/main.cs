@@ -20,7 +20,7 @@ namespace gtmGame
             mGameMgr.DoInit();
             mLoginModel.DoInit();
 
-            mGameMgr.netMgr.SendConnect("192.168.0.104", 8888);
+            NetManager.instance.SendConnect("192.168.0.108", 8888);
 
             StartCoroutine(Cor_SendLoginMsg());
         }
@@ -55,9 +55,9 @@ namespace gtmGame
             fbs.ReqLogin.AddPassword(builder, password);
             var orc = fbs.ReqLogin.EndReqLogin(builder);
             builder.Finish(orc.Value);
-                    
+                       
             byte[] bytearray = builder.DataBuffer.ToSizedArray();
-            mGameMgr.msgDispatcher.SendMsg((uint)fbs.MsgId.ReqLogin, bytearray);
+            IMsgDispatcher.instance.SendMsg((uint)fbs.MsgId.ReqLogin, bytearray);
         }
     }
 }

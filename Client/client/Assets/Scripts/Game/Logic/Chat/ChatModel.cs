@@ -5,7 +5,7 @@ using gtmInterface;
 
 namespace gtmGame
 {
-    public class ChatModel : ClientSingleton<ChatModel>, IManager
+    public class ChatModel : ClientSingleton<ChatModel>, LogicMgrInterface
     {
         #region 继承
 

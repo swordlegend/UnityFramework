@@ -4,21 +4,21 @@ using UnityEngine;
 
 namespace gtmInterface
 {
-    public interface IManager
+    public abstract class IManager
     {
         /// <summary>
         /// 初始化
         /// </summary>
-        void DoInit();
+        public abstract void DoInit();
 
         /// <summary>
         /// 刷新
         /// </summary>
-        void DoUpdate();
+        public abstract void DoUpdate();
 
         /// <summary>
         /// 关闭
         /// </summary>
-        void DoClose();
+        public abstract void DoClose();
     }
 }

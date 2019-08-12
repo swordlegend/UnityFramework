@@ -9,24 +9,31 @@ namespace gtmInterface
         string LOG_TAG { get; }
     }
 
-    public interface ILogSystem : IManager
-    {      
-        void Log(object obj);
+    public abstract class ILogSystem : IManager
+    {
+        protected static ILogSystem _instance = null;
 
-        void Log(string message);
+        public static ILogSystem instance
+        {
+            get { return _instance; }
+        }
 
-        void Log(string format, params object[] args);
+        public abstract void Log(object obj);
 
-        void LogWarning(object obj);
-        
-        void LogWarning(string message);
-             
-        void LogWarning(string format, params object[] args);
+        public abstract void Log(string message);
 
-        void LogError(object obj);
+        public abstract void Log(string format, params object[] args);
 
-        void LogError(string message);
+        public abstract void LogWarning(object obj);
 
-        void LogError(string format, params object[] args);
+        public abstract void LogWarning(string message);
+
+        public abstract void LogWarning(string format, params object[] args);
+
+        public abstract void LogError(object obj);
+
+        public abstract void LogError(string message);
+
+        public abstract void LogError(string format, params object[] args);
     }
 }

@@ -7,11 +7,25 @@ using gtmEngine.Net;
 
 namespace gtmEngine
 {
-    public class MsgDispatcher : Singleton<MsgDispatcher>, IMsgDispatcher
+    public class MsgDispatcher : IMsgDispatcher
     {
-        private static Dictionary<uint, Action<byte[]>> mHandle = new Dictionary<uint, Action<byte[]>>();
+        #region 变量
 
-        public void Dispatcher(ushort msgid, byte[] bytearray)
+        /// <summary>
+        /// 消息句柄
+        /// </summary>
+        private static Dictionary<uint, IMsgProcFunc> mHandle = new Dictionary<uint, IMsgProcFunc>();
+
+        #endregion
+
+        #region 继承
+
+        public MsgDispatcher()
+        {
+            _instance = this;
+        }
+
+        public override void Dispatcher(ushort msgid, byte[] bytearray)
         {
             if (!mHandle.ContainsKey(msgid))
                 return;
@@ -19,22 +33,22 @@ namespace gtmEngine
             mHandle[msgid].Invoke(bytearray);
         }
 
-        public void DoClose()
+        public override void DoClose()
         {
             mHandle.Clear();
         }
 
-        public void DoInit()
-        {
-            _instance = this;
-        }
-
-        public void DoUpdate()
+        public override void DoInit()
         {
             
         }
 
-        public void Register(uint msgid, Action<byte[]> msg)
+        public override void DoUpdate()
+        {
+            
+        }
+
+        public override void Register(uint msgid, IMsgProcFunc msg)
         {
             if (!mHandle.ContainsKey(msgid))
             {
@@ -46,7 +60,7 @@ namespace gtmEngine
             }
         }
 
-        public void UnRegister(uint msgid, Action<byte[]> msg)
+        public override void UnRegister(uint msgid, IMsgProcFunc msg)
         {
             if (mHandle.ContainsKey(msgid))
             {
@@ -54,7 +68,7 @@ namespace gtmEngine
             }
         }
 
-        public void SendMsg(uint msgid, byte[] bytearray)
+        public override void SendMsg(uint msgid, byte[] bytearray)
         {
             ByteBuffer buff = new ByteBuffer();
             UInt16 lengh = (UInt16)(bytearray.Length + 2);
@@ -63,5 +77,7 @@ namespace gtmEngine
             buff.WriteBytes(bytearray);
             NetManager.instance.SendMessage(buff);
         }
+
+        #endregion
     }
 }

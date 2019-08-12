@@ -7,20 +7,20 @@ using FlatBuffers;
 
 namespace gtmGame
 {
-    public class LoginModel : ClientSingleton<LoginModel>, IManager
+    public class LoginModel : ClientSingleton<LoginModel>, LogicMgrInterface
     {
         #region 继承
 
         public void DoInit()
         {
-            GameMgr.instance.msgDispatcher.Register((uint)fbs.MsgId.RspLogin, RspLogin_SC);
-            GameMgr.instance.msgDispatcher.Register((uint)fbs.MsgId.ReqLogin, ReqLogin_SC);
+            IMsgDispatcher.instance.Register((uint)fbs.MsgId.RspLogin, RspLogin_SC);
+            IMsgDispatcher.instance.Register((uint)fbs.MsgId.ReqLogin, ReqLogin_SC);
         }
 
         public void DoClose()
         {
-            GameMgr.instance.msgDispatcher.UnRegister((uint)fbs.MsgId.RspLogin, RspLogin_SC);
-            GameMgr.instance.msgDispatcher.UnRegister((uint)fbs.MsgId.ReqLogin, ReqLogin_SC);
+            IMsgDispatcher.instance.UnRegister((uint)fbs.MsgId.RspLogin, RspLogin_SC);
+            IMsgDispatcher.instance.UnRegister((uint)fbs.MsgId.ReqLogin, ReqLogin_SC);
         }
 
         public void DoUpdate()
@@ -34,24 +34,24 @@ namespace gtmGame
 
         private void RspLogin_SC(byte[] bytearray)
         {
-            GameMgr.instance.logSystem.Log("RspLogin_SC " + bytearray.ToString());
+            ILogSystem.instance.Log("RspLogin_SC " + bytearray.ToString());
 
-            ByteBuffer byteBuffer = new ByteBuffer(bytearray);
+            FlatBuffers.ByteBuffer byteBuffer = new FlatBuffers.ByteBuffer(bytearray);
             fbs.RspLogin msg = fbs.RspLogin.GetRootAsRspLogin(byteBuffer);
 
-            GameMgr.instance.logSystem.Log(msg.Account);
-            GameMgr.instance.logSystem.Log(msg.Password);
-            GameMgr.instance.logSystem.Log(msg.Isok);
+            ILogSystem.instance.Log(msg.Account);
+            ILogSystem.instance.Log(msg.Password);
+            ILogSystem.instance.Log(msg.Isok);
         }
 
         private void ReqLogin_SC(byte[] bytearray)
         {
-            GameMgr.instance.logSystem.Log("ReqLogin_SC : " + bytearray.ToString());
+            ILogSystem.instance.Log("ReqLogin_SC : " + bytearray.ToString());
 
-            ByteBuffer byteBuffer = new ByteBuffer(bytearray);
+            FlatBuffers.ByteBuffer byteBuffer = new FlatBuffers.ByteBuffer(bytearray);
             fbs.ReqLogin msg = fbs.ReqLogin.GetRootAsReqLogin(byteBuffer);
-            GameMgr.instance.logSystem.Log(msg.Account);
-            GameMgr.instance.logSystem.Log(msg.Password);
+            ILogSystem.instance.Log(msg.Account);
+            ILogSystem.instance.Log(msg.Password);
         }
 
         #endregion
