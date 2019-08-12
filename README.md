@@ -14,7 +14,11 @@
 
 4. skynet集成flatbuffer	(只要集成lua版本就可以了, 不用集成c++)
 
-3. Unity和skynet通信, 使用flatbuffer (要一段时间)
+3. Unity和skynet通信, 使用flatbuffer
+
+    a. unity的flatbuffer可以正常收发消息 (完成)
+    
+    b. skynet接入flatbuffer协议，测试正常收发消息 
 
 4. 为lua增加mvc的ui模块 
 
