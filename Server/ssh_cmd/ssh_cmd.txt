@@ -38,3 +38,4 @@ cd /Users/xieliujian/Desktop/xieliujian/unityframework/trunk/Server/skynet-1.2.0
 ./skynet myexamples/e3/config
 
 ./skynet myexamples/e4/config
+
