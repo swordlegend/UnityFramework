@@ -7,6 +7,11 @@ namespace gtmInterface
 {
     public abstract class IMsgDispatcher : IManager
     {
+        public IMsgDispatcher()
+        {
+            _instance = this;
+        }
+
         protected static IMsgDispatcher _instance = null;
 
         public static IMsgDispatcher instance

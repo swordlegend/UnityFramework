@@ -11,6 +11,11 @@ namespace gtmInterface
 
     public abstract class ILogSystem : IManager
     {
+        public ILogSystem()
+        {
+            _instance = this;
+        }
+
         protected static ILogSystem _instance = null;
 
         public static ILogSystem instance

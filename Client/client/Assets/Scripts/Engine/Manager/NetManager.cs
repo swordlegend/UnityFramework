@@ -25,11 +25,6 @@ namespace gtmEngine
 
         #region 接口函数
 
-        public NetManager()
-        {
-            _instance = this;
-        }
-
         /// <summary>
         /// 初始化
         /// </summary>

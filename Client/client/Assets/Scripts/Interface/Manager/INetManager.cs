@@ -6,6 +6,11 @@ namespace gtmInterface
 {
     public abstract class INetManager : IManager
     {
+        public INetManager()
+        {
+            _instance = this;
+        }
+
         protected static INetManager _instance = null;
 
         public static INetManager instance

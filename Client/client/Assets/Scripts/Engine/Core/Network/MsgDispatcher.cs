@@ -20,11 +20,6 @@ namespace gtmEngine
 
         #region 继承
 
-        public MsgDispatcher()
-        {
-            _instance = this;
-        }
-
         public override void Dispatcher(ushort msgid, byte[] bytearray)
         {
             if (!mHandle.ContainsKey(msgid))

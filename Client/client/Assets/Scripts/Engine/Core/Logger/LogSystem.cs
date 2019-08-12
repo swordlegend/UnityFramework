@@ -89,11 +89,6 @@ namespace gtmEngine
 
         #region 接口
 
-        public LogSystem()
-        {
-            _instance = this;
-        }
-
         public override void DoInit()
         {
             
