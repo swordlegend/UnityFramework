@@ -24,9 +24,13 @@ local function echo(id)
             print("client say:" .. str)
 
             local builder = flatbuffers.Builder(1024)
+
+            local account = builder:CreateString("wow");
+            local password = builder:CreateString("skynet");
+
             rsplogin.Start(builder)
-            rsplogin.AddAccount(builder, "wow")
-            rsplogin.AddPassword(builder, "skynet")
+            rsplogin.AddAccount(builder, account)
+            rsplogin.AddPassword(builder, password)
             rsplogin.AddIsok(builder, false);
             local orc = rsplogin.End(builder);
             builder:Finish(orc);
