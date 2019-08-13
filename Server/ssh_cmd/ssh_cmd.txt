@@ -1,6 +1,6 @@
 
 // 远程连接mac服务器
-ssh xieliujian@192.168.0.108
+ssh xieliujian@192.168.0.104
 
 // cd到指定目录
 cd /Users/xieliujian/Desktop/xieliujian/unityframework/
@@ -40,6 +40,9 @@ cd /Users/xieliujian/Desktop/xieliujian/unityframework/trunk/Server/skynet-1.2.0
 ./skynet myexamples/e4/config
 
 ./skynet myexamples/e5/config
+
+
+
 
 
 

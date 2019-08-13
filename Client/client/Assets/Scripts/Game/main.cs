@@ -14,13 +14,15 @@ namespace gtmGame
 
         private LoginModel mLoginModel = new LoginModel();
 
+        public string ipaddress = "192.168.0.104";
+
         // Start is called before the first frame update
         void Start()
         {
             mGameMgr.DoInit();
             mLoginModel.DoInit();
 
-            NetManager.instance.SendConnect("192.168.0.108", 8888);
+            NetManager.instance.SendConnect(ipaddress, 8888);
 
             StartCoroutine(Cor_SendLoginMsg());
         }
