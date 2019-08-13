@@ -19,26 +19,38 @@
     a. unity的flatbuffer可以正常收发消息 (完成)
     
     b. skynet接入flatbuffer协议，测试正常收发消息 
+    
+4. 修改flatbuffer代码生成工具，自动生成msdid
 
-4. 为lua增加mvc的ui模块 
+5. 为lua增加mvc的ui模块 
+
+5. xlua集成flatbuffer通信协议 (全lua框架使用)
+
+6. 开发gm指令窗口ui
+
+8. 表格工具开发(用原来开发的，或者github高star的，或者用flatbuffer生成一套跨平台的)
+
+9. 下载服务器从原来项目搬迁过来(做测试热更服务器)
+
+10. 热更新 (长期优化 + 争取到商用级别)
+
+11. unity显示xlua的报错堆栈(能快速定位问题)
+
+12. 增加跨平台输入系统(不使用ui) 
+
+13. 制作手机摇杆ui
+
+14. 3dui的实现，ugui使用world space的render mode （实现如头顶气泡，头顶名字的功能）
 
 ---
 
-7. 增加跨平台输入系统(不使用ui) 
-
 8. 单机模式登陆（方便测试跑游戏）
-
-9. 3dui的实现，ugui使用world space的render mode （实现如头顶气泡，头顶名字的功能）
-
-10. unity显示xlua的报错堆栈(能快速定位问题)
 
 11. lua游戏流程加入状态机管理   
 
 12. ui增加敏感字检测
 
 13. ui增加avatar的rt显示
-
-4. xlua集成flatbuffer通信协议 (全lua框架使用)
 
 4. 测试idea emmylua 远程调试skynet 
 
