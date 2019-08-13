@@ -56,6 +56,14 @@
 
 14. 测试idea emmylua 远程调试skynet 
 
+---
+
+文档
+
+unity与skynet通信示例一(收发消息)
+unity与skynet通信示例二(使用flatbuffer协议)
+unity与skynet通信示例三(flatbuffer的msgid自动生成)
+
 
 
 
