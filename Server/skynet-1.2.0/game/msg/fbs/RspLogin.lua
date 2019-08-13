@@ -4,6 +4,7 @@
 
 local flatbuffers = require('flatbuffers')
 
+---@class RspLogin
 local RspLogin = {} -- the module
 local RspLogin_mt = {} -- the class metatable
 

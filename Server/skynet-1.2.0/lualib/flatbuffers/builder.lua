@@ -4,6 +4,7 @@ local compat = require("flatbuffers.compat")
 
 local m = {}
 
+---@class flatbufferbuilder
 local mt = {}
 
 -- get locals for faster access
