@@ -11,6 +11,7 @@ local flatbuffers = require("flatbuffers");
 
 ---@type RspLogin
 local rsplogin = require "RspLogin"
+local msgid = require "MsgId"
 
 local function echo(id)
     -- 每当 accept 函数获得一个新的 socket id 后，并不会立即收到这个 socket 上的数据。这是因为，我们有时会希望把这个 socket 的操作权转让给别的服务去处理。
@@ -37,10 +38,15 @@ local function echo(id)
 
             local bufAsString = builder:Output();
 
-            print("RspLogin : "..bufAsString);
+            print("RspLogin : " .. bufAsString);
+
+            local buflen = string.len(bufAsString) + 2;
+            local msgid = msgid.RspLogin;
+
+            local strwrite = string.pack(">HHB", buflen, msgid, bufAsString);
 
             -- 把一个字符串置入正常的写队列，skynet 框架会在 socket 可写时发送它。
-            socket.write(id, bufAsString)
+            socket.write(id, strwrite)
         else
             socket.close(id)
             return
