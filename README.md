@@ -54,7 +54,7 @@
 
 13. ui增加avatar的rt显示
 
-4. 测试idea emmylua 远程调试skynet 
+14. 测试idea emmylua 远程调试skynet 
 
 
 
