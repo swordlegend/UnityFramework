@@ -47,7 +47,7 @@ local function echo(id)
             print(""..msgid);
 
             --local strwrite = string.pack(">HH", buflen, msgid, bufAsString);
-            local strwrite = string.pack(">HH", buflen, msgid);
+            local strwrite = string.pack("<HH", buflen, msgid);
 
             print(strwrite)
 

@@ -173,7 +173,7 @@ namespace gtmEngine.Net
                     return;
                 }
 
-                LogSystem.instance.Log(bytesRead.ToString());
+                //LogSystem.instance.Log(bytesRead.ToString());
 
                 //分析数据包内容，抛给逻辑层
                 OnReceive(mByteBuffer, bytesRead);
