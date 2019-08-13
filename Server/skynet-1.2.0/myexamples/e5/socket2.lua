@@ -37,6 +37,8 @@ local function echo(id)
 
             local bufAsString = builder:Output();
 
+            print("RspLogin : "..bufAsString);
+
             -- 把一个字符串置入正常的写队列，skynet 框架会在 socket 可写时发送它。
             socket.write(id, bufAsString)
         else
