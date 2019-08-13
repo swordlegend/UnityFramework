@@ -4,7 +4,6 @@
 
 local flatbuffers = require('flatbuffers')
 
----@class RspLogin
 local RspLogin = {} -- the module
 local RspLogin_mt = {} -- the class metatable
 
@@ -34,17 +33,9 @@ function RspLogin_mt:Password()
         return self.view:String(o + self.view.pos)
     end
 end
-function RspLogin_mt:Isok()
-    local o = self.view:Offset(8)
-    if o ~= 0 then
-        return (self.view:Get(flatbuffers.N.Bool, o + self.view.pos) ~= 0)
-    end
-    return false
-end
-function RspLogin.Start(builder) builder:StartObject(3) end
+function RspLogin.Start(builder) builder:StartObject(2) end
 function RspLogin.AddAccount(builder, account) builder:PrependUOffsetTRelativeSlot(0, account, 0) end
 function RspLogin.AddPassword(builder, password) builder:PrependUOffsetTRelativeSlot(1, password, 0) end
-function RspLogin.AddIsok(builder, isok) builder:PrependBoolSlot(2, isok, 0) end
 function RspLogin.End(builder) return builder:EndObject() end
 
 return RspLogin -- return the module

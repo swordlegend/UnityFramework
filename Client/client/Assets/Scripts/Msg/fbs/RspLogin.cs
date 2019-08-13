@@ -31,23 +31,19 @@ public struct RspLogin : IFlatbufferObject
   public ArraySegment<byte>? GetPasswordBytes() { return __p.__vector_as_arraysegment(6); }
 #endif
   public byte[] GetPasswordArray() { return __p.__vector_as_array<byte>(6); }
-  public bool Isok { get { int o = __p.__offset(8); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
 
   public static Offset<RspLogin> CreateRspLogin(FlatBufferBuilder builder,
       StringOffset accountOffset = default(StringOffset),
-      StringOffset passwordOffset = default(StringOffset),
-      bool isok = false) {
-    builder.StartObject(3);
+      StringOffset passwordOffset = default(StringOffset)) {
+    builder.StartObject(2);
     RspLogin.AddPassword(builder, passwordOffset);
     RspLogin.AddAccount(builder, accountOffset);
-    RspLogin.AddIsok(builder, isok);
     return RspLogin.EndRspLogin(builder);
   }
 
-  public static void StartRspLogin(FlatBufferBuilder builder) { builder.StartObject(3); }
+  public static void StartRspLogin(FlatBufferBuilder builder) { builder.StartObject(2); }
   public static void AddAccount(FlatBufferBuilder builder, StringOffset accountOffset) { builder.AddOffset(0, accountOffset.Value, 0); }
   public static void AddPassword(FlatBufferBuilder builder, StringOffset passwordOffset) { builder.AddOffset(1, passwordOffset.Value, 0); }
-  public static void AddIsok(FlatBufferBuilder builder, bool isok) { builder.AddBool(2, isok, false); }
   public static Offset<RspLogin> EndRspLogin(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<RspLogin>(o);

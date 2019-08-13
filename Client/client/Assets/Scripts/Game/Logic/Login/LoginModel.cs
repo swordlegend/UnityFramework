@@ -41,7 +41,6 @@ namespace gtmGame
 
             ILogSystem.instance.Log(msg.Account);
             ILogSystem.instance.Log(msg.Password);
-            ILogSystem.instance.Log(msg.Isok);
         }
 
         private void ReqLogin_SC(byte[] bytearray)
