@@ -18,6 +18,8 @@
 
     a. unity的flatbuffer可以正常收发消息 (完成)
     
+    ---
+    
     b. skynet接入flatbuffer协议，测试正常收发消息 
     
 4. 修改flatbuffer代码生成工具，自动生成msdid
