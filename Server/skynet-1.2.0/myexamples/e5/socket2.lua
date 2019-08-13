@@ -43,6 +43,9 @@ local function echo(id)
             local buflen = #bufAsString + 2;
             local msgid = msgid.RspLogin;
 
+            print(""..buflen);
+            print(""..msgid);
+
             --local strwrite = string.pack(">HH", buflen, msgid, bufAsString);
             local strwrite = string.pack(">HH", buflen, msgid);
 
