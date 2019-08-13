@@ -31,7 +31,7 @@ local function echo(id)
             rsplogin.Start(builder)
             rsplogin.AddAccount(builder, account)
             rsplogin.AddPassword(builder, password)
-            rsplogin.AddIsok(builder, 1)
+            --rsplogin.AddIsok(builder, 1)
             local orc = rsplogin.End(builder);
             builder:Finish(orc);
 
