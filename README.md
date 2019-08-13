@@ -18,11 +18,11 @@
 
     a. unity的flatbuffer可以正常收发消息 (完成)
     
-    ---
+    b. skynet接入flatbuffer协议，测试正常收发消息 (完成)
     
-    b. skynet接入flatbuffer协议，测试正常收发消息 
+---
     
-4. 修改flatbuffer代码生成工具，自动生成msdid
+4. 修改flatbuffer代码生成工具，自动生成msdid 
 
 5. 为lua增加mvc的ui模块 
 
@@ -60,9 +60,11 @@
 
 文档
 
-unity与skynet通信示例一(收发消息)
-unity与skynet通信示例二(使用flatbuffer协议)
-unity与skynet通信示例三(flatbuffer的msgid自动生成)
+1. unity与skynet通信示例一(收发消息)
+
+2. unity与skynet通信示例二(使用flatbuffer协议)
+
+3. unity与skynet通信示例三(flatbuffer的msgid自动生成)
 
 
 
