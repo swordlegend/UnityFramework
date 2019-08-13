@@ -22,7 +22,7 @@ local function echo(id)
         local str = socket.read(id)
         if str then
 
-            print("client say:" .. str)
+            --print("client say:" .. str)
 
             local builder = flatbuffers.Builder(1024)
 
@@ -38,14 +38,19 @@ local function echo(id)
 
             local bufAsString = builder:Output();
 
-            print("RspLogin : " .. bufAsString);
+            --print("RspLogin : " .. bufAsString);
 
             local buflen = #bufAsString + 2;
             local msgid = msgid.RspLogin;
 
             --local strwrite = string.pack(">HH", buflen, msgid, bufAsString);
             local strwrite = string.pack(">HH", buflen, msgid);
+
+            print(strwrite)
+
             strwrite = strwrite..bufAsString;
+
+            print(strwrite)
 
             -- 把一个字符串置入正常的写队列，skynet 框架会在 socket 可写时发送它。
             socket.write(id, strwrite)
