@@ -8,6 +8,9 @@ cd /Users/xieliujian/Desktop/xieliujian/unityframework/
 // svn 刷新
 svn update
 
+// svn 清理
+svn cleanup
+
 
 
 // 运行skynet测试例子
