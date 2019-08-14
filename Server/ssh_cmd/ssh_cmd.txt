@@ -3,10 +3,13 @@
 ssh xieliujian@192.168.0.104
 
 // cd到指定目录
-cd /Users/xieliujian/Desktop/xieliujian/unityframework/
+cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/
 
 // 创建目录
 mkdir unityframework
+
+// 删除文件夹
+rm -rf /Users/xieliujian/Desktop/xieliujian/unityframework.git/
 
 // checkout目录
 svn checkout https://github.com/xieliujian/UnityFramework.git
