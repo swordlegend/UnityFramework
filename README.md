@@ -22,6 +22,8 @@
         
 4. 修改flatbuffer代码生成工具，自动生成msdid 
 
+5. 资源管理类添加(只加载本地资源)
+
 5. 为lua增加mvc的ui模块 
 
 5. xlua集成flatbuffer通信协议 (全lua框架使用)
@@ -29,6 +31,8 @@
 11. unity打印xlua的报错堆栈(能快速定位问题)
 
 ---
+
+12. 资源管理类完善(加载streamasset资源)
 
 6. 开发gm指令窗口ui
 
