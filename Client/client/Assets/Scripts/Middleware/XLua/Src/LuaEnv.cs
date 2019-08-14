@@ -16,6 +16,8 @@ using RealStatePtr = System.IntPtr;
 using LuaCSFunction = XLua.LuaDLL.lua_CSFunction;
 #endif
 
+using gtmInterface;
+
 
 namespace XLua
 {
@@ -440,7 +442,14 @@ namespace XLua
                 if (ex != null) throw ex;
 
                 // A non-wrapped Lua error (best interpreted as a string) - wrap it and throw it
-                if (err == null) err = "Unknown Lua Error";
+                if (err == null)
+                    err = "Unknown Lua Error";
+
+                if (ILogSystem.instance != null)
+                {
+                    ILogSystem.instance.LogError(err.ToString());
+                }
+
                 throw new LuaException(err.ToString());
 #if THREAD_SAFE || HOTFIX_ENABLE
             }

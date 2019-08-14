@@ -11,6 +11,7 @@ local flatbuffers = require("flatbuffers");
 
 ---@type RspLogin
 local rsplogin = require "RspLogin"
+
 local msgid = require "MsgId"
 
 local function echo(id)
@@ -38,15 +39,12 @@ local function echo(id)
 
             local bufAsString = builder:Output();
 
-            --print("RspLogin : " .. bufAsString);
-
             local buflen = #bufAsString + 2;
             local msgid = msgid.RspLogin;
 
             print(""..buflen);
             print(""..msgid);
-
-            --local strwrite = string.pack(">HH", buflen, msgid, bufAsString);
+            
             local strwrite = string.pack("<HH", buflen, msgid);
 
             print(strwrite)
