@@ -19,14 +19,16 @@
     a. unity的flatbuffer可以正常收发消息 (完成)
     
     b. skynet接入flatbuffer协议，测试正常收发消息 (完成)
-    
----
-    
+        
 4. 修改flatbuffer代码生成工具，自动生成msdid 
 
 5. 为lua增加mvc的ui模块 
 
 5. xlua集成flatbuffer通信协议 (全lua框架使用)
+
+11. unity打印xlua的报错堆栈(能快速定位问题)
+
+---
 
 6. 开发gm指令窗口ui
 
@@ -35,8 +37,6 @@
 9. 下载服务器从原来项目搬迁过来(做测试热更服务器)
 
 10. 热更新 (长期优化 + 争取到商用级别)
-
-11. unity显示xlua的报错堆栈(能快速定位问题)
 
 12. 增加跨平台输入系统(不使用ui) 
 
