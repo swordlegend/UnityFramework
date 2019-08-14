@@ -70,7 +70,11 @@ namespace gtmEngine
             buff.WriteShort((UInt16)lengh);
             buff.WriteShort((UInt16)msgid);
             buff.WriteBytes(bytearray);
-            NetManager.instance.SendMessage(buff);
+
+            if (NetManager.instance != null)
+            {
+                NetManager.instance.SendMessage(buff);
+            }
         }
 
         #endregion

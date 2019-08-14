@@ -115,114 +115,15 @@ namespace gtmEngine
             while (mEventQueue.Count > 0)
             {
                 KeyValuePair<ushort, byte[]> keyvaleupair = mEventQueue.Dequeue();
-                MsgDispatcher.instance.Dispatcher(keyvaleupair.Key, keyvaleupair.Value);                        
+
+                if (MsgDispatcher.instance != null)
+                {
+                    MsgDispatcher.instance.Dispatcher(keyvaleupair.Key, keyvaleupair.Value);
+                }                     
             }
         }
 
         #endregion
-
-        /// <summary>
-        /// 连接 
-        /// </summary>
-        //public void OnConnect()
-        //{
-        //    LogSystem.instance.Log("======连接========");
-        //}
-
-        /// <summary>
-        /// 断开连接
-        /// </summary>
-        //public void OnDisConnect()
-        //{
-        //    LogSystem.instance.Log("======断开连接========");
-        //}
-
-        //public delegate void TocHandler(object data);
-
-        /// <summary>
-        /// 回调消息表
-        /// </summary>
-        //private Dictionary<Type, TocHandler> mHandlerDict = new Dictionary<Type, TocHandler>();
-
-        /// <summary>
-        /// 派发协议
-        /// </summary>
-        /// <param name="protoId"></param>
-        /// <param name="buff"></param>
-        //public void DispatchProto(int protoId, byte[] buff)
-        //{
-        //    if (!ProtoDic.ContainProtoId(protoId))
-        //    {
-        //        Debuger.LogError("未知协议号");
-        //        return;
-        //    }
-
-        //    Type protoType = ProtoDic.GetProtoTypeByProtoId(protoId);
-
-        //    try
-        //    {
-        //        MessageParser messageParser = ProtoDic.GetMessageParser(protoType.TypeHandle);
-        //        object toc = messageParser.ParseFrom(buff);
-        //        mEventQueue.Enqueue(new KeyValuePair<Type, object>(protoType, toc));
-        //    }
-        //    catch
-        //    {
-        //        Debuger.Log("DispatchProto Error:" + protoType.ToString());
-        //    }
-        //}
-
-        //public void AddHandler(Type type, TocHandler handler)
-        //{
-        //    if (mHandlerDict.ContainsKey(type))
-        //    {
-        //        mHandlerDict[type] += handler;
-        //    }
-        //    else
-        //    {
-        //        mHandlerDict.Add(type, handler);
-        //    }
-        //}
-
-        //public void RemoveHandle(Type type, TocHandler handler)
-        //{
-        //    if (mHandlerDict.ContainsKey(type))
-        //    {
-        //        mHandlerDict[type] -= handler;
-        //    }
-        //}
-
-        /// <summary>
-        /// 发送SOCKET消息
-        /// </summary>
-        //public void SendMessage(IMessage obj)
-        //{
-        //    if (!mSocketClient.IsConnected())
-        //        return;
-
-        //    if (!ProtoDic.ContainProtoType(obj.GetType()))
-        //    {
-        //        Debuger.LogError("不存协议类型");
-        //        return;
-        //    }
-
-        //    ByteBuffer buff = new ByteBuffer();
-        //    int protoId = ProtoDic.GetProtoIdByProtoType(obj.GetType());
-
-        //    byte[] result;
-        //    using (MemoryStream ms = new MemoryStream())
-        //    {
-        //        obj.WriteTo(ms);
-        //        result = ms.ToArray();
-        //    }
-
-        //    UInt16 lengh = (UInt16)(result.Length + 2);
-        //    //Debug.Log("lengh" + lengh + ",protoId" + protoId);
-        //    buff.WriteShort((UInt16)lengh);
-        //    buff.WriteShort((UInt16)protoId);
-        //    buff.WriteBytes(result);
-        //    SendMessage(buff);
-        //}
-
     }
 }
 

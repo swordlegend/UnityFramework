@@ -1,12 +1,12 @@
 
 // 远程连接mac服务器
-ssh xieliujian@192.168.0.104
+ssh xieliujian@192.168.0.103
 
 // cd到指定目录
 cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/
 
 // 创建目录
-mkdir unityframework
+mkdir unityframework.git
 
 // 删除文件夹
 rm -rf /Users/xieliujian/Desktop/xieliujian/unityframework.git/
@@ -24,7 +24,7 @@ svn cleanup
 
 // 运行skynet测试例子
 
-cd /Users/xieliujian/Desktop/xieliujian/unityframework/trunk/Server/skynet-1.2.0/
+cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/Server/skynet-1.2.0/
 
 ./skynet examples/config
 
@@ -41,7 +41,7 @@ kill -9 PID
 
 // 运行自己的测试例子
 
-cd /Users/xieliujian/Desktop/xieliujian/unityframework/trunk/Server/skynet-1.2.0/
+cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/Server/skynet-1.2.0/
 
 ./skynet myexamples/e1/config
 

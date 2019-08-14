@@ -19,7 +19,6 @@ namespace gtmEngine.Net
             Disconnect,
         }
 
-
         private const int MAX_READ = 8192;
 
         #endregion
@@ -129,24 +128,6 @@ namespace gtmEngine.Net
             {
                 LogSystem.instance.LogError("client.connected----->>false");
             }
-
-            //MemoryStream ms = null;
-            //using (ms = new MemoryStream())
-            //{
-            //    ms.Position = 0;
-            //    BinaryWriter writer = new BinaryWriter(ms);
-            //    writer.Write(message);
-            //    writer.Flush();
-            //    if (mClient != null && mClient.Connected)
-            //    {
-            //        byte[] payload = ms.ToArray();
-            //        mNetStream.BeginWrite(payload, 0, payload.Length, new AsyncCallback(OnWrite), null);
-            //    }
-            //    else
-            //    {
-            //        LogSystem.instance.LogError("client.connected----->>false");
-            //    }
-            //}
         }
 
         /// <summary>
@@ -172,9 +153,7 @@ namespace gtmEngine.Net
                     OnDisconnected(DisType.Disconnect, "bytesRead < 1");
                     return;
                 }
-
-                //LogSystem.instance.Log(bytesRead.ToString());
-
+                
                 //分析数据包内容，抛给逻辑层
                 OnReceive(mByteBuffer, bytesRead);
 
@@ -252,12 +231,6 @@ namespace gtmEngine.Net
                     int protocollen = msglen - 2;
                     byte[] bytearray = mReader.ReadBytes(protocollen);
                     OnReceivedMessage(msgid, bytearray);
-
-                    //MemoryStream ms = new MemoryStream();
-                    //BinaryWriter writer = new BinaryWriter(ms);
-                    //writer.Write(mReader.ReadBytes(messageLen));
-                    //ms.Seek(0, SeekOrigin.Begin);
-                    //OnReceivedMessage(ms);
                 }
                 else
                 {
@@ -287,20 +260,6 @@ namespace gtmEngine.Net
         {
             NetManager.instance.AddEvent(msgid, bytearray);
         }
-
-        //void OnReceivedMessage(MemoryStream ms)
-        //{
-        //    BinaryReader r = new BinaryReader(ms);
-        //    byte[] message = r.ReadBytes((int)(ms.Length - ms.Position));
-
-        //    ByteBuffer buffer = new ByteBuffer(message);
-        //    NetManager.instance.AddEvent(buffer);
-
-        //    //int mainId = buffer.ReadShort();
-        //    //int pbDataLen = message.Length - 2;
-        //    //byte[] pbData = buffer.ReadBytes(pbDataLen);
-        //    //NetManager.instance.DispatchProto(mainId, pbData);
-        //}
 
         /// <summary>
         /// 会话发送
