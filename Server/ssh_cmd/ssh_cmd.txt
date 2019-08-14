@@ -5,6 +5,12 @@ ssh xieliujian@192.168.0.104
 // cd到指定目录
 cd /Users/xieliujian/Desktop/xieliujian/unityframework/
 
+// 创建目录
+mkdir unityframework
+
+// checkout目录
+svn checkout https://github.com/xieliujian/UnityFramework.git
+
 // svn 刷新
 svn update
 
