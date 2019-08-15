@@ -9,6 +9,7 @@ local ReqLogin = {} -- the module
 
 local ReqLogin_mt = {} -- the class metatable
 
+RspLogin.HashID = 0x0CDFF5EC2B4610A6;
 
 function ReqLogin.New()
     local o = {}

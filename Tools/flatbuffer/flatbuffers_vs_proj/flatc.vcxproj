@@ -120,7 +120,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/Xieliujian/UnityFramework/trunk/Tools/flatbuffer/flatbuffers_vs_proj/Debug/flatc.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Xieliujian/UnityFramework/trunk/Tools/flatbuffer/flatbuffers_vs_proj/Debug/flatc.pdb</ProgramDataBaseFile>
+      <ProgramDataBaseFile>../intermediate\$(Configuration)\$(ProjectName)/flatc.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
