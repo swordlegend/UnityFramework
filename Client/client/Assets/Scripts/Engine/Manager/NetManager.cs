@@ -14,12 +14,12 @@ namespace gtmEngine
         /// <summary>
         /// Socket
         /// </summary>
-        private SocketClient mSocketClient = new SocketClient();
+        private SocketClient m_SocketClient = new SocketClient();
 
         /// <summary>
         /// 事件队列
         /// </summary>
-        private static Queue<KeyValuePair<ushort, byte[]>> mEventQueue = new Queue<KeyValuePair<ushort, byte[]>>();
+        private static Queue<KeyValuePair<ushort, byte[]>> m_EventQueue = new Queue<KeyValuePair<ushort, byte[]>>();
  
         #endregion
 
@@ -30,10 +30,10 @@ namespace gtmEngine
         /// </summary>
         public override void DoInit()
         {
-            if (mSocketClient == null)
+            if (m_SocketClient == null)
                 return;
 
-            mSocketClient.OnRegister();
+            m_SocketClient.OnRegister();
         }
 
         /// <summary>
@@ -46,10 +46,10 @@ namespace gtmEngine
 
         public override void DoClose()
         {
-            if (mSocketClient == null)
+            if (m_SocketClient == null)
                 return;
 
-            mSocketClient.OnRemove();
+            m_SocketClient.OnRemove();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace gtmEngine
         /// </summary>
         public override void SendConnect(string address, int port)
         {
-            mSocketClient.SendConnect(address, port);
+            m_SocketClient.SendConnect(address, port);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace gtmEngine
         /// </summary>
         public override void CloseSocket()
         {
-            mSocketClient.Close();
+            m_SocketClient.Close();
         }
 
         /// <summary>
@@ -74,10 +74,10 @@ namespace gtmEngine
         /// <returns></returns>
         public override bool IsConnected()
         {
-            if (mSocketClient == null)
+            if (m_SocketClient == null)
                 return false;
 
-            return mSocketClient.IsConnected();
+            return m_SocketClient.IsConnected();
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace gtmEngine
         /// </summary>
         public override void SendMessage(ByteBuffer buffer)
         {
-            mSocketClient.SendMessage(buffer);
+            m_SocketClient.SendMessage(buffer);
         }
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace gtmEngine
         /// <param name="bytearray"></param>
         public override void AddEvent(ushort msgid, byte[] bytearray)
         {
-            lock (mEventQueue)
+            lock (m_EventQueue)
             {
-                mEventQueue.Enqueue(new KeyValuePair<ushort, byte[]>(msgid, bytearray));
+                m_EventQueue.Enqueue(new KeyValuePair<ushort, byte[]>(msgid, bytearray));
             }
         }
 
@@ -109,12 +109,12 @@ namespace gtmEngine
         /// </summary>
         private void UpdateEventQueue()
         {
-            if (mEventQueue.Count <= 0)
+            if (m_EventQueue.Count <= 0)
                 return;
 
-            while (mEventQueue.Count > 0)
+            while (m_EventQueue.Count > 0)
             {
-                KeyValuePair<ushort, byte[]> keyvaleupair = mEventQueue.Dequeue();
+                KeyValuePair<ushort, byte[]> keyvaleupair = m_EventQueue.Dequeue();
 
                 if (MsgDispatcher.instance != null)
                 {

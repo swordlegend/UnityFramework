@@ -6,7 +6,7 @@ namespace gtmInterface
 {
     public class Singleton<T> where T : new()
     {
-        protected static T _instance = default(T);
+        protected static T m_sInstance = default(T);
 
         protected Singleton()
         {
@@ -17,15 +17,15 @@ namespace gtmInterface
         {
             get
             {
-                if (_instance == null)
+                if (m_sInstance == null)
                 {
-                    if (_instance == null)
+                    if (m_sInstance == null)
                     {
-                        _instance = new T();
+                        m_sInstance = new T();
                     }
                 }
 
-                return _instance;
+                return m_sInstance;
             }
         }
     }

@@ -10,17 +10,17 @@ namespace gtmGame
 {
     public class main : MonoBehaviour
     {
-        private GameMgr mGameMgr = new GameMgr();
+        private GameMgr m_GameMgr = new GameMgr();
 
-        private LoginModel mLoginModel = new LoginModel();
+        private LoginModel m_LoginModel = new LoginModel();
 
         public string ipaddress = "192.168.0.104";
 
         // Start is called before the first frame update
         void Start()
         {
-            mGameMgr.DoInit();
-            mLoginModel.DoInit();
+            m_GameMgr.DoInit();
+            m_LoginModel.DoInit();
 
             NetManager.instance.SendConnect(ipaddress, 8888);
 
@@ -30,13 +30,13 @@ namespace gtmGame
         // Update is called once per frame
         void Update()
         {
-            mGameMgr.DoUpdate();
+            m_GameMgr.DoUpdate();
         }
 
         private void OnDestroy()
         {
-            mLoginModel.DoClose();
-            mGameMgr.DoClose();
+            m_LoginModel.DoClose();
+            m_GameMgr.DoClose();
         }
 
         IEnumerator Cor_SendLoginMsg()

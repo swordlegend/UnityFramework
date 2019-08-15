@@ -28,27 +28,27 @@ namespace gtmEngine.Net
         /// <summary>
         /// tcp client
         /// </summary>
-        private TcpClient mClient = null;
+        private TcpClient m_Client = null;
 
         /// <summary>
         /// network stream
         /// </summary>
-        private NetworkStream mNetStream = null;
+        private NetworkStream m_NetStream = null;
 
         /// <summary>
         /// memory stream
         /// </summary>
-        private MemoryStream mMemStream = null;
+        private MemoryStream m_MemStream = null;
 
         /// <summary>
         /// reader
         /// </summary>
-        private BinaryReader mReader = null;
+        private BinaryReader m_Reader = null;
 
         /// <summary>
         /// 网络接收的数据
         /// </summary>
-        private byte[] mByteBuffer = new byte[MAX_READ];
+        private byte[] m_ByteBuffer = new byte[MAX_READ];
 
         #endregion
 
@@ -64,8 +64,8 @@ namespace gtmEngine.Net
         /// </summary>
         public void OnRegister()
         {
-            mMemStream = new MemoryStream();
-            mReader = new BinaryReader(mMemStream);
+            m_MemStream = new MemoryStream();
+            m_Reader = new BinaryReader(m_MemStream);
         }
 
         /// <summary>
@@ -75,11 +75,11 @@ namespace gtmEngine.Net
         {
             Close();
 
-            if (mReader != null)
-                mReader.Close();
+            if (m_Reader != null)
+                m_Reader.Close();
 
-            if (mMemStream != null)
-                mMemStream.Close();
+            if (m_MemStream != null)
+                m_MemStream.Close();
 
         }
 
@@ -88,15 +88,15 @@ namespace gtmEngine.Net
         /// </summary>
         void ConnectServer(string host, int port)
         {
-            mClient = null;
-            mClient = new TcpClient();
-            mClient.SendTimeout = 1000;
-            mClient.ReceiveTimeout = 1000;
-            mClient.NoDelay = true;
+            m_Client = null;
+            m_Client = new TcpClient();
+            m_Client.SendTimeout = 1000;
+            m_Client.ReceiveTimeout = 1000;
+            m_Client.NoDelay = true;
 
             try
             {
-                mClient.BeginConnect(host, port, new AsyncCallback(OnConnect), null);
+                m_Client.BeginConnect(host, port, new AsyncCallback(OnConnect), null);
             }
             catch (Exception e)
             {
@@ -110,8 +110,8 @@ namespace gtmEngine.Net
         /// </summary>
         void OnConnect(IAsyncResult asr)
         {
-            mNetStream = mClient.GetStream();
-            mNetStream.BeginRead(mByteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
+            m_NetStream = m_Client.GetStream();
+            m_NetStream.BeginRead(m_ByteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
             LogSystem.instance.Log("======连接========");
         }
 
@@ -122,7 +122,7 @@ namespace gtmEngine.Net
         {
             if (IsConnected())
             {
-                mNetStream.BeginWrite(message, 0, message.Length, new AsyncCallback(OnWrite), null);
+                m_NetStream.BeginWrite(message, 0, message.Length, new AsyncCallback(OnWrite), null);
             }
             else
             {
@@ -141,10 +141,10 @@ namespace gtmEngine.Net
                 if (!IsConnected())
                     return;
 
-                lock (mClient.GetStream())
+                lock (m_Client.GetStream())
                 {
                     //读取字节流到缓冲区
-                    bytesRead = mClient.GetStream().EndRead(asr);
+                    bytesRead = m_Client.GetStream().EndRead(asr);
                 }
 
                 if (bytesRead < 1)
@@ -155,13 +155,13 @@ namespace gtmEngine.Net
                 }
                 
                 //分析数据包内容，抛给逻辑层
-                OnReceive(mByteBuffer, bytesRead);
+                OnReceive(m_ByteBuffer, bytesRead);
 
-                lock (mClient.GetStream())
+                lock (m_Client.GetStream())
                 {
                     //分析完，再次监听服务器发过来的新消息
-                    Array.Clear(mByteBuffer, 0, mByteBuffer.Length);   //清空数组
-                    mClient.GetStream().BeginRead(mByteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
+                    Array.Clear(m_ByteBuffer, 0, m_ByteBuffer.Length);   //清空数组
+                    m_Client.GetStream().BeginRead(m_ByteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
                 }
             }
             catch (Exception ex)
@@ -188,9 +188,9 @@ namespace gtmEngine.Net
         void PrintBytes()
         {
             string returnStr = string.Empty;
-            for (int i = 0; i < mByteBuffer.Length; i++)
+            for (int i = 0; i < m_ByteBuffer.Length; i++)
             {
-                returnStr += mByteBuffer[i].ToString("X2");
+                returnStr += m_ByteBuffer[i].ToString("X2");
             }
 
             LogSystem.instance.LogError(returnStr);
@@ -203,7 +203,7 @@ namespace gtmEngine.Net
         {
             try
             {
-                mNetStream.EndWrite(r);
+                m_NetStream.EndWrite(r);
             }
             catch (Exception ex)
             {
@@ -216,32 +216,32 @@ namespace gtmEngine.Net
         /// </summary>
         void OnReceive(byte[] bytes, int length)
         {
-            mMemStream.Seek(0, SeekOrigin.End);
-            mMemStream.Write(bytes, 0, length);
+            m_MemStream.Seek(0, SeekOrigin.End);
+            m_MemStream.Write(bytes, 0, length);
 
             //Reset to beginning
-            mMemStream.Seek(0, SeekOrigin.Begin);
+            m_MemStream.Seek(0, SeekOrigin.Begin);
 
             while (RemainingBytes() > 2)
             {
-                ushort msglen = mReader.ReadUInt16();
+                ushort msglen = m_Reader.ReadUInt16();
                 if (RemainingBytes() >= msglen)
                 {
-                    ushort msgid = mReader.ReadUInt16();
+                    ushort msgid = m_Reader.ReadUInt16();
                     int protocollen = msglen - 2;
-                    byte[] bytearray = mReader.ReadBytes(protocollen);
+                    byte[] bytearray = m_Reader.ReadBytes(protocollen);
                     OnReceivedMessage(msgid, bytearray);
                 }
                 else
                 {
-                    mMemStream.Position = mMemStream.Position - 2;
+                    m_MemStream.Position = m_MemStream.Position - 2;
                     break;
                 }
             }
 
-            byte[] leftover = mReader.ReadBytes((int)RemainingBytes());
-            mMemStream.SetLength(0);
-            mMemStream.Write(leftover, 0, leftover.Length);
+            byte[] leftover = m_Reader.ReadBytes((int)RemainingBytes());
+            m_MemStream.SetLength(0);
+            m_MemStream.Write(leftover, 0, leftover.Length);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace gtmEngine.Net
         /// </summary>
         private long RemainingBytes()
         {
-            return mMemStream.Length - mMemStream.Position;
+            return m_MemStream.Length - m_MemStream.Position;
         }
 
         /// <summary>
@@ -274,12 +274,12 @@ namespace gtmEngine.Net
         /// </summary>
         public void Close()
         {
-            if (mClient != null)
+            if (m_Client != null)
             {
-                if (mClient.Connected)
-                    mClient.Close();
+                if (m_Client.Connected)
+                    m_Client.Close();
 
-                mClient = null;
+                m_Client = null;
 
                 LogSystem.instance.Log("======关闭连接========");
             }
@@ -311,7 +311,7 @@ namespace gtmEngine.Net
         /// <returns></returns>
         public bool IsConnected()
         {
-            return (mClient != null && mClient.Connected);
+            return (m_Client != null && m_Client.Connected);
         }
 
         #endregion

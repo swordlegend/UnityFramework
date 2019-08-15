@@ -14,7 +14,7 @@ namespace gtmEngine
         /// <summary>
         /// 消息句柄
         /// </summary>
-        private static Dictionary<uint, IMsgProcFunc> mHandle = new Dictionary<uint, IMsgProcFunc>();
+        private static Dictionary<uint, IMsgProcFunc> m_Handle = new Dictionary<uint, IMsgProcFunc>();
 
         #endregion
 
@@ -22,15 +22,15 @@ namespace gtmEngine
 
         public override void Dispatcher(ushort msgid, byte[] bytearray)
         {
-            if (!mHandle.ContainsKey(msgid))
+            if (!m_Handle.ContainsKey(msgid))
                 return;
 
-            mHandle[msgid].Invoke(bytearray);
+            m_Handle[msgid].Invoke(bytearray);
         }
 
         public override void DoClose()
         {
-            mHandle.Clear();
+            m_Handle.Clear();
         }
 
         public override void DoInit()
@@ -45,21 +45,21 @@ namespace gtmEngine
 
         public override void Register(uint msgid, IMsgProcFunc msg)
         {
-            if (!mHandle.ContainsKey(msgid))
+            if (!m_Handle.ContainsKey(msgid))
             {
-                mHandle.Add(msgid, msg);
+                m_Handle.Add(msgid, msg);
             }
             else
             {
-                mHandle[msgid] += msg;
+                m_Handle[msgid] += msg;
             }
         }
 
         public override void UnRegister(uint msgid, IMsgProcFunc msg)
         {
-            if (mHandle.ContainsKey(msgid))
+            if (m_Handle.ContainsKey(msgid))
             {
-                mHandle[msgid] -= msg;
+                m_Handle[msgid] -= msg;
             }
         }
 

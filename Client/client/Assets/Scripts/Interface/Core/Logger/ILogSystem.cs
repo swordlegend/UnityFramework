@@ -13,14 +13,14 @@ namespace gtmInterface
     {
         public ILogSystem()
         {
-            _instance = this;
+            m_sInstance = this;
         }
 
-        protected static ILogSystem _instance = null;
+        protected static ILogSystem m_sInstance = null;
 
         public static ILogSystem instance
         {
-            get { return _instance; }
+            get { return m_sInstance; }
         }
 
         public abstract void Log(object obj);

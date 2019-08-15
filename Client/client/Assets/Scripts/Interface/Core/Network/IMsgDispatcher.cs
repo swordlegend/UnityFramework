@@ -9,14 +9,14 @@ namespace gtmInterface
     {
         public IMsgDispatcher()
         {
-            _instance = this;
+            m_sInstance = this;
         }
 
-        protected static IMsgDispatcher _instance = null;
+        protected static IMsgDispatcher m_sInstance = null;
 
         public static IMsgDispatcher instance
         {
-            get { return _instance; }
+            get { return m_sInstance; }
         }
 
         public delegate void IMsgProcFunc(byte[] bytearray);
