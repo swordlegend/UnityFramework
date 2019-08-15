@@ -19,8 +19,8 @@ namespace gtmEngine
         /// <summary>
         /// 事件队列
         /// </summary>
-        private static Queue<KeyValuePair<ushort, byte[]>> m_EventQueue = new Queue<KeyValuePair<ushort, byte[]>>();
- 
+        private static Queue<KeyValuePair<ulong, byte[]>> m_EventQueue = new Queue<KeyValuePair<ulong, byte[]>>();
+        
         #endregion
 
         #region 接口函数
@@ -92,11 +92,11 @@ namespace gtmEngine
         /// 增加事件
         /// </summary>
         /// <param name="bytearray"></param>
-        public override void AddEvent(ushort msgid, byte[] bytearray)
+        public override void AddEvent(ulong msgid, byte[] bytearray)
         {
             lock (m_EventQueue)
             {
-                m_EventQueue.Enqueue(new KeyValuePair<ushort, byte[]>(msgid, bytearray));
+                m_EventQueue.Enqueue(new KeyValuePair<ulong, byte[]>(msgid, bytearray));
             }
         }
 
@@ -114,7 +114,7 @@ namespace gtmEngine
 
             while (m_EventQueue.Count > 0)
             {
-                KeyValuePair<ushort, byte[]> keyvaleupair = m_EventQueue.Dequeue();
+                KeyValuePair<ulong, byte[]> keyvaleupair = m_EventQueue.Dequeue();
 
                 if (MsgDispatcher.instance != null)
                 {

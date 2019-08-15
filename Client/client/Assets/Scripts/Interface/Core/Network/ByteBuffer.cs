@@ -69,6 +69,11 @@ namespace gtmInterface
             m_Writer.Write((long)v);
         }
 
+        public void WriteUlong(ulong v)
+        {
+            m_Writer.Write(v);
+        }
+
         public void WriteFloat(float v)
         {
             byte[] temp = BitConverter.GetBytes(v);

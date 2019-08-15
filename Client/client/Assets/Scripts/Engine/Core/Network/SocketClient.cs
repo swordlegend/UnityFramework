@@ -227,8 +227,8 @@ namespace gtmEngine.Net
                 ushort msglen = m_Reader.ReadUInt16();
                 if (RemainingBytes() >= msglen)
                 {
-                    ushort msgid = m_Reader.ReadUInt16();
-                    int protocollen = msglen - 2;
+                    ulong msgid = m_Reader.ReadUInt64();
+                    int protocollen = msglen - sizeof(ulong);
                     byte[] bytearray = m_Reader.ReadBytes(protocollen);
                     OnReceivedMessage(msgid, bytearray);
                 }
@@ -256,7 +256,7 @@ namespace gtmEngine.Net
         /// 接收到消息
         /// </summary>
         /// <param name="ms"></param>
-        void OnReceivedMessage(ushort msgid, byte[] bytearray)
+        void OnReceivedMessage(ulong msgid, byte[] bytearray)
         {
             NetManager.instance.AddEvent(msgid, bytearray);
         }

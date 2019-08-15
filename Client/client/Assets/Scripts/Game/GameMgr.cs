@@ -27,6 +27,8 @@ namespace gtmGame
         {
             m_NetMgr.DoInit();
             m_LogSystem.DoInit();
+
+            m_MsgDispatcher.RegisterMsgType(IMsgType.FlatBuffer);
             m_MsgDispatcher.DoInit();
         }
 

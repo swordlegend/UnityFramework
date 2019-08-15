@@ -47,6 +47,6 @@ namespace gtmInterface
         /// </summary>
         /// <param name="msgid"></param>
         /// <param name="bytearray"></param>
-        public abstract void AddEvent(ushort msgid, byte[] bytearray);
+        public abstract void AddEvent(ulong msgid, byte[] bytearray);
     }
 }
