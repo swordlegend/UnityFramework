@@ -18,6 +18,14 @@ flatbuffers_vs_proj
 大世界
 Floating Point Fix system 浮点修正系统
 
+原生环境开发可能石像开发阶段暴露出问题
+
+HttpWebRequest
+HttpWebResponse
+
+LogCategory
+    GameLogic
+
 
 
 
