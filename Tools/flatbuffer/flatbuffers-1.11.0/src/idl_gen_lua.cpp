@@ -81,7 +81,12 @@ namespace lua {
     // Begin a class declaration.
     void BeginClass(const StructDef &struct_def, std::string *code_ptr) {
       std::string &code = *code_ptr;
+
+      code += "---@class " + NormalizedName(struct_def) + "\n";
       code += "local " + NormalizedName(struct_def) + " = {} -- the module\n";
+
+      code += "\n";
+
       code += "local " + NormalizedMetaName(struct_def) + " = {} -- the class metatable\n";
       code += "\n";
     }
@@ -125,6 +130,7 @@ namespace lua {
       std::string *code_ptr) {
       std::string &code = *code_ptr;
 
+      code += "\n";
       code += "function " + NormalizedName(struct_def) + ".New()\n";
       code += std::string(Indent) + "local o = {}\n";
       code += std::string(Indent) + "setmetatable(o, {__index = " + NormalizedMetaName(struct_def) + "})\n";
@@ -137,6 +143,7 @@ namespace lua {
       std::string *code_ptr) {
       std::string &code = *code_ptr;
 
+      code += "\n";
       code += "function " + NormalizedName(struct_def) + ".GetRootAs" + NormalizedName(struct_def) + "(buf, offset)\n";
       code += std::string(Indent) + "local n = flatbuffers.N.UOffsetT:Unpack(buf, offset)\n";
       code += std::string(Indent) + "local o = " + NormalizedName(struct_def) + ".New()\n";
@@ -151,6 +158,7 @@ namespace lua {
       std::string &code = *code_ptr;
 
       GenReceiver(struct_def, code_ptr);
+      code += "\n";
       code += "Init(buf, pos)\n";
       code += std::string(Indent) + SelfData + " = flatbuffers.view.New(buf, pos)\n";
       code += EndFunc;
@@ -162,6 +170,7 @@ namespace lua {
       std::string &code = *code_ptr;
 
       GenReceiver(struct_def, code_ptr);
+
       code += MakeCamel(NormalizedName(field)) + "Length()\n";
       code += OffsetPrefix(field);
       code += std::string(Indent) + Indent + "return " + SelfData + ":VectorLen(o)\n";
@@ -177,6 +186,7 @@ namespace lua {
       std::string &code = *code_ptr;
       std::string getter = GenGetter(field.value.type);
       GenReceiver(struct_def, code_ptr);
+
       code += MakeCamel(NormalizedName(field));
       code += "()\n";
       code += std::string(Indent) + "return " + getter;
@@ -191,6 +201,7 @@ namespace lua {
       std::string &code = *code_ptr;
       std::string getter = GenGetter(field.value.type);
       GenReceiver(struct_def, code_ptr);
+
       code += MakeCamel(NormalizedName(field));
       code += "()\n";
       code += OffsetPrefix(field);
@@ -219,6 +230,7 @@ namespace lua {
       std::string *code_ptr) {
       std::string &code = *code_ptr;
       GenReceiver(struct_def, code_ptr);
+
       code += MakeCamel(NormalizedName(field));
       code += "(obj)\n";
       code += std::string(Indent) + "obj:Init(" + SelfDataBytes + ", " + SelfDataPos + " + ";
@@ -234,6 +246,7 @@ namespace lua {
       std::string *code_ptr) {
       std::string &code = *code_ptr;
       GenReceiver(struct_def, code_ptr);
+
       code += MakeCamel(NormalizedName(field));
       code += "()\n";
       code += OffsetPrefix(field);
@@ -255,6 +268,7 @@ namespace lua {
       std::string *code_ptr) {
       std::string &code = *code_ptr;
       GenReceiver(struct_def, code_ptr);
+    
       code += MakeCamel(NormalizedName(field));
       code += "()\n";
       code += OffsetPrefix(field);
@@ -269,6 +283,7 @@ namespace lua {
       std::string *code_ptr) {
       std::string &code = *code_ptr;
       GenReceiver(struct_def, code_ptr);
+
       code += MakeCamel(NormalizedName(field)) + "()\n";
       code += OffsetPrefix(field);
 
@@ -295,6 +310,7 @@ namespace lua {
       auto vectortype = field.value.type.VectorType();
 
       GenReceiver(struct_def, code_ptr);
+
       code += MakeCamel(NormalizedName(field));
       code += "(j)\n";
       code += OffsetPrefix(field);
@@ -320,6 +336,7 @@ namespace lua {
       auto vectortype = field.value.type.VectorType();
 
       GenReceiver(struct_def, code_ptr);
+
       code += MakeCamel(NormalizedName(field));
       code += "(j)\n";
       code += OffsetPrefix(field);
@@ -408,6 +425,8 @@ namespace lua {
     void GetStartOfTable(const StructDef &struct_def,
       std::string *code_ptr) {
       std::string &code = *code_ptr;
+
+      code += "\n";
       code += "function " + NormalizedName(struct_def) + ".Start";
       code += "(builder) ";
       code += "builder:StartObject(";
@@ -466,6 +485,8 @@ namespace lua {
     // Generate the receiver for function signatures.
     void GenReceiver(const StructDef &struct_def, std::string *code_ptr) {
       std::string &code = *code_ptr;
+
+      code += "\n";
       code += "function " + NormalizedMetaName(struct_def) + ":";
     }
 
