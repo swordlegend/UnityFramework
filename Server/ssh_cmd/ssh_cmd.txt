@@ -7,13 +7,12 @@ ssh xieliujian@192.168.0.102
 cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/
 
 //
-cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/Server/skynet-1.2.0/myexamples/e5/
-
-cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/Server/ssh_cmd/
+cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/
 
 
 // 创建目录
 mkdir unityframework.git
+
 
 // 删除文件夹
 rm -rf /Users/xieliujian/Desktop/xieliujian/unityframework.git/
@@ -28,7 +27,8 @@ svn update
 // svn 清理
 svn cleanup
 
-
+// svn commit
+svn commit -m ""
 
 // 运行skynet测试例子
 
