@@ -9,19 +9,47 @@ using System.Reflection;
 
 namespace gtmEngine
 {
+    class FlatBufferProcFun<T> : IFlatBufferProcFun where T : struct, FlatBuffers.IFlatbufferObject
+    {
+        private MsgProcDelegate<T> m_dlg;
+
+        private T m_obj = default(T);
+
+        public FlatBufferProcFun(MsgProcDelegate<T> dlg)
+        {
+            m_dlg = dlg;
+        }
+
+        public override void Invoke(byte[] bytearray)
+        {
+            FlatBuffers.ByteBuffer buf = new FlatBuffers.ByteBuffer(bytearray);
+            m_obj.__init(buf.GetInt(buf.Position) + buf.Position, buf);
+
+            try
+            {
+                m_dlg(m_obj);
+            }
+            catch (Exception e)
+            {
+                LogSystem.instance.LogError("process msg error!", typeof(T).FullName);
+                LogSystem.instance.LogError(e.ToString());
+            }
+        }
+    }
+
     public class MsgDispatcher : IMsgDispatcher
     {
         #region 变量
 
         /// <summary>
-        /// 消息句柄
-        /// </summary>
-        //private static Dictionary<uint, IMsgProcFunc> m_Handle = new Dictionary<uint, IMsgProcFunc>();
-
-        /// <summary>
         /// fb消息句柄
         /// </summary>
-        private static Dictionary<ulong, Action<object>> m_FbHandle = new Dictionary<ulong, Action<object>>();
+        private Dictionary<ulong, IFlatBufferProcFun> m_fbMsgProcDict = new Dictionary<ulong, IFlatBufferProcFun>(100);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private FlatBuffers.FlatBufferBuilder m_flatBufferBuilder = new FlatBuffers.FlatBufferBuilder(1024);
 
         #endregion
 
@@ -29,12 +57,6 @@ namespace gtmEngine
 
         public override void Dispatcher(ulong msgid, byte[] bytearray)
         {
-            //if (!m_Handle.ContainsKey(msgid))
-            //    return;
-
-            //m_Handle[msgid].Invoke(bytearray);
-
-
             if (m_MsgType == IMsgType.FlatBuffer)
             {
                 DispatcherFbMsg(msgid, bytearray);
@@ -43,9 +65,7 @@ namespace gtmEngine
 
         public override void DoClose()
         {
-            //m_Handle.Clear();
-
-            m_FbHandle.Clear();
+            m_fbMsgProcDict.Clear();
         }
 
         public override void DoInit()
@@ -57,81 +77,40 @@ namespace gtmEngine
         {
             
         }
-
-        //public override void Register(uint msgid, IMsgProcFunc msg)
-        //{
-        //    if (!m_Handle.ContainsKey(msgid))
-        //    {
-        //        m_Handle.Add(msgid, msg);
-        //    }
-        //    else
-        //    {
-        //        m_Handle[msgid] += msg;
-        //    }
-        //}
-
-        //public override void UnRegister(uint msgid, IMsgProcFunc msg)
-        //{
-        //    if (m_Handle.ContainsKey(msgid))
-        //    {
-        //        m_Handle[msgid] -= msg;
-        //    }
-        //}
-
-        //public override void SendMsg(uint msgid, byte[] bytearray)
-        //{
-        //    gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
-        //    UInt16 lengh = (UInt16)(bytearray.Length + 2);
-        //    buff.WriteShort(lengh);
-        //    buff.WriteUlong((ulong)msgid);
-        //    buff.WriteBytes(bytearray);
-
-        //    if (NetManager.instance != null)
-        //    {
-        //        NetManager.instance.SendMessage(buff);
-        //    }
-        //}
-
-        public override void RegisterFBMsg<T>(Action<T> fbfunc)
+        public override void RegisterFBMsg<T>(MsgProcDelegate<T> fbfunc)
         {
             Type type = typeof(T);
-            FieldInfo fieldInfo = type.GetField("HashID");
+            FieldInfo fieldInfo = type.GetField("HashID", BindingFlags.Static | BindingFlags.Public);
             ulong hashid = (ulong)fieldInfo.GetValue(null);
 
-            //if (!m_FbHandle.ContainsKey(hashid))
-            //{
-            //    m_FbHandle.Add(hashid, fbfunc);
-            //}
-            //else
-            //{
-            //    m_FbHandle[hashid] += fbfunc;
-            //}
+            IFlatBufferProcFun exist;
+            if (m_fbMsgProcDict.TryGetValue(hashid, out exist))
+            {
+                ILogSystem.instance.LogError("FBMsgProc Exist! " + type.Name);
+            }
+            else
+            {
+                m_fbMsgProcDict.Add(hashid, new FlatBufferProcFun<T>(fbfunc));
+            }
         }
 
-        public override void UnRegisterFBMsg<T>(Action<T> fbfunc)
+        public override void UnRegisterFBMsg<T>(MsgProcDelegate<T> fbfunc)
         {
             Type type = typeof(T);
             FieldInfo fieldInfo = type.GetField("HashID");
             ulong hashid = (ulong)fieldInfo.GetValue(null);
 
-            //if (m_FbHandle.ContainsKey(hashid))
-            //{
-            //    m_FbHandle[hashid] -= fbfunc;
-            //}
+            m_fbMsgProcDict.Remove(hashid);
         }
 
-        public override void SendFBMsg<T>(FlatBufferBuilder builder)
+        public override void SendFBMsg(ulong msgid, FlatBufferBuilder builder)
         {
-            Type type = typeof(T);
-            FieldInfo fieldInfo = type.GetField("HashID");
-            ulong hashid = (ulong)fieldInfo.GetValue(null);
-
             byte[] bytearray = builder.DataBuffer.ToSizedArray();
 
             gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
             UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
             buff.WriteShort(lengh);
-            buff.WriteUlong(hashid);
+            buff.WriteUlong(msgid);
             buff.WriteBytes(bytearray);
 
             if (NetManager.instance != null)
@@ -142,13 +121,11 @@ namespace gtmEngine
 
         private void DispatcherFbMsg(ulong msgid, byte[] bytearray)
         {
-            //FlatBuffers.ByteBuffer byteBuffer = new FlatBuffers.ByteBuffer(bytearray);
-            //fbs.RspLogin msg = fbs.RspLogin.GetRootAsRspLogin(byteBuffer);
-
-            //if (m_FbHandle.ContainsKey(msgid))
-            //{
-            //    m_FbHandle[msgid].Invoke(msg);
-            //}
+            IFlatBufferProcFun procfunc;
+            if (m_fbMsgProcDict.TryGetValue(msgid, out procfunc))
+            {
+                procfunc.Invoke(bytearray);
+            }
         }
 
         #endregion

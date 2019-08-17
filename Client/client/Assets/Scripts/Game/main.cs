@@ -58,10 +58,7 @@ namespace gtmGame
             var orc = fbs.ReqLogin.EndReqLogin(builder);
             builder.Finish(orc.Value);
 
-            IMsgDispatcher.instance.SendFBMsg<fbs.ReqLogin>(builder);
-                        
-            //byte[] bytearray = builder.DataBuffer.ToSizedArray();
-            //IMsgDispatcher.instance.SendMsg((uint)fbs.MsgId.ReqLogin, bytearray);
+            IMsgDispatcher.instance.SendFBMsg(fbs.ReqLogin.HashID, builder);
         }
     }
 }

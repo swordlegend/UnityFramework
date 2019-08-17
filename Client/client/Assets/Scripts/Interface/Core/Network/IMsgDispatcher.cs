@@ -14,6 +14,16 @@ namespace gtmInterface
         Protobuf,
     }
 
+    class IFlatBufferProcFun
+    {
+        public virtual void Invoke(byte[] buf)
+        {
+
+        }
+    }
+
+    public delegate void MsgProcDelegate<T>(T msg);
+
     public abstract class IMsgDispatcher : IManager
     {
         public IMsgDispatcher()
@@ -30,14 +40,6 @@ namespace gtmInterface
 
         protected IMsgType m_MsgType = IMsgType.Invalid;
 
-        //public delegate void IMsgProcFunc(byte[] bytearray);
-
-        //public abstract void Register(uint msgid, IMsgProcFunc msg);
-
-        //public abstract void UnRegister(uint msgid, IMsgProcFunc msg);
-
-        //public abstract void SendMsg(uint msgid, byte[] bytearray);
-
         public void RegisterMsgType(IMsgType msgtype)
         {
             m_MsgType = msgtype;
@@ -45,10 +47,10 @@ namespace gtmInterface
 
         public abstract void Dispatcher(ulong msgid, byte[] bytearray);
 
-        public virtual void RegisterFBMsg<T>(Action<T> fbfunc) { }
+        public virtual void RegisterFBMsg<T>(MsgProcDelegate<T> fbfunc) where T : struct, FlatBuffers.IFlatbufferObject { }
         
-        public virtual void UnRegisterFBMsg<T>(Action<T> fbfunc) { }
+        public virtual void UnRegisterFBMsg<T>(MsgProcDelegate<T> fbfunc) where T : struct, FlatBuffers.IFlatbufferObject { }
 
-        public virtual void SendFBMsg<T>(FlatBufferBuilder builder) { }
+        public virtual void SendFBMsg(ulong msgid, FlatBufferBuilder builder) { }
     }
 }
