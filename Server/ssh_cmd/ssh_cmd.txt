@@ -1,9 +1,16 @@
 
 // 远程连接mac服务器
-ssh xieliujian@192.168.0.103
+ssh xieliujian@192.168.0.102
+
 
 // cd到指定目录
 cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/
+
+//
+cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/Server/skynet-1.2.0/myexamples/e5/
+
+cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/Server/ssh_cmd/
+
 
 // 创建目录
 mkdir unityframework.git
@@ -13,6 +20,7 @@ rm -rf /Users/xieliujian/Desktop/xieliujian/unityframework.git/
 
 // checkout目录
 svn checkout https://github.com/xieliujian/UnityFramework.git
+
 
 // svn 刷新
 svn update
