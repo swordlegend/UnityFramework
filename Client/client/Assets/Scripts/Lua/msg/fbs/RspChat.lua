@@ -24,6 +24,10 @@ function RspChat.GetRootAsRspChat(buf, offset)
     return o
 end
 
+function RspChat.init(buf, offset)
+    RspChat.GetRootAsRspChat(buf, offset)
+end
+
 function RspChat_mt:
 Init(buf, pos)
     self.view = flatbuffers.view.New(buf, pos)

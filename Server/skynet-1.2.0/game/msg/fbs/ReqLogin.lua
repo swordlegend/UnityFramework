@@ -24,6 +24,10 @@ function ReqLogin.GetRootAsReqLogin(buf, offset)
     return o
 end
 
+function ReqLogin.init(buf, offset)
+    ReqLogin.GetRootAsReqLogin(buf, offset)
+end
+
 function ReqLogin_mt:
 Init(buf, pos)
     self.view = flatbuffers.view.New(buf, pos)

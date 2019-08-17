@@ -24,7 +24,7 @@ namespace gtmEngine
         {
             FlatBuffers.ByteBuffer buf = new FlatBuffers.ByteBuffer(bytearray);
             m_obj.__init(buf.GetInt(buf.Position) + buf.Position, buf);
-
+            
             try
             {
                 m_dlg(m_obj);

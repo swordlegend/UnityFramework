@@ -24,6 +24,10 @@ function ReqChat.GetRootAsReqChat(buf, offset)
     return o
 end
 
+function ReqChat.init(buf, offset)
+    ReqChat.GetRootAsReqChat(buf, offset)
+end
+
 function ReqChat_mt:
 Init(buf, pos)
     self.view = flatbuffers.view.New(buf, pos)

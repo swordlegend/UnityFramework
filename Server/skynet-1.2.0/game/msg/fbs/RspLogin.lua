@@ -24,6 +24,10 @@ function RspLogin.GetRootAsRspLogin(buf, offset)
     return o
 end
 
+function RspLogin.init(buf, offset)
+    RspLogin.GetRootAsRspLogin(buf, offset)
+end
+
 function RspLogin_mt:
 Init(buf, pos)
     self.view = flatbuffers.view.New(buf, pos)

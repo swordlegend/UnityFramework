@@ -155,6 +155,12 @@ namespace lua {
       code += std::string(Indent) + "o:Init(buf, n + offset)\n";
       code += std::string(Indent) + "return o\n";
       code += EndFunc;
+      
+      code += "\n";
+      code += "function " + NormalizedName(struct_def) + ".init" + "(buf, offset)\n";
+      code += std::string(Indent) + NormalizedName(struct_def) +
+              ".GetRootAs" + NormalizedName(struct_def) + "(buf, offset)\n";
+      code += EndFunc;
     }
 
     // Initialize an existing object with other data, to avoid an allocation.
