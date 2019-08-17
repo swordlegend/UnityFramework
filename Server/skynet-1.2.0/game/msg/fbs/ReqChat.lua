@@ -9,7 +9,7 @@ local ReqChat = {} -- the module
 
 local ReqChat_mt = {} -- the class metatable
 
-RspLogin.HashID = 0x9291D76D5CC9BF89;
+ReqChat.HashID = 0x9291D76D5CC9BF89;
 
 function ReqChat.New()
     local o = {}
