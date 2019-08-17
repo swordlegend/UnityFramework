@@ -50,8 +50,8 @@ namespace gtmGame
         {
             // 发送消息
             var builder = new FlatBufferBuilder(1);
-            var account = builder.CreateString("xieliujian");
-            var password = builder.CreateString("504522");
+            var account = builder.CreateString("xie");
+            var password = builder.CreateString("123456");
             fbs.ReqLogin.StartReqLogin(builder);
             fbs.ReqLogin.AddAccount(builder, account);
             fbs.ReqLogin.AddPassword(builder, password);
