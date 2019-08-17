@@ -39,13 +39,13 @@ local function echo(id)
 
             local bufAsString = builder:Output();
 
-            local buflen = #bufAsString + 2;
-            local msgid = msgid.RspLogin;
+            local buflen = #bufAsString + 8;
+            local msgid = rsplogin.HashID;
 
             print(""..buflen);
             print(""..msgid);
 
-            local strwrite = string.pack("<HH", buflen, msgid);
+            local strwrite = string.pack("<HL", buflen, msgid);
 
             print(strwrite)
 
