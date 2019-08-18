@@ -40,6 +40,11 @@ namespace gtmInterface
 
         protected IMsgType m_MsgType = IMsgType.Invalid;
 
+        public virtual FlatBuffers.FlatBufferBuilder flatBufferBuilder
+        {
+            get { return null; }
+        }
+
         public void RegisterMsgType(IMsgType msgtype)
         {
             m_MsgType = msgtype;

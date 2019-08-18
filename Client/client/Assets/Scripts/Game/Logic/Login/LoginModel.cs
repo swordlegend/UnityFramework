@@ -15,13 +15,11 @@ namespace gtmGame
         public void DoInit()
         {
             IMsgDispatcher.instance.RegisterFBMsg<fbs.RspLogin>(RspLogin_SC);
-            IMsgDispatcher.instance.RegisterFBMsg<fbs.ReqLogin>(ReqLogin_SC);
         }
 
         public void DoClose()
         {
             IMsgDispatcher.instance.UnRegisterFBMsg<fbs.RspLogin>(RspLogin_SC);
-            IMsgDispatcher.instance.UnRegisterFBMsg<fbs.ReqLogin>(ReqLogin_SC);
         }
 
         public void DoUpdate()
@@ -37,13 +35,6 @@ namespace gtmGame
         {
             ILogSystem.instance.Log(msg.Account);
             ILogSystem.instance.Log(msg.Password);
-        }
-
-        private void ReqLogin_SC(fbs.ReqLogin msg)
-        {
-            ILogSystem.instance.Log(msg.Account);
-            ILogSystem.instance.Log(msg.Password);
-
         }
 
         #endregion

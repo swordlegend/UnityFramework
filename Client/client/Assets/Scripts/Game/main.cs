@@ -10,47 +10,66 @@ namespace gtmGame
 {
     public class main : MonoBehaviour
     {
-        private GameMgr m_GameMgr = new GameMgr();
+        private GameMgr m_gameMgr = new GameMgr();
 
-        private LoginModel m_LoginModel = new LoginModel();
+        private LoginModel m_loginModel = new LoginModel();
+
+        private ChatModel m_chatModel = new ChatModel();
 
         public string ipaddress = "192.168.0.104";
 
         // Start is called before the first frame update
         void Start()
         {
-            m_GameMgr.DoInit();
-            m_LoginModel.DoInit();
+            m_gameMgr.DoInit();
+            m_loginModel.DoInit();
+            m_chatModel.DoInit();
 
             NetManager.instance.SendConnect(ipaddress, 8888);
-
-            StartCoroutine(Cor_SendLoginMsg());
         }
 
         // Update is called once per frame
         void Update()
         {
-            m_GameMgr.DoUpdate();
+            m_gameMgr.DoUpdate();
         }
 
         private void OnDestroy()
         {
-            m_LoginModel.DoClose();
-            m_GameMgr.DoClose();
+            m_loginModel.DoClose();
+            m_gameMgr.DoClose();
+            m_chatModel.DoClose();
         }
 
-        IEnumerator Cor_SendLoginMsg()
+        private void OnGUI()
         {
-            yield return new WaitForSeconds(1.0f);
+            if (GUI.Button(new Rect(0, 0, 300, 200), "SendLoginMsg"))
+            {
+                SendLoginMsg();
+            }
 
-            SendLoginMsg();
+            if (GUI.Button(new Rect(0, 200, 300, 200), "SendChatMsg"))
+            {
+                SendChatMsg();
+            }
+        }
+
+        private void SendChatMsg()
+        {
+            var builder = IMsgDispatcher.instance.flatBufferBuilder;
+            var say = builder.CreateString("11111111111");
+            fbs.ReqChat.StartReqChat(builder);
+            fbs.ReqChat.AddSay(builder, say);
+            var orc = fbs.ReqChat.EndReqChat(builder);
+            builder.Finish(orc.Value);
+
+            IMsgDispatcher.instance.SendFBMsg(fbs.ReqChat.HashID, builder);
         }
 
         private void SendLoginMsg()
         {
-            // 发送消息
-            var builder = new FlatBufferBuilder(1);
-            var account = builder.CreateString("xie");
+            var builder = IMsgDispatcher.instance.flatBufferBuilder;
+            var account = builder.CreateString("xiexie");
             var password = builder.CreateString("123456");
             fbs.ReqLogin.StartReqLogin(builder);
             fbs.ReqLogin.AddAccount(builder, account);
