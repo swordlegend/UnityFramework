@@ -113,6 +113,8 @@ namespace gtmEngine
             buff.WriteUlong(msgid);
             buff.WriteBytes(bytearray);
 
+            LogSystem.instance.Log(msgid.ToString());
+
             if (NetManager.instance != null)
             {
                 NetManager.instance.SendMessage(buff);

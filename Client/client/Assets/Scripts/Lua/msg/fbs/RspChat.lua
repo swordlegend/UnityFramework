@@ -25,7 +25,7 @@ function RspChat.GetRootAsRspChat(buf, offset)
 end
 
 function RspChat.init(buf, offset)
-    RspChat.GetRootAsRspChat(buf, offset)
+    return RspChat.GetRootAsRspChat(buf, offset)
 end
 
 function RspChat_mt:

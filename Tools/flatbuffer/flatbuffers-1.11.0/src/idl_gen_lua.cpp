@@ -158,7 +158,7 @@ namespace lua {
       
       code += "\n";
       code += "function " + NormalizedName(struct_def) + ".init" + "(buf, offset)\n";
-      code += std::string(Indent) + NormalizedName(struct_def) +
+      code += std::string(Indent) + "return " + NormalizedName(struct_def) +
               ".GetRootAs" + NormalizedName(struct_def) + "(buf, offset)\n";
       code += EndFunc;
     }

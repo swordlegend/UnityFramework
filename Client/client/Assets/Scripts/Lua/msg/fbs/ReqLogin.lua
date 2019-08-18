@@ -25,7 +25,7 @@ function ReqLogin.GetRootAsReqLogin(buf, offset)
 end
 
 function ReqLogin.init(buf, offset)
-    ReqLogin.GetRootAsReqLogin(buf, offset)
+    return ReqLogin.GetRootAsReqLogin(buf, offset)
 end
 
 function ReqLogin_mt:

@@ -25,7 +25,7 @@ function ReqChat.GetRootAsReqChat(buf, offset)
 end
 
 function ReqChat.init(buf, offset)
-    ReqChat.GetRootAsReqChat(buf, offset)
+    return ReqChat.GetRootAsReqChat(buf, offset)
 end
 
 function ReqChat_mt:

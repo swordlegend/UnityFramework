@@ -25,7 +25,7 @@ function RspLogin.GetRootAsRspLogin(buf, offset)
 end
 
 function RspLogin.init(buf, offset)
-    RspLogin.GetRootAsRspLogin(buf, offset)
+    return RspLogin.GetRootAsRspLogin(buf, offset)
 end
 
 function RspLogin_mt:
