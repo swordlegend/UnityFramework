@@ -26,15 +26,15 @@
 
 5. 日志系统优化精简 (完成)    
 
+5. 为lua增加mvc的ui模块 
+
+---
+
 1. [文档] unity与skynet通信示例一(收发消息)
 
 2. [文档] unity与skynet通信示例二(使用flatbuffer协议)
 
 3. [文档] unity与skynet通信示例三(flatbuffer的msgid自动生成)
-
-5. 为lua增加mvc的ui模块 
-
----
 
 5. 资源管理类添加(只加载本地资源) 
 
