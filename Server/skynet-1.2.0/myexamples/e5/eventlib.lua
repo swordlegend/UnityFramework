@@ -155,10 +155,12 @@ function _M:DisconnectAll()
     self:Disconnect()
 end
 
-function _M:Fire(...)
-    assert(self ~= nil and type(self) == "table", "Invalid Event (make sure you're using ':' not '.')")
-    self.args = { ... }
-    self.executing = true
+function _M:Fire(data)
+    --assert(self ~= nil and type(self) == "table", "Invalid Event (make sure you're using ':' not '.')")
+
+    --self.args = { ... }
+    --self.executing = true
+
     --[[
     if self.waiter then
         self.waiter = false
@@ -166,19 +168,28 @@ function _M:Fire(...)
             coroutine.resume(v)
         end
     end]]
-    self.waiter = false
-    local i = 0
+
+    --self.waiter = false
+    --local i = 0
+
     assert(self.handlers, "no handler table")
+
     for k, v in pairs(self.handlers) do
-        i = i + 1
-        spawn(function()
-            v(unpack(self.args))
-            i = i - 1
-            if i == 0 then self.executing = false end
-        end)
+
+        --i = i + 1
+
+        v(data);
+
+        --spawn(function()
+        --    v(self.args)
+        --    i = i - 1
+        --    if i == 0 then self.executing = false end
+        --end)
     end
-    self:WaitForWaiters()
-    self.args = nil
+
+    --self:WaitForWaiters()
+
+    --self.args = nil
     --self.executing = false
 end
 _M.Simulate = _M.Fire

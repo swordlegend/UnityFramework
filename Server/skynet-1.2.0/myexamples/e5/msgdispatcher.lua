@@ -1,4 +1,3 @@
-
 ---@type flatbuffers
 local flatbuffers = require("flatbuffers");
 
@@ -45,20 +44,23 @@ msgdispatcher.sendFbMsg = function(id, msg)
     local buflen = #bufAsString + 8;
     local msgid = msg.HashID;
     local strwrite = string.pack("<HL", buflen, msgid);
-    strwrite = strwrite..bufAsString;
+    strwrite = strwrite .. bufAsString;
 
     socket.write(id, strwrite)
 end
 
 -- fb消息分发
 msgdispatcher.dispatcherFbMsg = function(id, str)
+
     local msglen = string.unpack("<H", str);
-    local msgid = string.unpack("<L", str);
+
+    -- string.unpack默认是1
+    local msgid = string.unpack("<L", str, 2 + 1);
     local msgoffset = 2 + 8;
 
     local msgbuf = flatbuffers.binaryArray.New(str);
 
-    local eventlib = netmsg[msgid];
+    local eventlib = netmsg.getEvents(msgid);
     if not eventlib then
         return ;
     end

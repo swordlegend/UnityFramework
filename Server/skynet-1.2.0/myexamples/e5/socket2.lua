@@ -15,13 +15,13 @@ local socket = require "skynet.socket"
 --local reqlogin = require "ReqLogin";
 
 ---@type loginmodel
-local loginmodel = require("loginmodel")
+local loginmodel = require "loginmodel"
 
 ---@type chatmodel
-local chatmodel = require("chatmodel")
+local chatmodel = require "chatmodel"
 
 ---@type msgdispatcher
-local msgdispatcher = require("msgdispatcher")
+local msgdispatcher = require "msgdispatcher"
 
 local function echo(id)
 
@@ -34,7 +34,7 @@ local function echo(id)
         if str then
 
             msgdispatcher.dispatcher(id, str);
-            
+
             --print("client say:" .. str)
             --
             --local builder = flatbuffers.Builder(1024)

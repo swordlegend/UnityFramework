@@ -13,24 +13,24 @@ local rspchat = require "RspChat";
 chatmodel = {}
 
 chatmodel.register = function()
-    msgdispatcher.registerFbMsg(rspchat, chatmodel.rspchat_cs);
+    msgdispatcher.registerFbMsg(reqchat, chatmodel.reqchat_cs);
 end
 
 chatmodel.unRegister = function()
-    msgdispatcher.unRegisterFbMsg(rspchat, chatmodel.rspchat_cs);
+    msgdispatcher.unRegisterFbMsg(reqchat, chatmodel.reqchat_cs);
 end
 
 -- 消息
-chatmodel.rspchat_cs = function(data)
+chatmodel.reqchat_cs = function(data)
 
     local id = data.id;
     local reqchat = data.msg;
 
     local builder = msgdispatcher.builder;
-    local say = builder:CreateString("wow");
+    local say = builder:CreateString(reqchat:Say().." wow");
 
-    rspchat.Start(builder)
-    rspchat.Say(say);
+    rspchat.Start(builder);
+    rspchat.AddSay(builder, say);
     local orc = rspchat.End(builder);
     builder:Finish(orc);
 

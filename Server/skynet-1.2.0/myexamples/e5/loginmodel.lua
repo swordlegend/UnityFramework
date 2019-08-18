@@ -13,6 +13,7 @@ local rsplogin = require "RspLogin";
 loginmodel = {}
 
 loginmodel.register = function()
+
     msgdispatcher.registerFbMsg(reqlogin, loginmodel.reqlogin_cs);
 end
 
@@ -27,8 +28,8 @@ loginmodel.reqlogin_cs = function(data)
     local reqlogindata = data.msg;
 
     local builder = msgdispatcher.builder;
-    local account = builder:CreateString("wow");
-    local password = builder:CreateString("skynet");
+    local account = builder:CreateString(reqlogindata:Account().." wow");
+    local password = builder:CreateString(reqlogindata:Password().." skynet");
 
     rsplogin.Start(builder)
     rsplogin.AddAccount(builder, account)

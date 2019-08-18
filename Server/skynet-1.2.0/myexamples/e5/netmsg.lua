@@ -8,6 +8,11 @@ local EventLib = require "eventlib"
 local netmsg = {}
 local events = {}
 
+function netmsg.getEvents(msgid)
+
+    return events[msgid];
+end
+
 function netmsg.AddListener(msg, handler)
 
     local msgid = msg.HashID;
@@ -21,11 +26,11 @@ function netmsg.AddListener(msg, handler)
     events[msgid]:connect(handler)
 end
 
-function netmsg.Brocast(event, ...)
+function netmsg.Brocast(event, data)
     if not events[event] then
         error("brocast " .. event .. " has no event.")
     else
-        events[event]:fire(...)
+        events[event]:fire(data)
     end
 end
 

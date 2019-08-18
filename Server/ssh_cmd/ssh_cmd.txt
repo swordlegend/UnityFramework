@@ -6,9 +6,6 @@ ssh xieliujian@192.168.0.102
 // cd到指定目录
 cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/
 
-//
-cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/
-
 
 // 创建目录
 mkdir unityframework.git
@@ -29,6 +26,9 @@ svn cleanup
 
 // svn commit
 svn commit -m ""
+
+// svn add
+svn add *.*
 
 // 运行skynet测试例子
 
