@@ -11,39 +11,41 @@ namespace gtmGame
         /// <summary>
         /// 网络
         /// </summary>
-        private INetManager m_NetMgr = new NetManager();
+        private INetManager m_netMgr = new NetManager();
 
         /// <summary>
         /// 日志
         /// </summary>
-        private ILogSystem m_LogSystem = new LogSystem();
+        private ILogSystem m_logSystem = new LogSystem();
 
         /// <summary>
         /// 消息分发
         /// </summary>
-        private IMsgDispatcher m_MsgDispatcher = new MsgDispatcher();
+        private IMsgDispatcher m_msgDispatcher = new MsgDispatcher();
 
         public void DoInit()
         {
-            m_NetMgr.DoInit();
-            m_LogSystem.DoInit();
+            m_netMgr.DoInit();
 
-            m_MsgDispatcher.RegisterMsgType(IMsgType.FlatBuffer);
-            m_MsgDispatcher.DoInit();
+            m_logSystem.EnableSave();
+            m_logSystem.DoInit();
+
+            m_msgDispatcher.RegisterMsgType(IMsgType.FlatBuffer);
+            m_msgDispatcher.DoInit();
         }
 
         public void DoUpdate()
         {
-            m_NetMgr.DoUpdate();
-            m_LogSystem.DoUpdate();
-            m_MsgDispatcher.DoUpdate();
+            m_netMgr.DoUpdate();
+            m_logSystem.DoUpdate();
+            m_msgDispatcher.DoUpdate();
         }
 
         public void DoClose()
         {
-            m_NetMgr.DoClose();
-            m_LogSystem.DoClose();
-            m_MsgDispatcher.DoClose();
+            m_netMgr.DoClose();
+            m_logSystem.DoClose();
+            m_msgDispatcher.DoClose();
         }
     }
 }

@@ -31,8 +31,8 @@ namespace gtmEngine
             }
             catch (Exception e)
             {
-                LogSystem.instance.LogError("process msg error!", typeof(T).FullName);
-                LogSystem.instance.LogError(e.ToString());
+                LogSystem.instance.LogError(LogCategory.GameEngine, "process msg error!" + typeof(T).FullName);
+                LogSystem.instance.LogError(LogCategory.GameEngine, e.ToString());
             }
         }
     }
@@ -90,7 +90,7 @@ namespace gtmEngine
             IFlatBufferProcFun exist;
             if (m_fbMsgProcDict.TryGetValue(hashid, out exist))
             {
-                ILogSystem.instance.LogError("FBMsgProc Exist! " + type.Name);
+                ILogSystem.instance.LogError(LogCategory.GameEngine, "FBMsgProc Exist! " + type.Name);
             }
             else
             {
@@ -116,8 +116,6 @@ namespace gtmEngine
             buff.WriteShort(lengh);
             buff.WriteUlong(msgid);
             buff.WriteBytes(bytearray);
-
-            LogSystem.instance.Log(msgid.ToString());
 
             if (NetManager.instance != null)
             {

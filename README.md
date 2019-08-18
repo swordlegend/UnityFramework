@@ -24,9 +24,15 @@
         
 4. 修改flatbuffer代码生成工具，自动生成msdid (完成)
 
-5. 日志系统优化精简(还有后续优化)     
+5. 日志系统优化精简 (完成)    
 
 5. 为lua增加mvc的ui模块 
+
+1. [文档] unity与skynet通信示例一(收发消息)
+
+2. [文档] unity与skynet通信示例二(使用flatbuffer协议)
+
+3. [文档] unity与skynet通信示例三(flatbuffer的msgid自动生成)
 
 ---
 
@@ -62,15 +68,6 @@
 
 14. 测试idea emmylua 远程调试skynet 
 
----
-
-文档
-
-1. unity与skynet通信示例一(收发消息)
-
-2. unity与skynet通信示例二(使用flatbuffer协议)
-
-3. unity与skynet通信示例三(flatbuffer的msgid自动生成)
 
 
 

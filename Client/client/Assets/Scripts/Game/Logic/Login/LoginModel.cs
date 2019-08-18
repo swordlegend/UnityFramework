@@ -33,8 +33,8 @@ namespace gtmGame
 
         private void RspLogin_SC(fbs.RspLogin msg)
         {
-            ILogSystem.instance.Log(msg.Account);
-            ILogSystem.instance.Log(msg.Password);
+            ILogSystem.instance.Log(LogCategory.GameLogic, msg.Account);
+            ILogSystem.instance.Log(LogCategory.GameLogic, msg.Password);
         }
 
         #endregion

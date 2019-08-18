@@ -1,16 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace gtmInterface
 {
-    public interface ILogTag
+    public enum LogCategory
     {
-        string LOG_TAG { get; }
+        GameLogic,
+        GameEngine,
+        Plugin_Xlua,
     }
 
     public abstract class ILogSystem : IManager
     {
+        protected string[] LogCategoryName = {
+            "GameLogic",
+            "GameEngine",
+            "Plugin_Xlua"
+        };
+
         public ILogSystem()
         {
             m_sInstance = this;
@@ -23,22 +32,26 @@ namespace gtmInterface
             get { return m_sInstance; }
         }
 
-        public abstract void Log(object obj);
+        [Conditional("DEBUG")]
+        public void Log(LogCategory category, string message)
+        {
+            Log(category, LogType.Log, message);
+        }
 
-        public abstract void Log(string message);
+        [Conditional("DEBUG")]
+        public void LogWarning(LogCategory category, string message)
+        {
+            Log(category, LogType.Warning, message);
+        }
 
-        public abstract void Log(string format, params object[] args);
+        [Conditional("DEBUG")]
+        public void LogError(LogCategory category, string message)
+        {
+            Log(category, LogType.Error, message);
+        }
 
-        public abstract void LogWarning(object obj);
+        public abstract void EnableSave(string logFileDir = null);
 
-        public abstract void LogWarning(string message);
-
-        public abstract void LogWarning(string format, params object[] args);
-
-        public abstract void LogError(object obj);
-
-        public abstract void LogError(string message);
-
-        public abstract void LogError(string format, params object[] args);
+        protected abstract void Log(LogCategory category, LogType type, string message);
     }
 }

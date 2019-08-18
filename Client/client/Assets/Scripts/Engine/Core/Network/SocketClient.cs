@@ -101,7 +101,7 @@ namespace gtmEngine.Net
             catch (Exception e)
             {
                 Close();
-                LogSystem.instance.LogError(e.Message);
+                LogSystem.instance.LogError(LogCategory.GameEngine, e.Message);
             }
         }
 
@@ -112,7 +112,7 @@ namespace gtmEngine.Net
         {
             m_NetStream = m_Client.GetStream();
             m_NetStream.BeginRead(m_ByteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
-            LogSystem.instance.Log("======连接========");
+            LogSystem.instance.Log(LogCategory.GameEngine, "======连接========");
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace gtmEngine.Net
             }
             else
             {
-                LogSystem.instance.LogError("client.connected----->>false");
+                LogSystem.instance.LogError(LogCategory.GameEngine, "client.connected----->>false");
             }
         }
 
@@ -176,8 +176,8 @@ namespace gtmEngine.Net
         /// </summary>
         void OnDisconnected(DisType dis, string msg)
         {
-            LogSystem.instance.Log("OnDisconnected" + msg);
-            LogSystem.instance.Log("======断开连接========");
+            LogSystem.instance.Log(LogCategory.GameEngine, "OnDisconnected" + msg);
+            LogSystem.instance.Log(LogCategory.GameEngine, "======断开连接========");
             Close();   //关掉客户端链接
         }
 
@@ -193,7 +193,7 @@ namespace gtmEngine.Net
                 returnStr += m_ByteBuffer[i].ToString("X2");
             }
 
-            LogSystem.instance.LogError(returnStr);
+            LogSystem.instance.LogError(LogCategory.GameEngine, returnStr);
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace gtmEngine.Net
             }
             catch (Exception ex)
             {
-                LogSystem.instance.LogError("OnWrite--->>>" + ex.Message);
+                LogSystem.instance.LogError(LogCategory.GameEngine, "OnWrite--->>>" + ex.Message);
             }
         }
 
@@ -281,7 +281,7 @@ namespace gtmEngine.Net
 
                 m_Client = null;
 
-                LogSystem.instance.Log("======关闭连接========");
+                LogSystem.instance.Log(LogCategory.GameEngine, "======关闭连接========");
             }
         }
 

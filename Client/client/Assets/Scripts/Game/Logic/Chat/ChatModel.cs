@@ -26,7 +26,7 @@ namespace gtmGame
 
         private void RspChat_SC(fbs.RspChat msg)
         {
-            ILogSystem.instance.Log(msg.Say);
+            ILogSystem.instance.Log(LogCategory.GameLogic, msg.Say);
         }
 
         #endregion

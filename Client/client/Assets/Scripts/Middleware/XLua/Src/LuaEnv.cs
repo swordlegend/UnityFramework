@@ -447,7 +447,7 @@ namespace XLua
 
                 if (ILogSystem.instance != null)
                 {
-                    ILogSystem.instance.LogError(err.ToString());
+                    ILogSystem.instance.LogError(LogCategory.Plugin_Xlua, err.ToString());
                 }
 
                 throw new LuaException(err.ToString());
