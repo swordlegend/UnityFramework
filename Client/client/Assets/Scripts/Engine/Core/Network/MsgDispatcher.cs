@@ -46,13 +46,18 @@ namespace gtmEngine
         /// </summary>
         private Dictionary<ulong, IFlatBufferProcFun> m_fbMsgProcDict = new Dictionary<ulong, IFlatBufferProcFun>(100);
 
+
         private FlatBuffers.FlatBufferBuilder m_flatBufferBuilder = new FlatBuffers.FlatBufferBuilder(1024);
         /// <summary>
-        /// 
+        /// flatBufferBuilder
         /// </summary>
         public override FlatBuffers.FlatBufferBuilder flatBufferBuilder
         {
-            get { return m_flatBufferBuilder; }
+            get
+            {
+                m_flatBufferBuilder.Clear();
+                return m_flatBufferBuilder;
+            }
         }
 
         #endregion

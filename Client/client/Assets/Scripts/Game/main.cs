@@ -56,7 +56,7 @@ namespace gtmGame
 
         private void SendChatMsg()
         {
-            var builder = new FlatBufferBuilder(1024);
+            var builder = IMsgDispatcher.instance.flatBufferBuilder;
             var say = builder.CreateString("11111111111");
             fbs.ReqChat.StartReqChat(builder);
             fbs.ReqChat.AddSay(builder, say);
@@ -68,7 +68,7 @@ namespace gtmGame
 
         private void SendLoginMsg()
         {
-            var builder = new FlatBufferBuilder(1024);
+            var builder = IMsgDispatcher.instance.flatBufferBuilder;
             var account = builder.CreateString("xiexie");
             var password = builder.CreateString("123456");
             fbs.ReqLogin.StartReqLogin(builder);
