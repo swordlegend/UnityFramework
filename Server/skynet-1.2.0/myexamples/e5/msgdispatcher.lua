@@ -60,6 +60,11 @@ msgdispatcher.dispatcherFbMsg = function(id, str)
 
     local msgbuf = flatbuffers.binaryArray.New(str);
 
+    print(""..msglen);
+    print(""..msgid);
+    print(""..#str);
+    print(str);
+
     local eventlib = netmsg.getEvents(msgid);
     if not eventlib then
         return ;
