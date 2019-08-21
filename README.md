@@ -26,17 +26,17 @@
 
 5. 日志系统优化精简 (完成)   
 
+1. [文档] unity与skynet通信示例一(收发消息)         (有长数据解析bug未解决，待查)
+
+2. [文档] unity与skynet通信示例二(使用flatbuffer协议)       (有长数据解析bug未解决，待查)
+
+3. [文档] unity与skynet通信示例三(flatbuffer的msgid自动生成)     (有长数据解析bug未解决，待查)
+
 1. skynet根据不同的平台生成不同的*.so文件和可执行文件(版本发布的时候不用再次编译)  
 
 5. 资源管理类添加(只加载本地资源) 
 
 5. 为lua增加mvc的ui模块 
-
-1. [文档] unity与skynet通信示例一(收发消息)
-
-2. [文档] unity与skynet通信示例二(使用flatbuffer协议)
-
-3. [文档] unity与skynet通信示例三(flatbuffer的msgid自动生成)
 
 5. xlua集成flatbuffer通信协议 (全lua框架使用) 
 
