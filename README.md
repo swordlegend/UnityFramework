@@ -42,6 +42,24 @@
 
 ---
 
+1. Entity实体类
+
+2. Npc类
+
+3. Character类
+
+4. MainCharacter类
+
+5. EnhancedScrollList的ui控件
+
+6. Entity动作状态机基类
+
+7. Npc动作状态机
+
+8. Character动作状态机
+
+9. 位置同步
+
 8. 表格工具开发(用原来开发的，或者github高star的，或者用flatbuffer生成一套跨平台的)
 
 9. 下载服务器从原来项目搬迁过来(做测试热更服务器)
