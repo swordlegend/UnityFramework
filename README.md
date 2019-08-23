@@ -32,7 +32,7 @@
 
 3. [文档] unity与skynet通信示例三(flatbuffer的msgid自动生成)     (有长数据解析bug未解决，待查)
 
-4. idea的terminal打印中文不显示乱码 (完成)
+4. idea的terminal打印中文不显示乱码 (目录 : snapshots/idea的terminal打印中文不显示乱码.png) (完成)
 
 5. mac电脑远程连接改为固定端口，同时解决svn不能提交的问题
 
