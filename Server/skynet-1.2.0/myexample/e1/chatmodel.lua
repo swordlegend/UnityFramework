@@ -1,4 +1,3 @@
-
 ---@type msgdispatcher
 local msgdispatcher = require("msgdispatcher");
 
@@ -8,11 +7,12 @@ local reqchat = require("ReqChat");
 ---@type RspLogin
 local rspchat = require "RspChat";
 
-
 ---@class chatmodel
 chatmodel = {}
 
 chatmodel.register = function()
+    print("chatmodel.register")
+
     msgdispatcher.registerFbMsg(reqchat, chatmodel.reqchat_cs);
 end
 
@@ -22,12 +22,15 @@ end
 
 -- 消息
 chatmodel.reqchat_cs = function(data)
+    print("chatmodel.reqchat_cs")
 
     local id = data.id;
     local reqchat = data.msg;
 
+    print(reqchat:Say());
+
     local builder = msgdispatcher.builder;
-    local say = builder:CreateString(reqchat:Say().." wow");
+    local say = builder:CreateString(reqchat:Say() .. " balabala说话");
 
     rspchat.Start(builder);
     rspchat.AddSay(builder, say);

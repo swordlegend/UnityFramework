@@ -1,6 +1,6 @@
 include "config.path"
 
--- preload = "./examples/preload.lua"	-- run preload.lua before every lua service run
+-- preload = "./myexample/preload.lua"	-- run preload.lua before every lua service run
 thread = 8
 logger = nil
 logpath = "."
@@ -13,3 +13,5 @@ standalone = "0.0.0.0:2013"
 -- snax_interface_g = "snax_g"
 cpath = root.."cservice/?.so"
 -- daemon = "./skynet.pid"
+
+

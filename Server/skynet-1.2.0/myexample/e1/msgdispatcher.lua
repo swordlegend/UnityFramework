@@ -7,8 +7,13 @@ local netmsg = require 'netmsg'
 ---@type socket
 local socket = require "skynet.socket"
 
+---@type netpack
+local netpack = require "skynet.netpack"
+
 ---@class msgdispatcher
-msgdispatcher = {}
+msgdispatcher = {
+
+}
 
 msgdispatcher.msgType = {
     flatbuffer = 0,
@@ -41,29 +46,25 @@ end
 msgdispatcher.sendFbMsg = function(id, msg)
 
     local bufAsString = msgdispatcher.builder:Output();
-    local buflen = #bufAsString + 8;
     local msgid = msg.HashID;
-    local strwrite = string.pack("<HL", buflen, msgid);
+    local strwrite = string.pack("<L", msgid);
     strwrite = strwrite .. bufAsString;
 
-    socket.write(id, strwrite)
+    local package = string.pack("<s2", strwrite)
+
+    socket.write(id, package)
 end
 
 -- fb消息分发
-msgdispatcher.dispatcherFbMsg = function(id, str)
+msgdispatcher.dispatcherFbMsg = function(id, msg, sz)
 
-    local msglen = string.unpack("<H", str);
+    local str = netpack.tostring(msg, sz);
 
     -- string.unpack默认是1
-    local msgid = string.unpack("<L", str, 2 + 1);
-    local msgoffset = 2 + 8;
+    local msgid = string.unpack("<L", str);
+    local msgoffset = 8;
 
     local msgbuf = flatbuffers.binaryArray.New(str);
-
-    print(""..msglen);
-    print(""..msgid);
-    print(""..#str);
-    print(str);
 
     local eventlib = netmsg.getEvents(msgid);
     if not eventlib then
