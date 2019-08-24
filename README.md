@@ -26,15 +26,15 @@
 
 5. 日志系统优化精简 (完成)   
 
-1. [文档] unity与skynet通信示例一(收发消息)         (有长数据解析bug未解决，待查)
+1. [文档] unity与skynet通信示例一(收发消息)(skynet使用gate分包)       (完成)   
 
-2. [文档] unity与skynet通信示例二(使用flatbuffer协议)       (有长数据解析bug未解决，待查)
+2. [文档] unity与skynet通信示例二(使用flatbuffer协议)(skynet使用gate分包)    (完成) 
 
-3. [文档] unity与skynet通信示例三(flatbuffer的msgid自动生成)     (有长数据解析bug未解决，待查)
+3. [文档] unity与skynet通信示例三(flatbuffer的msgid自动生成)(skynet使用gate分包)  (完成) 
 
 4. idea的terminal打印中文不显示乱码 (目录 : snapshots/idea的terminal打印中文不显示乱码.png) (完成)
 
-5. mac电脑远程连接改为固定端口，同时解决svn不能提交的问题
+5. mac电脑远程连接改为固定端口，同时解决svn不能提交的问题       (完成)
 
 1. skynet根据不同的平台生成不同的*.so文件和可执行文件(版本发布的时候不用再次编译)  
 
