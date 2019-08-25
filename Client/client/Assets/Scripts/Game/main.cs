@@ -12,9 +12,7 @@ namespace gtmGame
     {
         private GameMgr m_gameMgr = new GameMgr();
 
-        private LoginModel m_loginModel = new LoginModel();
-
-        private ChatModel m_chatModel = new ChatModel();
+        private GameLogicMgr m_gameLogicMgr = new GameLogicMgr();
 
         public string ipaddress = "192.168.0.108";
 
@@ -22,21 +20,20 @@ namespace gtmGame
         void Start()
         {
             m_gameMgr.DoInit();
-            m_loginModel.DoInit();
-            m_chatModel.DoInit();
+            m_gameLogicMgr.DoInit();
         }
 
         // Update is called once per frame
         void Update()
         {
             m_gameMgr.DoUpdate();
+            m_gameLogicMgr.DoUpdate();
         }
 
         private void OnDestroy()
         {
-            m_loginModel.DoClose();
+            m_gameLogicMgr.DoClose();
             m_gameMgr.DoClose();
-            m_chatModel.DoClose();
         }
 
         private void OnGUI()
