@@ -8,7 +8,7 @@ public class Character : MovableEntity
 
     public Character()
     {
-
+        m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
     }
 
     #endregion

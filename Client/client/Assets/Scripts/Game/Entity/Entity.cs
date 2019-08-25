@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity
+public abstract class Entity
 {
     #region 变量
 
@@ -16,6 +16,7 @@ public class Entity
         set { m_postion = position; }
     }
 
+
     private GameObject m_gameObject;
     /// <summary>
     /// 游戏物体
@@ -24,6 +25,16 @@ public class Entity
     {
         get { return m_gameObject; }
         set { m_gameObject = value; }
+    }
+
+
+    protected AnimStateMgr m_animStateMgr = null;
+    /// <summary>
+    /// 动画状态机
+    /// </summary>
+    public AnimStateMgr animStateMgr
+    {
+        get { return m_animStateMgr; }
     }
 
     #endregion

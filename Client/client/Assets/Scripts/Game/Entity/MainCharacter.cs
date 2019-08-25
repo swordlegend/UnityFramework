@@ -8,7 +8,7 @@ public class MainCharacter : Character
 
     public MainCharacter()
     {
-
+        m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
     }
 
     #endregion

@@ -8,7 +8,7 @@ public class Mount : MovableEntity
 
     public Mount()
     {
-
+        m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
     }
 
     #endregion

@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Npc : MonoBehaviour
+public class Npc : MovableEntity
 {
-    // Start is called before the first frame update
-    void Start()
+    #region 函数
+
+    public Npc()
     {
-        
+        m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #endregion
 }
