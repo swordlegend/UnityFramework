@@ -2,30 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : IAnimState
+namespace gtmGame
 {
-    #region 继承
-
-    public AttackState(Entity entity)
-        : base(entity)
+    public class AttackState : IAnimState
     {
-        m_stateType = (int)AnimStateType.attack;
-    }
+        #region 继承
 
-    public override void OnEnter()
-    {
-        
-    }
+        public AttackState(Entity entity)
+            : base(entity)
+        {
+            m_stateType = (int)AnimStateType.attack;
+        }
 
-    public override void OnExit()
-    {
-        
-    }
+        public override void OnEnter()
+        {
 
-    public override void OnUpdate()
-    {
-        
-    }
+        }
 
-    #endregion
+        public override void OnExit()
+        {
+
+        }
+
+        public override void OnUpdate()
+        {
+
+        }
+
+        #endregion
+    }
 }
+

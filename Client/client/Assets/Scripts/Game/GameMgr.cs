@@ -23,6 +23,11 @@ namespace gtmGame
         /// </summary>
         private IMsgDispatcher m_msgDispatcher = new MsgDispatcher();
 
+        /// <summary>
+        /// lua管理
+        /// </summary>
+        private LuaManager m_luaMgr = new LuaManager();
+
         public void DoInit()
         {
             m_netMgr.DoInit();
@@ -32,6 +37,8 @@ namespace gtmGame
 
             m_msgDispatcher.RegisterMsgType(IMsgType.FlatBuffer);
             m_msgDispatcher.DoInit();
+
+            m_luaMgr.DoInit();
         }
 
         public void DoUpdate()
@@ -39,10 +46,12 @@ namespace gtmGame
             m_netMgr.DoUpdate();
             m_logSystem.DoUpdate();
             m_msgDispatcher.DoUpdate();
+            m_luaMgr.DoUpdate();
         }
 
         public void DoClose()
         {
+            m_luaMgr.DoClose();
             m_netMgr.DoClose();
             m_logSystem.DoClose();
             m_msgDispatcher.DoClose();

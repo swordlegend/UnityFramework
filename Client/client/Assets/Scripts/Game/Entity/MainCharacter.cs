@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCharacter : Character
+namespace gtmGame
 {
-    #region 函数
-
-    public MainCharacter()
+    public class MainCharacter : Character
     {
-        m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
-    }
+        #region 函数
 
-    #endregion
+        public MainCharacter()
+        {
+            m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
+        }
+
+        #endregion
+    }
 }
+

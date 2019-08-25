@@ -2,30 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : IAnimState
+namespace gtmGame
 {
-    #region 继承
-
-    public IdleState(Entity entity)
-        : base(entity)
+    public class IdleState : IAnimState
     {
-        m_stateType = (int)AnimStateType.idle;
-    }
+        #region 继承
 
-    public override void OnEnter()
-    {
-        
-    }
+        public IdleState(Entity entity)
+            : base(entity)
+        {
+            m_stateType = (int)AnimStateType.idle;
+        }
 
-    public override void OnExit()
-    {
-        
-    }
+        public override void OnEnter()
+        {
 
-    public override void OnUpdate()
-    {
-        
-    }
+        }
 
-    #endregion
+        public override void OnExit()
+        {
+
+        }
+
+        public override void OnUpdate()
+        {
+
+        }
+
+        #endregion
+    }
 }
+

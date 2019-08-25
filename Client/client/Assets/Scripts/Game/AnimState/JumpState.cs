@@ -2,30 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpState : IAnimState
+namespace gtmGame
 {
-    #region 继承
-
-    public JumpState(Entity entity)
-        : base(entity)
+    public class JumpState : IAnimState
     {
-        m_stateType = (int)AnimStateType.jump;
-    }
+        #region 继承
 
-    public override void OnEnter()
-    {
-        
-    }
+        public JumpState(Entity entity)
+            : base(entity)
+        {
+            m_stateType = (int)AnimStateType.jump;
+        }
 
-    public override void OnExit()
-    {
-        
-    }
+        public override void OnEnter()
+        {
 
-    public override void OnUpdate()
-    {
-        
-    }
+        }
 
-    #endregion
+        public override void OnExit()
+        {
+
+        }
+
+        public override void OnUpdate()
+        {
+
+        }
+
+        #endregion
+    }
 }
+

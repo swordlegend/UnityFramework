@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface LogicMgrInterface
+namespace gtmGame
 {
-    void DoInit();
+    public interface LogicMgrInterface
+    {
+        void DoInit();
 
-    void DoClose();
+        void DoClose();
 
-    void DoUpdate();
+        void DoUpdate();
+    }
 }
+

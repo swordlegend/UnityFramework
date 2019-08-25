@@ -2,30 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveState : IAnimState
+namespace gtmGame
 {
-    #region 继承
-
-    public MoveState(Entity entity)
-        : base(entity)
+    public class MoveState : IAnimState
     {
-        m_stateType = (int)AnimStateType.move;
-    }
+        #region 继承
 
-    public override void OnEnter()
-    {
-        
-    }
+        public MoveState(Entity entity)
+            : base(entity)
+        {
+            m_stateType = (int)AnimStateType.move;
+        }
 
-    public override void OnExit()
-    {
-        
-    }
+        public override void OnEnter()
+        {
 
-    public override void OnUpdate()
-    {
-        
-    }
+        }
 
-    #endregion
+        public override void OnExit()
+        {
+
+        }
+
+        public override void OnUpdate()
+        {
+
+        }
+
+        #endregion
+    }
 }
+

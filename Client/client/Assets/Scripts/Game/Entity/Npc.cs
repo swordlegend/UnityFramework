@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Npc : MovableEntity
+namespace gtmGame
 {
-    #region 函数
-
-    public Npc()
+    public class Npc : MovableEntity
     {
-        m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
-    }
+        #region 函数
 
-    #endregion
+        public Npc()
+        {
+            m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
+        }
+
+        #endregion
+    }
 }
+

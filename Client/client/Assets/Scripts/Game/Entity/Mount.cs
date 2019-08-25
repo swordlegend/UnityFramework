@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mount : MovableEntity
+namespace gtmGame
 {
-    #region 函数
-
-    public Mount()
+    public class Mount : MovableEntity
     {
-        m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
-    }
+        #region 函数
 
-    #endregion
+        public Mount()
+        {
+            m_animStateMgr = AnimStateFactory.CreateStateMgr(this);
+        }
+
+        #endregion
+    }
 }
+
