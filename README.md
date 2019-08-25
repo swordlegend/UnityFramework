@@ -36,6 +36,14 @@
 
 5. mac电脑远程连接改为固定端口，同时解决svn不能提交的问题       (完成)
 
+1. Entity实体类(空类待完善)   (完成)
+
+2. Npc类(空类待完善)   (完成)
+
+3. Character类(空类待完善)   (完成)
+
+4. MainCharacter类(空类待完善)   (完成)
+
 1. skynet根据不同的平台生成不同的*.so文件和可执行文件(版本发布的时候不用再次编译)  
 
 5. 资源管理类添加(只加载本地资源) 
@@ -45,14 +53,6 @@
 5. xlua集成flatbuffer通信协议 (全lua框架使用) 
 
 ---
-
-1. Entity实体类
-
-2. Npc类
-
-3. Character类
-
-4. MainCharacter类
 
 5. EnhancedScrollList的ui控件
 
