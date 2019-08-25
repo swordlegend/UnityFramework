@@ -26,13 +26,29 @@ HttpWebResponse
 LogCategory
     GameLogic
 
-111111111111111111111111111111111
 
-11111111111111111111111111111
+------------------------------------8/25----------------------------------
 
-11111111111111111111111111111
+public override void SendFBMsg(ulong msgid, FlatBufferBuilder builder)
+{
+    byte[] bytearray = builder.DataBuffer.ToSizedArray();
 
-11111111111111111111111111111
+    gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
+    UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
+    UInt16 biglen = Converter.GetBigEndian(lengh);
+    buff.WriteShort(biglen);
+    buff.WriteUlong(msgid);
+    buff.WriteBytes(bytearray);
+
+    if (NetManager.instance != null)
+    {
+        NetManager.instance.SendMessage(buff);
+    }
+}
+
+byte[] bytearray = builder.DataBuffer.ToSizedArray();	这个函数最好去掉，直接把flatbuffer的二进制数据写入发送buff中
+
+--------------------------------------------------------------------------
 
 
 
