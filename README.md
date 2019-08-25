@@ -56,6 +56,10 @@
 
 5. xlua集成flatbuffer通信协议 (全lua框架使用) 
 
+6. 登录系统客户端功能
+
+7. 登陆系统服务器功能
+
 ---
 
 5. EnhancedScrollList的ui控件
