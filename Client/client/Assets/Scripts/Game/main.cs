@@ -10,30 +10,25 @@ namespace gtmGame
 {
     public class main : MonoBehaviour
     {
-        private GameMgr m_gameMgr = new GameMgr();
-
-        private GameLogicMgr m_gameLogicMgr = new GameLogicMgr();
-
         public string ipaddress = "192.168.0.108";
+
+        private GameApplication m_gameApp = new GameApplication();
 
         // Start is called before the first frame update
         void Start()
         {
-            m_gameMgr.DoInit();
-            m_gameLogicMgr.DoInit();
+            m_gameApp.DoInit();
         }
 
         // Update is called once per frame
         void Update()
         {
-            m_gameMgr.DoUpdate();
-            m_gameLogicMgr.DoUpdate();
+            m_gameApp.DoUpdate();
         }
 
         private void OnDestroy()
         {
-            m_gameLogicMgr.DoClose();
-            m_gameMgr.DoClose();
+            m_gameApp.DoClose();
         }
 
         private void OnGUI()
