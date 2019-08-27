@@ -23,10 +23,17 @@ namespace gtmGame
         /// </summary>
         private IMsgDispatcher m_msgDispatcher = new MsgDispatcher();
 
+
+        private LuaManager m_luaMgr = new LuaManager();
         /// <summary>
         /// lua管理
         /// </summary>
-        private LuaManager m_luaMgr = new LuaManager();
+        public LuaManager luaMgr
+        {
+            get { return m_luaMgr; }
+        }
+
+        #region 继承函数
 
         public void DoInit()
         {
@@ -56,6 +63,8 @@ namespace gtmGame
             m_logSystem.DoClose();
             m_msgDispatcher.DoClose();
         }
+
+        #endregion
     }
 }
 

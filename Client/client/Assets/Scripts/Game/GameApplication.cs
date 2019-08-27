@@ -9,6 +9,13 @@ namespace gtmGame
         #region 变量
 
         private GameMgr m_gameMgr = new GameMgr();
+        /// <summary>
+        /// ...
+        /// </summary>
+        public GameMgr gameMgr
+        {
+            get { return m_gameMgr; }
+        }
 
         private GameLogicMgr m_gameLogicMgr = new GameLogicMgr();
 
@@ -35,5 +42,7 @@ namespace gtmGame
         }
 
         #endregion
+
+
     }
 }

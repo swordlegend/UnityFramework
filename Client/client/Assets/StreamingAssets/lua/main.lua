@@ -2,11 +2,10 @@
 
 
 function main()
-    print("111")
+    print("1111111111111111111111111111")
 end
 
-
-
+main();
 
 
 

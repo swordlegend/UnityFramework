@@ -10,7 +10,7 @@ namespace gtmGame
 
         protected ClientSingleton()
         {
-            
+
         }
 
         public static T instance

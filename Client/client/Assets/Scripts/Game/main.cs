@@ -18,6 +18,8 @@ namespace gtmGame
         void Start()
         {
             m_gameApp.DoInit();
+
+            m_gameApp.gameMgr.luaMgr.DoString("main.lua");
         }
 
         // Update is called once per frame
