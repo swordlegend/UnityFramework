@@ -50,8 +50,10 @@ namespace gtmInterface
             Log(category, LogType.Error, message);
         }
 
+        [XLua.BlackList]
         public abstract void EnableSave(string logFileDir = null);
 
+        [XLua.BlackList]
         protected abstract void Log(LogCategory category, LogType type, string message);
     }
 }

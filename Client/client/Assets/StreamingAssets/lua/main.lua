@@ -1,8 +1,10 @@
 
 
+require "define"
+
 
 function main()
-    print("1111111111111111111111111111")
+    print("123", "456", 420, "王虎", 1.35)
 end
 
 main();

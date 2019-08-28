@@ -4,3 +4,17 @@
 --- DateTime: 2019/8/10 20:46
 ---
 
+gtmInterface = CS.gtmInterface
+
+global = {};
+
+---@class gtmInterface.LogCategory
+global.LogCategory = gtmInterface.LogCategory;
+
+---@class gtmInterface.ILogSystem
+global.ILogSystem = gtmInterface.ILogSystem.instance;
+
+
+
+
+

@@ -4,7 +4,21 @@
 --- DateTime: 2019/8/10 20:50
 ---
 
--- 重载打印函数
-print = function()
+require "global"
 
+local function paramtostring(...)
+    local s = "";
+    local paramnum = select("#", ...);
+    for i = 1, paramnum do
+        s = s .. " " .. tostring(select(i, ...));
+    end
+
+    return s;
+end
+
+print = function(...)
+
+    local strlog = paramtostring(...);
+
+    global.ILogSystem:Log(global.LogCategory.GameLogic, strlog);
 end
