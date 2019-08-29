@@ -163,10 +163,10 @@ namespace XLua.CSObjectWrap
         static int _g_get_luaMgr(RealStatePtr L)
         {
 		    try {
-                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+                //ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                gtmGame.GameMgr gen_to_be_invoked = (gtmGame.GameMgr)translator.FastGetCSObj(L, 1);
-                translator.Push(L, gen_to_be_invoked.luaMgr);
+                //gtmGame.GameMgr gen_to_be_invoked = (gtmGame.GameMgr)translator.FastGetCSObj(L, 1);
+                //translator.Push(L, gen_to_be_invoked.luaMgr);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }

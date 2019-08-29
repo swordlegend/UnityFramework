@@ -23,15 +23,20 @@ namespace gtmGame
         /// </summary>
         private IMsgDispatcher m_msgDispatcher = new MsgDispatcher();
 
+        /// <summary>
+        /// 资源加载
+        /// </summary>
+        private IResourceLoad m_resLoad = new ResourceLoad();
 
-        private LuaManager m_luaMgr = new LuaManager();
         /// <summary>
         /// lua管理
         /// </summary>
-        public LuaManager luaMgr
-        {
-            get { return m_luaMgr; }
-        }
+        private LuaManager m_luaMgr = null;
+
+        /// <summary>
+        /// ui管理
+        /// </summary>
+        private UIManager m_uiMgr = null;
 
         #region 继承函数
 
@@ -45,23 +50,33 @@ namespace gtmGame
             m_msgDispatcher.RegisterMsgType(IMsgType.FlatBuffer);
             m_msgDispatcher.DoInit();
 
+            m_resLoad.DoInit();
+
+            m_luaMgr = LuaManager.instance;
             m_luaMgr.DoInit();
+
+            m_uiMgr = UIManager.instance;
+            m_uiMgr.DoInit();
         }
 
         public void DoUpdate()
         {
+            m_uiMgr.DoUpdate();
             m_netMgr.DoUpdate();
             m_logSystem.DoUpdate();
             m_msgDispatcher.DoUpdate();
             m_luaMgr.DoUpdate();
+            m_resLoad.DoUpdate();
         }
 
         public void DoClose()
         {
+            m_uiMgr.DoClose();
             m_luaMgr.DoClose();
             m_netMgr.DoClose();
             m_logSystem.DoClose();
             m_msgDispatcher.DoClose();
+            m_resLoad.DoClose();
         }
 
         #endregion
