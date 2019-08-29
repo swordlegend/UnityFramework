@@ -35,7 +35,7 @@ namespace gtmGame
             m_gameLogicMgr.DoInit();
 
             // do string
-            LuaManager.instance.DoString("main");
+            LuaManager.instance.LoadLuaFile("main");
         }
 
         public void DoUpdate()

@@ -15,18 +15,20 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class gtmGameLuaManagerWrap 
+    public class gtmGameUIManagerWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(gtmGame.LuaManager);
-			Utils.BeginObjectRegister(type, L, translator, 0, 4, 0, 0);
+			System.Type type = typeof(gtmGame.UIManager);
+			Utils.BeginObjectRegister(type, L, translator, 0, 6, 0, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "DoClose", _m_DoClose);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "DoInit", _m_DoInit);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "DoUpdate", _m_DoUpdate);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadLuaFile", _m_LoadLuaFile);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetLayer", _m_GetLayer);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "CreateDialog", _m_CreateDialog);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "CloseDialog", _m_CloseDialog);
 			
 			
 			
@@ -54,7 +56,7 @@ namespace XLua.CSObjectWrap
 				if(LuaAPI.lua_gettop(L) == 1)
 				{
 					
-					gtmGame.LuaManager gen_ret = new gtmGame.LuaManager();
+					gtmGame.UIManager gen_ret = new gtmGame.UIManager();
 					translator.Push(L, gen_ret);
                     
 					return 1;
@@ -64,7 +66,7 @@ namespace XLua.CSObjectWrap
 			catch(System.Exception gen_e) {
 				return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
 			}
-            return LuaAPI.luaL_error(L, "invalid arguments to gtmGame.LuaManager constructor!");
+            return LuaAPI.luaL_error(L, "invalid arguments to gtmGame.UIManager constructor!");
             
         }
         
@@ -83,7 +85,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmGame.LuaManager gen_to_be_invoked = (gtmGame.LuaManager)translator.FastGetCSObj(L, 1);
+                gtmGame.UIManager gen_to_be_invoked = (gtmGame.UIManager)translator.FastGetCSObj(L, 1);
             
             
                 
@@ -110,7 +112,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmGame.LuaManager gen_to_be_invoked = (gtmGame.LuaManager)translator.FastGetCSObj(L, 1);
+                gtmGame.UIManager gen_to_be_invoked = (gtmGame.UIManager)translator.FastGetCSObj(L, 1);
             
             
                 
@@ -137,7 +139,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmGame.LuaManager gen_to_be_invoked = (gtmGame.LuaManager)translator.FastGetCSObj(L, 1);
+                gtmGame.UIManager gen_to_be_invoked = (gtmGame.UIManager)translator.FastGetCSObj(L, 1);
             
             
                 
@@ -157,21 +159,79 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LoadLuaFile(RealStatePtr L)
+        static int _m_GetLayer(RealStatePtr L)
         {
 		    try {
             
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmGame.LuaManager gen_to_be_invoked = (gtmGame.LuaManager)translator.FastGetCSObj(L, 1);
+                gtmGame.UIManager gen_to_be_invoked = (gtmGame.UIManager)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
-                    string _file = LuaAPI.lua_tostring(L, 2);
+                    gtmGame.UILayer _layer;translator.Get(L, 2, out _layer);
                     
-                    gen_to_be_invoked.LoadLuaFile( _file );
+                        UnityEngine.Transform gen_ret = gen_to_be_invoked.GetLayer( _layer );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_CreateDialog(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.UIManager gen_to_be_invoked = (gtmGame.UIManager)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    string _layoutname = LuaAPI.lua_tostring(L, 2);
+                    string _luafilename = LuaAPI.lua_tostring(L, 3);
+
+                    gen_to_be_invoked.CreateDialog(_layoutname, _luafilename);
+
+
+
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_CloseDialog(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.UIManager gen_to_be_invoked = (gtmGame.UIManager)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    string _layoutname = LuaAPI.lua_tostring(L, 2);
+                    
+                    gen_to_be_invoked.CloseDialog( _layoutname );
                     
                     
                     

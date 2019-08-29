@@ -15,17 +15,16 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class gtmInterfaceILogSystemWrap 
+    public class gtmInterfaceIResourceLoadWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(gtmInterface.ILogSystem);
-			Utils.BeginObjectRegister(type, L, translator, 0, 3, 0, 0);
+			System.Type type = typeof(gtmInterface.IResourceLoad);
+			Utils.BeginObjectRegister(type, L, translator, 0, 2, 0, 0);
 			
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Log", _m_Log);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LogWarning", _m_LogWarning);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LogError", _m_LogError);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadResourceSync", _m_LoadResourceSync);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadResourceAsync", _m_LoadResourceAsync);
 			
 			
 			
@@ -48,7 +47,7 @@ namespace XLua.CSObjectWrap
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int __CreateInstance(RealStatePtr L)
         {
-            return LuaAPI.luaL_error(L, "gtmInterface.ILogSystem does not have a constructor!");
+            return LuaAPI.luaL_error(L, "gtmInterface.IResourceLoad does not have a constructor!");
         }
         
 		
@@ -59,26 +58,27 @@ namespace XLua.CSObjectWrap
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_Log(RealStatePtr L)
+        static int _m_LoadResourceSync(RealStatePtr L)
         {
 		    try {
             
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmInterface.ILogSystem gen_to_be_invoked = (gtmInterface.ILogSystem)translator.FastGetCSObj(L, 1);
+                gtmInterface.IResourceLoad gen_to_be_invoked = (gtmInterface.IResourceLoad)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
-                    gtmInterface.LogCategory _category;translator.Get(L, 2, out _category);
-                    string _message = LuaAPI.lua_tostring(L, 3);
+                    string _path = LuaAPI.lua_tostring(L, 2);
+                    string _filename = LuaAPI.lua_tostring(L, 3);
                     
-                    gen_to_be_invoked.Log( _category, _message );
+                        object gen_ret = gen_to_be_invoked.LoadResourceSync( _path, _filename );
+                        translator.PushAny(L, gen_ret);
                     
                     
                     
-                    return 0;
+                    return 1;
                 }
                 
             } catch(System.Exception gen_e) {
@@ -88,51 +88,23 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LogWarning(RealStatePtr L)
+        static int _m_LoadResourceAsync(RealStatePtr L)
         {
 		    try {
             
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmInterface.ILogSystem gen_to_be_invoked = (gtmInterface.ILogSystem)translator.FastGetCSObj(L, 1);
+                gtmInterface.IResourceLoad gen_to_be_invoked = (gtmInterface.IResourceLoad)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
-                    gtmInterface.LogCategory _category;translator.Get(L, 2, out _category);
-                    string _message = LuaAPI.lua_tostring(L, 3);
+                    string _path = LuaAPI.lua_tostring(L, 2);
+                    string _filename = LuaAPI.lua_tostring(L, 3);
+                    gtmInterface.IResourceLoadCallback _callback = translator.GetDelegate<gtmInterface.IResourceLoadCallback>(L, 4);
                     
-                    gen_to_be_invoked.LogWarning( _category, _message );
-                    
-                    
-                    
-                    return 0;
-                }
-                
-            } catch(System.Exception gen_e) {
-                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
-            }
-            
-        }
-        
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LogError(RealStatePtr L)
-        {
-		    try {
-            
-                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-            
-            
-                gtmInterface.ILogSystem gen_to_be_invoked = (gtmInterface.ILogSystem)translator.FastGetCSObj(L, 1);
-            
-            
-                
-                {
-                    gtmInterface.LogCategory _category;translator.Get(L, 2, out _category);
-                    string _message = LuaAPI.lua_tostring(L, 3);
-                    
-                    gen_to_be_invoked.LogError( _category, _message );
+                    gen_to_be_invoked.LoadResourceAsync( _path, _filename, _callback );
                     
                     
                     
@@ -153,7 +125,7 @@ namespace XLua.CSObjectWrap
         {
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			    translator.Push(L, gtmInterface.ILogSystem.instance);
+			    translator.Push(L, gtmInterface.IResourceLoad.instance);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }

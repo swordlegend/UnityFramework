@@ -4,11 +4,12 @@
 --- DateTime: 2019/8/10 20:46
 ---
 
-gtmInterface = CS.gtmInterface
+gtmInterface = CS.gtmInterface;
 
 gtmGame = CS.gtmGame;
 
 UnityEngine = CS.UnityEngine;
+
 
 global = {};
 

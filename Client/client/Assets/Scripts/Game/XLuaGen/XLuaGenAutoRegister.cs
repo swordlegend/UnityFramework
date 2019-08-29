@@ -1256,11 +1256,27 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(UnityEngine.UI.Shadow), UnityEngineUIShadowWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(AssetBundleLoad), AssetBundleLoadWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(ResourceLoad), ResourceLoadWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(ResourcePathLoad), ResourcePathLoadWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(ResouceLoadHelper), ResouceLoadHelperWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(fbs.ReqChat), fbsReqChatWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(fbs.ReqLogin), fbsReqLoginWrap.__Register);
         
+        }
+        
+        static void wrapInit8(LuaEnv luaenv, ObjectTranslator translator)
+        {
         
             translator.DelayWrapLoader(typeof(fbs.RspChat), fbsRspChatWrap.__Register);
         
@@ -1273,10 +1289,6 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(gtmInterface.IFile), gtmInterfaceIFileWrap.__Register);
         
-        }
-        
-        static void wrapInit8(LuaEnv luaenv, ObjectTranslator translator)
-        {
         
             translator.DelayWrapLoader(typeof(gtmInterface.ILogSystem), gtmInterfaceILogSystemWrap.__Register);
         
@@ -1285,6 +1297,9 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(gtmInterface.IMsgDispatcher), gtmInterfaceIMsgDispatcherWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(gtmInterface.IResourceLoad), gtmInterfaceIResourceLoadWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(gtmInterface.IManager), gtmInterfaceIManagerWrap.__Register);
@@ -1357,6 +1372,12 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(gtmGame.LuaManager), gtmGameLuaManagerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(gtmGame.UIManager), gtmGameUIManagerWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(gtmGame.Dialog), gtmGameDialogWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(FlatBuffers.ByteBufferAllocator), FlatBuffersByteBufferAllocatorWrap.__Register);

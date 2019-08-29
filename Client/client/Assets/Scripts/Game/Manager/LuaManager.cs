@@ -56,7 +56,7 @@ namespace gtmGame
             return  System.Text.Encoding.UTF8.GetBytes(data);
         }
 
-        public void DoString(string file)
+        public void LoadLuaFile(string file)
         {
             if (m_luaEnv != null)
             {

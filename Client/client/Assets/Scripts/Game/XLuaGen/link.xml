@@ -505,7 +505,11 @@
 	</assembly>
 
 	<assembly fullname="Assembly-CSharp">
-	    <type fullname="fbs.ReqChat" preserve="all"/>
+	    <type fullname="AssetBundleLoad" preserve="all"/>
+		<type fullname="ResourceLoad" preserve="all"/>
+		<type fullname="ResourcePathLoad" preserve="all"/>
+		<type fullname="ResouceLoadHelper" preserve="all"/>
+		<type fullname="fbs.ReqChat" preserve="all"/>
 		<type fullname="fbs.ReqLogin" preserve="all"/>
 		<type fullname="fbs.RspChat" preserve="all"/>
 		<type fullname="fbs.RspLogin" preserve="all"/>
@@ -514,6 +518,7 @@
 		<type fullname="gtmInterface.ILogSystem" preserve="all"/>
 		<type fullname="gtmInterface.ByteBuffer" preserve="all"/>
 		<type fullname="gtmInterface.IMsgDispatcher" preserve="all"/>
+		<type fullname="gtmInterface.IResourceLoad" preserve="all"/>
 		<type fullname="gtmInterface.IManager" preserve="all"/>
 		<type fullname="gtmInterface.INetManager" preserve="all"/>
 		<type fullname="gtmGame.AnimStateMgr" preserve="all"/>
@@ -538,6 +543,8 @@
 		<type fullname="gtmGame.GameLogicMgr" preserve="all"/>
 		<type fullname="gtmGame.GameMgr" preserve="all"/>
 		<type fullname="gtmGame.LuaManager" preserve="all"/>
+		<type fullname="gtmGame.UIManager" preserve="all"/>
+		<type fullname="gtmGame.Dialog" preserve="all"/>
 		<type fullname="FlatBuffers.ByteBufferAllocator" preserve="all"/>
 		<type fullname="FlatBuffers.ByteArrayAllocator" preserve="all"/>
 		<type fullname="FlatBuffers.ByteBuffer" preserve="all"/>

@@ -15,31 +15,32 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class gtmInterfaceILogSystemWrap 
+    public class gtmGameDialogWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(gtmInterface.ILogSystem);
-			Utils.BeginObjectRegister(type, L, translator, 0, 3, 0, 0);
+			System.Type type = typeof(gtmGame.Dialog);
+			Utils.BeginObjectRegister(type, L, translator, 0, 4, 1, 0);
 			
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Log", _m_Log);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LogWarning", _m_LogWarning);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LogError", _m_LogError);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Init", _m_Init);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Close", _m_Close);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SetParent", _m_SetParent);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AddBtnListener", _m_AddBtnListener);
 			
 			
-			
+			Utils.RegisterFunc(L, Utils.GETTER_IDX, "rootDialog", _g_get_rootDialog);
+            
 			
 			
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 1, 1, 0);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 1, 0, 0);
 			
 			
             
-			Utils.RegisterFunc(L, Utils.CLS_GETTER_IDX, "instance", _g_get_instance);
-            
+			
 			
 			
 			Utils.EndClassRegister(type, L, translator);
@@ -48,7 +49,24 @@ namespace XLua.CSObjectWrap
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int __CreateInstance(RealStatePtr L)
         {
-            return LuaAPI.luaL_error(L, "gtmInterface.ILogSystem does not have a constructor!");
+            
+			try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+				if(LuaAPI.lua_gettop(L) == 1)
+				{
+					
+					gtmGame.Dialog gen_ret = new gtmGame.Dialog();
+					translator.Push(L, gen_ret);
+                    
+					return 1;
+				}
+				
+			}
+			catch(System.Exception gen_e) {
+				return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+			}
+            return LuaAPI.luaL_error(L, "invalid arguments to gtmGame.Dialog constructor!");
+            
         }
         
 		
@@ -59,22 +77,21 @@ namespace XLua.CSObjectWrap
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_Log(RealStatePtr L)
+        static int _m_Init(RealStatePtr L)
         {
 		    try {
             
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmInterface.ILogSystem gen_to_be_invoked = (gtmInterface.ILogSystem)translator.FastGetCSObj(L, 1);
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
-                    gtmInterface.LogCategory _category;translator.Get(L, 2, out _category);
-                    string _message = LuaAPI.lua_tostring(L, 3);
+                    string _layoutname = LuaAPI.lua_tostring(L, 2);
                     
-                    gen_to_be_invoked.Log( _category, _message );
+                    gen_to_be_invoked.Init( _layoutname );
                     
                     
                     
@@ -88,22 +105,20 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LogWarning(RealStatePtr L)
+        static int _m_Close(RealStatePtr L)
         {
 		    try {
             
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmInterface.ILogSystem gen_to_be_invoked = (gtmInterface.ILogSystem)translator.FastGetCSObj(L, 1);
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
-                    gtmInterface.LogCategory _category;translator.Get(L, 2, out _category);
-                    string _message = LuaAPI.lua_tostring(L, 3);
                     
-                    gen_to_be_invoked.LogWarning( _category, _message );
+                    gen_to_be_invoked.Close(  );
                     
                     
                     
@@ -117,22 +132,50 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_LogError(RealStatePtr L)
+        static int _m_SetParent(RealStatePtr L)
         {
 		    try {
             
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                gtmInterface.ILogSystem gen_to_be_invoked = (gtmInterface.ILogSystem)translator.FastGetCSObj(L, 1);
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
-                    gtmInterface.LogCategory _category;translator.Get(L, 2, out _category);
-                    string _message = LuaAPI.lua_tostring(L, 3);
+                    gtmGame.UILayer _layer;translator.Get(L, 2, out _layer);
                     
-                    gen_to_be_invoked.LogError( _category, _message );
+                    gen_to_be_invoked.SetParent( _layer );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_AddBtnListener(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    UnityEngine.UI.Button _btn = (UnityEngine.UI.Button)translator.GetObject(L, 2, typeof(UnityEngine.UI.Button));
+                    UnityEngine.Events.UnityAction _action = translator.GetDelegate<UnityEngine.Events.UnityAction>(L, 3);
+                    
+                    gen_to_be_invoked.AddBtnListener( _btn, _action );
                     
                     
                     
@@ -149,11 +192,13 @@ namespace XLua.CSObjectWrap
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _g_get_instance(RealStatePtr L)
+        static int _g_get_rootDialog(RealStatePtr L)
         {
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			    translator.Push(L, gtmInterface.ILogSystem.instance);
+			
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
+                translator.Push(L, gen_to_be_invoked.rootDialog);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
