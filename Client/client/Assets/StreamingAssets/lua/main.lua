@@ -9,7 +9,7 @@ function main()
     local testui = require("ui/ui_test/ui_test")
     testui.show();
 
-    
+
 end
 
 main();
