@@ -16,6 +16,8 @@ namespace gtmGame
         void Start()
         {
             m_gameApp.DoInit();
+
+            DontDestroyOnLoad(gameObject);
         }
 
         // Update is called once per frame
