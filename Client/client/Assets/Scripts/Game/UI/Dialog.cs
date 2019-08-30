@@ -39,12 +39,12 @@ namespace gtmGame
 
         public void Close()
         {
+            RemoveAllListener();
+
             if (m_rootLayout != null)
             {
                 GameObject.Destroy(m_rootLayout);
             }
-
-            RemoveAllListener();
         }
 
         public void SetParent(UILayer layer)
