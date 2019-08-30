@@ -202,12 +202,13 @@ namespace XLua.CSObjectWrap
                 {
                     string _layoutname = LuaAPI.lua_tostring(L, 2);
                     string _luafilename = LuaAPI.lua_tostring(L, 3);
-
-                    gen_to_be_invoked.CreateDialog(_layoutname, _luafilename);
-
-
-
-                    return 0;
+                    
+                        gtmGame.Dialog gen_ret = gen_to_be_invoked.CreateDialog( _layoutname, _luafilename );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
                 }
                 
             } catch(System.Exception gen_e) {

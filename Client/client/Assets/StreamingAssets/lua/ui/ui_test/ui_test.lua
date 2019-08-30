@@ -4,6 +4,7 @@
 --- DateTime: 2019/8/29 22:44
 ---
 
+---@class ui_test
 ui_test = {}
 
 ui_test.uiname = "ui_test"
@@ -11,13 +12,82 @@ ui_test.uiname = "ui_test"
 ---@type gtmGame.UIManager
 ui_test.uimgr = global.UIManager;
 
+
+----------------------------------------------内置-------------------------------------------------
+
 ui_test.show = function()
-    ui_test.uiroot = ui_test.uimgr:CreateDialog(ui_test.uiname, "ui_test");
+
+    ---@type gtmGame.Dialog
+    ui_test.uiinstance = ui_test.uimgr:CreateDialog(ui_test.uiname, "ui_test");
+
+    ui_test.initui();
+    ui_test.initEvent();
 end
 
 ui_test.close = function()
-    ui_test.uimgr.CloseDialog(ui_test.uiname);
+    ui_test.uimgr:CloseDialog(ui_test.uiname);
 end
+
+--- initui
+ui_test.initui = function()
+    ui_test.uiref = {};
+
+    ui_test.uiref.btn_connectserver = ui_test.uiinstance:FindBtn(ui_test.uiinstance.rootDialog, "btn_connectserver");
+    ui_test.uiref.btn_sendlogin = ui_test.uiinstance:FindBtn(ui_test.uiinstance.rootDialog, "btn_sendlogin");
+    ui_test.uiref.btn_sendchat = ui_test.uiinstance:FindBtn(ui_test.uiinstance.rootDialog, "btn_sendchat");
+end
+
+--- init event
+ui_test.initEvent = function()
+
+    ui_test.uiinstance:AddBtnListener(ui_test.uiref.btn_connectserver, ui_test.onConnectServerBtnClick);
+    ui_test.uiinstance:AddBtnListener(ui_test.uiref.btn_sendlogin, ui_test.onSendloginBtnClick);
+    ui_test.uiinstance:AddBtnListener(ui_test.uiref.btn_sendchat, ui_test.onSendchatBtnClick);
+end
+
+--------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------ui事件-------------------------------------------------
+
+function ui_test.onConnectServerBtnClick()
+    print("ui_test.onConnectServerBtnClick");
+end
+
+function ui_test.onSendloginBtnClick()
+    print("ui_test.onSendloginBtnClick");
+end
+
+function ui_test.onSendchatBtnClick()
+    print("ui_test.onSendchatBtnClick");
+end
+
+
+--------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 return ui_test;

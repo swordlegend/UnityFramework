@@ -21,11 +21,12 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(gtmGame.Dialog);
-			Utils.BeginObjectRegister(type, L, translator, 0, 4, 1, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 5, 1, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Init", _m_Init);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Close", _m_Close);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SetParent", _m_SetParent);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "FindBtn", _m_FindBtn);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AddBtnListener", _m_AddBtnListener);
 			
 			
@@ -151,6 +152,36 @@ namespace XLua.CSObjectWrap
                     
                     
                     return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_FindBtn(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    UnityEngine.Transform _parent = (UnityEngine.Transform)translator.GetObject(L, 2, typeof(UnityEngine.Transform));
+                    string _name = LuaAPI.lua_tostring(L, 3);
+                    
+                        UnityEngine.UI.Button gen_ret = gen_to_be_invoked.FindBtn( _parent, _name );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
                 }
                 
             } catch(System.Exception gen_e) {

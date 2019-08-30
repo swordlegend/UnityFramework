@@ -31,7 +31,16 @@ namespace gtmGame
 
         public void DoClose()
         {
-            
+            foreach(var iter in m_dialogDict)
+            {
+                Dialog dialog = iter.Value;
+                if (dialog == null)
+                    continue;
+
+                dialog.Close();
+            }
+
+            m_dialogDict.Clear();
         }
 
         public void DoInit()
@@ -70,17 +79,18 @@ namespace gtmGame
             return null;
         }
 
-        public void CreateDialog(string layoutname, string luafilename)
+        public Dialog CreateDialog(string layoutname, string luafilename)
         {
             int hashcode = layoutname.GetHashCode();
 
             if (m_dialogDict.ContainsKey(hashcode))
-                return;
+                return m_dialogDict[hashcode];
 
             Dialog dialog = new Dialog();
             dialog.Init(layoutname);
             dialog.SetParent(UILayer.main);
             m_dialogDict.Add(hashcode, dialog);
+            return dialog;
         }
 
         public void CloseDialog(string layoutname)

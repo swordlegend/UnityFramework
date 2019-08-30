@@ -10,14 +10,19 @@ namespace gtmGame
     {
         #region 变量
 
-        private GameObject m_rootLayout;
+        private Transform m_rootLayout;
         /// <summary>
         /// obj
         /// </summary>
-        public GameObject rootDialog
+        public Transform rootDialog
         {
             get { return m_rootLayout; }
         }
+
+        /// <summary>
+        /// ui event dict
+        /// </summary>
+        private Dictionary<UnityEvent, UnityEvent> m_uiEventDict = new Dictionary<UnityEvent, UnityEvent>(32);
 
         #endregion
 
@@ -29,7 +34,7 @@ namespace gtmGame
             if (prefab == null)
                 return;
 
-            m_rootLayout = GameObject.Instantiate(prefab);
+            m_rootLayout = GameObject.Instantiate(prefab).transform;
         }
 
         public void Close()
@@ -38,6 +43,8 @@ namespace gtmGame
             {
                 GameObject.Destroy(m_rootLayout);
             }
+
+            RemoveAllListener();
         }
 
         public void SetParent(UILayer layer)
@@ -52,9 +59,38 @@ namespace gtmGame
             m_rootLayout.transform.SetParent(trans, false);
         }
 
+        public Button FindBtn(Transform parent, string name)
+        {
+            Transform trans = parent.Find(name);
+            if (trans == null)
+                return null;
+
+            return trans.GetComponent<Button>();
+        }
+
         public void AddBtnListener(Button btn, UnityAction action)
         {
             btn.onClick.AddListener(action);
+
+            UnityEvent evt = null;
+            if (!m_uiEventDict.TryGetValue(btn.onClick, out evt))
+            {
+                m_uiEventDict.Add(btn.onClick, btn.onClick);
+            }
+        }
+
+        private void RemoveAllListener()
+        {
+            foreach (var iter in m_uiEventDict)
+            {
+                UnityEvent evt = iter.Key;
+                if (evt == null)
+                    continue;
+
+                evt.RemoveAllListeners();
+            }
+
+            m_uiEventDict.Clear();
         }
 
         #endregion

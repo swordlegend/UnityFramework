@@ -25,6 +25,7 @@ namespace gtmGame
             if (m_luaEnv != null)
             {
                 m_luaEnv.Dispose();
+                m_luaEnv = null;
             }
         }
 
