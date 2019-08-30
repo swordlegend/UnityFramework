@@ -72,11 +72,11 @@ namespace gtmGame
         public void DoClose()
         {
             m_uiMgr.DoClose();
-            m_luaMgr.DoClose();
             m_netMgr.DoClose();
             m_logSystem.DoClose();
             m_msgDispatcher.DoClose();
             m_resLoad.DoClose();
+            m_luaMgr.DoClose();
         }
 
         #endregion

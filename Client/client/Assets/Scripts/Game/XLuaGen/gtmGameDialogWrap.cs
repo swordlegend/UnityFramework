@@ -21,14 +21,15 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(gtmGame.Dialog);
-			Utils.BeginObjectRegister(type, L, translator, 0, 6, 1, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 7, 1, 0);
 			
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Init", _m_Init);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Create", _m_Create);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Close", _m_Close);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SetParent", _m_SetParent);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "FindBtn", _m_FindBtn);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AddBtnClickListener", _m_AddBtnClickListener);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "RemoveAllBtnClickListener", _m_RemoveAllBtnClickListener);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetButtonInChild", _m_GetButtonInChild);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetImageInChild", _m_GetImageInChild);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetTextInChild", _m_GetTextInChild);
 			
 			
 			Utils.RegisterFunc(L, Utils.GETTER_IDX, "rootDialog", _g_get_rootDialog);
@@ -79,7 +80,7 @@ namespace XLua.CSObjectWrap
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_Init(RealStatePtr L)
+        static int _m_Create(RealStatePtr L)
         {
 		    try {
             
@@ -93,7 +94,7 @@ namespace XLua.CSObjectWrap
                 {
                     string _layoutname = LuaAPI.lua_tostring(L, 2);
                     
-                    gen_to_be_invoked.Init( _layoutname );
+                    gen_to_be_invoked.Create( _layoutname );
                     
                     
                     
@@ -162,36 +163,6 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_FindBtn(RealStatePtr L)
-        {
-		    try {
-            
-                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-            
-            
-                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
-            
-            
-                
-                {
-                    UnityEngine.Transform _parent = (UnityEngine.Transform)translator.GetObject(L, 2, typeof(UnityEngine.Transform));
-                    string _name = LuaAPI.lua_tostring(L, 3);
-                    
-                        UnityEngine.UI.Button gen_ret = gen_to_be_invoked.FindBtn( _parent, _name );
-                        translator.Push(L, gen_ret);
-                    
-                    
-                    
-                    return 1;
-                }
-                
-            } catch(System.Exception gen_e) {
-                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
-            }
-            
-        }
-        
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _m_AddBtnClickListener(RealStatePtr L)
         {
 		    try {
@@ -221,7 +192,7 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_RemoveAllBtnClickListener(RealStatePtr L)
+        static int _m_GetButtonInChild(RealStatePtr L)
         {
 		    try {
             
@@ -233,13 +204,75 @@ namespace XLua.CSObjectWrap
             
                 
                 {
-                    UnityEngine.UI.Button _btn = (UnityEngine.UI.Button)translator.GetObject(L, 2, typeof(UnityEngine.UI.Button));
+                    UnityEngine.GameObject _parent = (UnityEngine.GameObject)translator.GetObject(L, 2, typeof(UnityEngine.GameObject));
+                    string _name = LuaAPI.lua_tostring(L, 3);
                     
-                    gen_to_be_invoked.RemoveAllBtnClickListener( _btn );
+                        UnityEngine.UI.Button gen_ret = gen_to_be_invoked.GetButtonInChild( _parent, _name );
+                        translator.Push(L, gen_ret);
                     
                     
                     
-                    return 0;
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_GetImageInChild(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    UnityEngine.GameObject _parent = (UnityEngine.GameObject)translator.GetObject(L, 2, typeof(UnityEngine.GameObject));
+                    string _name = LuaAPI.lua_tostring(L, 3);
+                    
+                        UnityEngine.UI.Image gen_ret = gen_to_be_invoked.GetImageInChild( _parent, _name );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_GetTextInChild(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    UnityEngine.GameObject _parent = (UnityEngine.GameObject)translator.GetObject(L, 2, typeof(UnityEngine.GameObject));
+                    string _name = LuaAPI.lua_tostring(L, 3);
+                    
+                        UnityEngine.UI.Text gen_ret = gen_to_be_invoked.GetTextInChild( _parent, _name );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
                 }
                 
             } catch(System.Exception gen_e) {

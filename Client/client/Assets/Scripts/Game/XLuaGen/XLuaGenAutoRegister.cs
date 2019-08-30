@@ -1265,18 +1265,21 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(ResourcePathLoad), ResourcePathLoadWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(DontUnload), DontUnloadWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(ResouceLoadHelper), ResouceLoadHelperWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(fbs.ReqChat), fbsReqChatWrap.__Register);
         
-        
-            translator.DelayWrapLoader(typeof(fbs.ReqLogin), fbsReqLoginWrap.__Register);
-        
         }
         
         static void wrapInit8(LuaEnv luaenv, ObjectTranslator translator)
         {
+        
+            translator.DelayWrapLoader(typeof(fbs.ReqLogin), fbsReqLoginWrap.__Register);
+        
         
             translator.DelayWrapLoader(typeof(fbs.RspChat), fbsRspChatWrap.__Register);
         

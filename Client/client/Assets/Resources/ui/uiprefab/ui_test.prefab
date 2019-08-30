@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4141694802324794848}
   - component: {fileID: 2125341705185031974}
   m_Layer: 5
-  m_Name: btn_test
+  m_Name: btn_close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -490, y: -217}
-  m_SizeDelta: {x: 620.4, y: 115.7}
+  m_AnchoredPosition: {x: 833, y: 457.6}
+  m_SizeDelta: {x: 154.8, y: 101.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5944034158153824099
 CanvasRenderer:
@@ -196,7 +196,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: test
+  m_Text: 'close
+
+'
 --- !u!1 &8056538093996391594
 GameObject:
   m_ObjectHideFlags: 0

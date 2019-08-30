@@ -87,7 +87,7 @@ namespace gtmGame
                 return m_dialogDict[hashcode];
 
             Dialog dialog = new Dialog();
-            dialog.Init(layoutname);
+            dialog.Create(layoutname);
             dialog.SetParent(UILayer.main);
             m_dialogDict.Add(hashcode, dialog);
             return dialog;

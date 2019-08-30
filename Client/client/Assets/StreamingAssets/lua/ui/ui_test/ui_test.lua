@@ -18,17 +18,16 @@ ui_test.uimgr = global.UIManager;
 ui_test.show = function()
 
     ---@type gtmGame.Dialog
-    ui_test.uiinstance = ui_test.uimgr:CreateDialog(ui_test.uiname, "ui_test");
+    ui_test.dialog = ui_test.uimgr:CreateDialog(ui_test.uiname, "ui_test");
+    if not ui_test.dialog then
+        print("ui_test.dialog null uiname "..ui_test.uiname);
+    end
 
     ui_test.initui();
     ui_test.initEvent();
 end
 
 ui_test.close = function()
-
-    --ui_test.uiinstance:RemoveAllBtnClickListener(ui_test.uiref.btn_connectserver);
-    --ui_test.uiinstance:RemoveAllBtnClickListener(ui_test.uiref.btn_sendlogin);
-    --ui_test.uiinstance:RemoveAllBtnClickListener(ui_test.uiref.btn_sendchat);
 
     ui_test.uimgr:CloseDialog(ui_test.uiname);
 end
@@ -37,17 +36,20 @@ end
 ui_test.initui = function()
     ui_test.uiref = {};
 
-    ui_test.uiref.btn_connectserver = ui_test.uiinstance:FindBtn(ui_test.uiinstance.rootDialog, "btn_connectserver");
-    ui_test.uiref.btn_sendlogin = ui_test.uiinstance:FindBtn(ui_test.uiinstance.rootDialog, "btn_sendlogin");
-    ui_test.uiref.btn_sendchat = ui_test.uiinstance:FindBtn(ui_test.uiinstance.rootDialog, "btn_sendchat");
+    ui_test.uiref.btn_connectserver = ui_test.dialog:GetButtonInChild(ui_test.dialog.rootDialog, "btn_connectserver");
+    ui_test.uiref.btn_sendlogin = ui_test.dialog:GetButtonInChild(ui_test.dialog.rootDialog, "btn_sendlogin");
+    ui_test.uiref.btn_sendchat = ui_test.dialog:GetButtonInChild(ui_test.dialog.rootDialog, "btn_sendchat");
+    ui_test.uiref.btn_close = ui_test.dialog:GetButtonInChild(ui_test.dialog.rootDialog, "btn_close");
 end
 
 --- init event
 ui_test.initEvent = function()
 
-    ui_test.uiinstance:AddBtnClickListener(ui_test.uiref.btn_connectserver, ui_test.onConnectServerBtnClick);
-    ui_test.uiinstance:AddBtnClickListener(ui_test.uiref.btn_sendlogin, ui_test.onSendloginBtnClick);
-    ui_test.uiinstance:AddBtnClickListener(ui_test.uiref.btn_sendchat, ui_test.onSendchatBtnClick);
+    ui_test.dialog:AddBtnClickListener(ui_test.uiref.btn_connectserver, ui_test.onConnectServerBtnClick);
+    ui_test.dialog:AddBtnClickListener(ui_test.uiref.btn_sendlogin, ui_test.onSendloginBtnClick);
+    ui_test.dialog:AddBtnClickListener(ui_test.uiref.btn_sendchat, ui_test.onSendchatBtnClick);
+    ui_test.dialog:AddBtnClickListener(ui_test.uiref.btn_close, ui_test.onCloseBtnClick);
+
 end
 
 --------------------------------------------------------------------------------------------------
@@ -77,6 +79,11 @@ function ui_test.onSendchatBtnClick()
     print("ui_test.onSendchatBtnClick");
 end
 
+function ui_test.onCloseBtnClick()
+    print("ui_test.onCloseBtnClick");
+
+    ui_test.close();
+end
 
 --------------------------------------------------------------------------------------------------
 

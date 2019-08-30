@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.ComponentModel;
 
 namespace gtmGame
 {
@@ -10,11 +11,11 @@ namespace gtmGame
     {
         #region 变量
 
-        private Transform m_rootLayout;
+        private GameObject m_rootLayout;
         /// <summary>
         /// obj
         /// </summary>
-        public Transform rootDialog
+        public GameObject rootDialog
         {
             get { return m_rootLayout; }
         }
@@ -28,13 +29,13 @@ namespace gtmGame
 
         #region 函数
 
-        public void Init(string layoutname)
+        public void Create(string layoutname)
         {
             GameObject prefab = ResouceLoadHelper.LoadUISync(layoutname);
             if (prefab == null)
                 return;
 
-            m_rootLayout = GameObject.Instantiate(prefab).transform;
+            m_rootLayout = GameObject.Instantiate(prefab);
         }
 
         public void Close()
@@ -43,7 +44,7 @@ namespace gtmGame
 
             if (m_rootLayout != null)
             {
-                GameObject.Destroy(m_rootLayout);
+                GameObject.Destroy(m_rootLayout.gameObject);
             }
         }
 
@@ -59,15 +60,6 @@ namespace gtmGame
             m_rootLayout.transform.SetParent(trans, false);
         }
 
-        public Button FindBtn(Transform parent, string name)
-        {
-            Transform trans = parent.Find(name);
-            if (trans == null)
-                return null;
-
-            return trans.GetComponent<Button>();
-        }
-
         public void AddBtnClickListener(Button btn, UnityAction action)
         {
             if (btn == null)
@@ -80,20 +72,7 @@ namespace gtmGame
                 m_uiEventSet.Add(btn.onClick);
             }
         }
-
-        public void RemoveAllBtnClickListener(Button btn)
-        {
-            if (btn == null)
-                return;
-
-            btn.onClick.RemoveAllListeners();
-
-            if (m_uiEventSet.Contains(btn.onClick))
-            {
-                m_uiEventSet.Remove(btn.onClick);
-            }
-        }
-
+        
         private void RemoveAllListener()
         {
             foreach (var iter in m_uiEventSet)
@@ -103,10 +82,44 @@ namespace gtmGame
                     continue;
 
                 evt.RemoveAllListeners();
-                evt = null;
+
+                // 解决xlua try to dispose a LuaEnv with C# callback! 报错
+                // 参考文章 https://www.bbsmax.com/A/n2d9MjYvdD/
+                evt.Invoke();
             }
 
             m_uiEventSet.Clear();
+        }
+
+        private T GetComponentInChild<T>(GameObject parent, string name) where T : UnityEngine.Component
+        {
+            if (parent == null)
+                return null;
+
+            Transform parenttrans = parent.transform;
+            if (parenttrans == null)
+                return null;
+
+            Transform trans = parenttrans.Find(name);
+            if (trans == null)
+                return null;
+
+            return trans.GetComponent<T>();
+        }
+
+        public Button GetButtonInChild(GameObject parent, string name)
+        {
+            return GetComponentInChild<Button>(parent, name);
+        }
+
+        public Image GetImageInChild(GameObject parent, string name)
+        {
+            return GetComponentInChild<Image>(parent, name);
+        }
+
+        public Text GetTextInChild(GameObject parent, string name)
+        {
+            return GetComponentInChild<Text>(parent, name);
         }
 
         #endregion
