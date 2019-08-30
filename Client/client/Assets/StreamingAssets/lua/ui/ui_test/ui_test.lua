@@ -25,6 +25,11 @@ ui_test.show = function()
 end
 
 ui_test.close = function()
+
+    --ui_test.uiinstance:RemoveAllBtnClickListener(ui_test.uiref.btn_connectserver);
+    --ui_test.uiinstance:RemoveAllBtnClickListener(ui_test.uiref.btn_sendlogin);
+    --ui_test.uiinstance:RemoveAllBtnClickListener(ui_test.uiref.btn_sendchat);
+
     ui_test.uimgr:CloseDialog(ui_test.uiname);
 end
 
@@ -40,9 +45,9 @@ end
 --- init event
 ui_test.initEvent = function()
 
-    ui_test.uiinstance:AddBtnListener(ui_test.uiref.btn_connectserver, ui_test.onConnectServerBtnClick);
-    ui_test.uiinstance:AddBtnListener(ui_test.uiref.btn_sendlogin, ui_test.onSendloginBtnClick);
-    ui_test.uiinstance:AddBtnListener(ui_test.uiref.btn_sendchat, ui_test.onSendchatBtnClick);
+    ui_test.uiinstance:AddBtnClickListener(ui_test.uiref.btn_connectserver, ui_test.onConnectServerBtnClick);
+    ui_test.uiinstance:AddBtnClickListener(ui_test.uiref.btn_sendlogin, ui_test.onSendloginBtnClick);
+    ui_test.uiinstance:AddBtnClickListener(ui_test.uiref.btn_sendchat, ui_test.onSendchatBtnClick);
 end
 
 --------------------------------------------------------------------------------------------------

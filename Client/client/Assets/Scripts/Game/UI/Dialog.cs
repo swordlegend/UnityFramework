@@ -22,7 +22,7 @@ namespace gtmGame
         /// <summary>
         /// ui event dict
         /// </summary>
-        private Dictionary<UnityEvent, UnityEvent> m_uiEventDict = new Dictionary<UnityEvent, UnityEvent>(32);
+        private HashSet<UnityEvent> m_uiEventSet = new HashSet<UnityEvent>();
 
         #endregion
 
@@ -68,29 +68,45 @@ namespace gtmGame
             return trans.GetComponent<Button>();
         }
 
-        public void AddBtnListener(Button btn, UnityAction action)
+        public void AddBtnClickListener(Button btn, UnityAction action)
         {
+            if (btn == null)
+                return;
+
             btn.onClick.AddListener(action);
 
-            UnityEvent evt = null;
-            if (!m_uiEventDict.TryGetValue(btn.onClick, out evt))
+            if (!m_uiEventSet.Contains(btn.onClick))
             {
-                m_uiEventDict.Add(btn.onClick, btn.onClick);
+                m_uiEventSet.Add(btn.onClick);
+            }
+        }
+
+        public void RemoveAllBtnClickListener(Button btn)
+        {
+            if (btn == null)
+                return;
+
+            btn.onClick.RemoveAllListeners();
+
+            if (m_uiEventSet.Contains(btn.onClick))
+            {
+                m_uiEventSet.Remove(btn.onClick);
             }
         }
 
         private void RemoveAllListener()
         {
-            foreach (var iter in m_uiEventDict)
+            foreach (var iter in m_uiEventSet)
             {
-                UnityEvent evt = iter.Key;
+                UnityEvent evt = iter;
                 if (evt == null)
                     continue;
 
                 evt.RemoveAllListeners();
+                evt = null;
             }
 
-            m_uiEventDict.Clear();
+            m_uiEventSet.Clear();
         }
 
         #endregion

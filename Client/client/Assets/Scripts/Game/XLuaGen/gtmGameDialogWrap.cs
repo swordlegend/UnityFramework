@@ -21,13 +21,14 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(gtmGame.Dialog);
-			Utils.BeginObjectRegister(type, L, translator, 0, 5, 1, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 6, 1, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Init", _m_Init);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Close", _m_Close);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SetParent", _m_SetParent);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "FindBtn", _m_FindBtn);
-			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AddBtnListener", _m_AddBtnListener);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AddBtnClickListener", _m_AddBtnClickListener);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "RemoveAllBtnClickListener", _m_RemoveAllBtnClickListener);
 			
 			
 			Utils.RegisterFunc(L, Utils.GETTER_IDX, "rootDialog", _g_get_rootDialog);
@@ -191,7 +192,7 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_AddBtnListener(RealStatePtr L)
+        static int _m_AddBtnClickListener(RealStatePtr L)
         {
 		    try {
             
@@ -206,7 +207,35 @@ namespace XLua.CSObjectWrap
                     UnityEngine.UI.Button _btn = (UnityEngine.UI.Button)translator.GetObject(L, 2, typeof(UnityEngine.UI.Button));
                     UnityEngine.Events.UnityAction _action = translator.GetDelegate<UnityEngine.Events.UnityAction>(L, 3);
                     
-                    gen_to_be_invoked.AddBtnListener( _btn, _action );
+                    gen_to_be_invoked.AddBtnClickListener( _btn, _action );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_RemoveAllBtnClickListener(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    UnityEngine.UI.Button _btn = (UnityEngine.UI.Button)translator.GetObject(L, 2, typeof(UnityEngine.UI.Button));
+                    
+                    gen_to_be_invoked.RemoveAllBtnClickListener( _btn );
                     
                     
                     

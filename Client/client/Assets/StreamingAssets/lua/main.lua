@@ -7,6 +7,9 @@ function main()
 
     local testui = require("ui/ui_test/ui_test")
     testui.show();
+
+    local util = require '3rd/xlua/util'
+    util.print_func_ref_by_csharp()
 end
 
 main();
