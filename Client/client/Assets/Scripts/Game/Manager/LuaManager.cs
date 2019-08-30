@@ -46,6 +46,9 @@ namespace gtmGame
         private byte[] CustomLoader(ref string file)
         {
             string filepath = IFile.GetFilePath() + "/lua/" + file;
+
+            filepath = filepath.Replace(".", "/");
+
             if (!file.EndsWith(".lua"))
             {
                 filepath += ".lua";

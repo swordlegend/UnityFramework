@@ -1,10 +1,10 @@
 local m = {}
 local mt = {}
 
-local mt_name = "flatbuffers.view.mt"
+local mt_name = "3rd.flatbuffers.view.mt"
 
-local N = require("flatbuffers.numTypes")
-local binaryarray = require("flatbuffers.binaryarray")
+local N = require("3rd.flatbuffers.numTypes")
+local binaryarray = require("3rd.flatbuffers.binaryarray")
 
 function m.New(buf, pos)
     N.UOffsetT:EnforceNumber(pos)

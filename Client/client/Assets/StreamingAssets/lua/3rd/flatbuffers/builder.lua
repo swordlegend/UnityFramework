@@ -1,6 +1,6 @@
-local N = require("flatbuffers.numTypes")
-local ba = require("flatbuffers.binaryarray")
-local compat = require("flatbuffers.compat")
+local N = require("3rd.flatbuffers.numTypes")
+local ba = require("3rd.flatbuffers.binaryarray")
+local compat = require("3rd.flatbuffers.compat")
 
 local m = {}
 

@@ -1,6 +1,6 @@
 local m = {}
 
-local ba = require("flatbuffers.binaryarray")
+local ba = require("3rd.flatbuffers.binaryarray")
 
 local bpack = ba.Pack
 local bunpack = ba.Unpack

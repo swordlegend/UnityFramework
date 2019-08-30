@@ -9,16 +9,14 @@ ui_test = {}
 
 ui_test.uiname = "ui_test"
 
----@type gtmGame.UIManager
-ui_test.uimgr = global.UIManager;
-
 
 ----------------------------------------------内置-------------------------------------------------
 
-ui_test.show = function()
+function ui_test.show()
 
     ---@type gtmGame.Dialog
-    ui_test.dialog = ui_test.uimgr:CreateDialog(ui_test.uiname, "ui_test");
+    ui_test.dialog = ui_mgr.createDialog(ui_test.uiname, "ui_test");
+
     if not ui_test.dialog then
         print("ui_test.dialog null uiname "..ui_test.uiname);
     end
@@ -27,13 +25,12 @@ ui_test.show = function()
     ui_test.initEvent();
 end
 
-ui_test.close = function()
-
-    ui_test.uimgr:CloseDialog(ui_test.uiname);
+function ui_test.close()
+    ui_mgr.closeDialog(ui_test.uiname);
 end
 
 --- initui
-ui_test.initui = function()
+function ui_test.initui()
     ui_test.uiref = {};
 
     ui_test.uiref.btn_connectserver = ui_test.dialog:GetButtonInChild(ui_test.dialog.rootDialog, "btn_connectserver");
@@ -43,7 +40,7 @@ ui_test.initui = function()
 end
 
 --- init event
-ui_test.initEvent = function()
+function ui_test.initEvent()
 
     ui_test.dialog:AddBtnClickListener(ui_test.uiref.btn_connectserver, ui_test.onConnectServerBtnClick);
     ui_test.dialog:AddBtnClickListener(ui_test.uiref.btn_sendlogin, ui_test.onSendloginBtnClick);
