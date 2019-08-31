@@ -60,7 +60,7 @@ byte[] bytearray = builder.DataBuffer.ToSizedArray();	这个函数最好去掉�
 
 
 
-------------------------------------8/31----------------------------------
+------------------------------------8/30----------------------------------
 
 xLua抛出异常	try to dispose a LuaEnv with C# callback!
 
@@ -69,4 +69,69 @@ xLua抛出异常	try to dispose a LuaEnv with C# callback!
 --------------------------------------------------------------------------
 
 
+
+
+
+
+
+------------------------------------8/31----------------------------------
+
+[CSharpCallLua]
+public static List<Type> CSharpCallLua
+{
+    get
+    {
+        List<Type> typelist = new List<Type>()
+        {
+            typeof(Action),
+
+            // 
+            typeof(Action<ulong, byte[]>),
+        };
+
+        return typelist;
+    }
+}
+
+CSharpCallLua 可以生成Action代理的泛型方法吗, 代理类型需要一个一个手动添加
+
+--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+------------------------------------8/31----------------------------------
+
+// 这个是从flatbuffer里面复制一份数据出来
+//byte[] bytearray = builder.DataBuffer.ToSizedArray();
+
+//gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
+//UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
+//UInt16 biglen = Converter.GetBigEndian(lengh);
+//buff.WriteShort(biglen);
+//buff.WriteUlong(msgid);
+//buff.WriteBytes(bytearray);
+
+
+// 这里做了优化处理，不从flatbuffer里面复制一份数据出来， 而是直接取数据, 减少一次拷贝
+int msgpos = builder.DataBuffer.Position;
+int msglen = builder.DataBuffer.Length - builder.DataBuffer.Position;
+
+gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
+UInt16 lengh = (UInt16)(msglen + sizeof(ulong));
+UInt16 biglen = Converter.GetBigEndian(lengh);
+buff.WriteShort(biglen);
+buff.WriteUlong(msgid);
+buff.WriteBytes(builder.DataBuffer.RawBuffer, msgpos, msglen);
+
+if (NetManager.instance != null)
+{
+    NetManager.instance.SendMessage(buff);
+}
+
+--------------------------------------------------------------------------
 
