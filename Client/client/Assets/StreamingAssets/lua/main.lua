@@ -14,7 +14,7 @@ function main()
 
     local testui = require("ui.uiview.ui_test.ui_test")
     testui.show();
-
+    
 end
 
 main();

@@ -14,7 +14,7 @@ local msgdispatcher = require("msgdispatcher.msgdispatcher")
 
 function netmsgregister.onLuaMsgEvent(msgid, bytearray)
 
-    print("netmsgregister.onLuaMsgEvent msgid : "..msgid);
+    --print("netmsgregister.onLuaMsgEvent msgid : "..msgid);
 
     msgdispatcher.dispatcher(msgid, bytearray)
 end
