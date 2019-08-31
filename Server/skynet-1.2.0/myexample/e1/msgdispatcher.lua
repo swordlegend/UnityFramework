@@ -53,6 +53,8 @@ msgdispatcher.sendFbMsg = function(id, msg, builder)
     local strwrite = string.pack("<L", msgid);
     strwrite = strwrite .. bufAsString;
 
+    print("msgdispatcher.sendFbMsg : " .. #bufAsString)
+
     local package = string.pack("<s2", strwrite)
 
     socket.write(id, package)
