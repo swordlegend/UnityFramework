@@ -12,9 +12,9 @@ function main()
     local netmsgregister = require "msgdispatcher.netmsgregister"
     netmsgregister.init();
 
-    local testui = require("ui.uiview.ui_test.ui_test")
+    local testui = require("ui.ui_test.ui_test")
     testui.show();
-    
+
 end
 
 main();
