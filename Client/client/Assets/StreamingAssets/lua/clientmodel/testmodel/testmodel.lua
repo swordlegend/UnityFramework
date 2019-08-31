@@ -35,7 +35,6 @@ function testmodel.close()
     msgdispatcher.unRegisterFbMsg(rspchat, testmodel.onRspChat_sc)
 end
 
-
 function testmodel.onRspLogin_sc(msg)
     print(msg:Account())
     print(msg:Password())
@@ -47,27 +46,38 @@ end
 
 function testmodel.sendreqlogin_cs(_account, _password)
 
-    --    ---@type builder
-    --local builder = msgdispatcher.newBuilder(1024);
-    --
-    --local account = builder:CreateString(_account);
-    --local password = builder:CreateString(_password);
-    --
-    --reqlogin.Start(builder)
-    --reqlogin.AddPassword(builder, account)
-    --reqlogin.AddPassword(builder, password)
-    --
-    --local orc = reqlogin.End(builder)
-    --builder:Finish(orc)
-    --
-    --msgdispatcher.sendFbMsg(reqlogin)
+    ---@type builder
+    local builder = msgdispatcher.newBuilder(1024);
 
-    global.UIManager:SendLoginMsg();
+    local account = builder:CreateString(_account);
+    local password = builder:CreateString(_password);
+
+    reqlogin.Start(builder)
+    reqlogin.AddAccount(builder, account)
+    reqlogin.AddPassword(builder, password)
+
+    local orc = reqlogin.End(builder)
+    builder:Finish(orc)
+
+    msgdispatcher.sendFbMsg(reqlogin, builder)
 end
 
-function testmodel.sendreqchat_cs()
-    global.UIManager:SendChatMsg();
+function testmodel.sendreqchat_cs(_say)
+
+    ---@type builder
+    local builder = msgdispatcher.newBuilder(1024);
+
+    local say = builder:CreateString(_say);
+
+    reqchat.Start(builder)
+    reqchat.AddSay(builder, say)
+
+    local orc = reqchat.End(builder)
+    builder:Finish(orc)
+
+    msgdispatcher.sendFbMsg(reqchat, builder)
 end
+
 
 return testmodel;
 

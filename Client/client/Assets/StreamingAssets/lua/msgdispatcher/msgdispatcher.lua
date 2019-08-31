@@ -45,16 +45,22 @@ msgdispatcher.sendFbMsg = function(msg, builder)
     --local msgid = msg.HashID;
     --local strwrite = string.pack("<L", msgid);
     --strwrite = strwrite .. bufAsString;
-    --
     --local package = string.pack("<s2", strwrite)
-    --
     --local bytebuf = global.ByteBuffer();
     --bytebuf:WriteBytes(package, 0, #package);
     --global.INetManager:SendMessage(bytebuf);
 
+
     local msgbytes = builder:Output();
     local msgid = msg.HashID;
-    global.IMsgDispatcher:SendFBMsg(msgid, msgbytes);
+    local msglen = #msgbytes + 8;
+
+    local bytebuf = global.ByteBuffer();
+    msglen = global.Converter.GetBigEndianUInt16(msglen)
+    bytebuf:WriteShort(msglen);
+    bytebuf:WriteUlong(msgid)
+    bytebuf:WriteBytes(msgbytes, 0, #msgbytes)
+    global.INetManager:SendMessage(bytebuf);
 end
 
 -- fb消息分发

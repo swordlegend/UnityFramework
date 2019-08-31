@@ -260,9 +260,7 @@ namespace XLua.CSObjectWrap
             
                 
                 {
-                    
-                    gen_to_be_invoked.SendLoginMsg(  );
-                    
+                                        
                     
                     
                     return 0;
@@ -288,7 +286,7 @@ namespace XLua.CSObjectWrap
                 
                 {
                     
-                    gen_to_be_invoked.SendChatMsg(  );
+
                     
                     
                     

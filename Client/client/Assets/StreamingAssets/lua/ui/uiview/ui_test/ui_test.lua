@@ -95,7 +95,10 @@ end
 function ui_test.onSendchatBtnClick()
     print("ui_test.onSendchatBtnClick");
 
-    testmodel.sendreqchat_cs();
+    testmodel.sendreqchat_cs(
+            "白日依山尽，黄河入海流。欲穷千里目，更上一层楼。" ..
+                    "红豆生南国，春来发几枝。愿君多采撷，此物最相思。" ..
+                    "松下问童子，言师采药去。只在此山中，云深不知处。");
 end
 
 function ui_test.onCloseBtnClick()

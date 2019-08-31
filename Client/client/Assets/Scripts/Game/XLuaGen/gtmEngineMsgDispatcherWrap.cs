@@ -198,20 +198,7 @@ namespace XLua.CSObjectWrap
                 gtmEngine.MsgDispatcher gen_to_be_invoked = (gtmEngine.MsgDispatcher)translator.FastGetCSObj(L, 1);
             
             
-			    int gen_param_count = LuaAPI.lua_gettop(L);
-            
-                if(gen_param_count == 3&& (LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2) || LuaAPI.lua_isuint64(L, 2))&& (LuaAPI.lua_isnil(L, 3) || LuaAPI.lua_type(L, 3) == LuaTypes.LUA_TSTRING)) 
-                {
-                    ulong _msgid = LuaAPI.lua_touint64(L, 2);
-                    byte[] _bytearray = LuaAPI.lua_tobytes(L, 3);
-                    
-                    gen_to_be_invoked.SendFBMsg( _msgid, _bytearray );
-                    
-                    
-                    
-                    return 0;
-                }
-                if(gen_param_count == 3&& (LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2) || LuaAPI.lua_isuint64(L, 2))&& translator.Assignable<FlatBuffers.FlatBufferBuilder>(L, 3)) 
+                
                 {
                     ulong _msgid = LuaAPI.lua_touint64(L, 2);
                     FlatBuffers.FlatBufferBuilder _builder = (FlatBuffers.FlatBufferBuilder)translator.GetObject(L, 3, typeof(FlatBuffers.FlatBufferBuilder));
@@ -226,8 +213,6 @@ namespace XLua.CSObjectWrap
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
-            
-            return LuaAPI.luaL_error(L, "invalid arguments to gtmEngine.MsgDispatcher.SendFBMsg!");
             
         }
         

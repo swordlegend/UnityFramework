@@ -112,21 +112,6 @@ namespace gtmEngine
             m_fbMsgProcDict.Remove(hashid);
         }
 
-        public override void SendFBMsg(ulong msgid, byte[] bytearray)
-        {
-            gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
-            UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
-            UInt16 biglen = Converter.GetBigEndian(lengh);
-            buff.WriteShort(biglen);
-            buff.WriteUlong(msgid);
-            buff.WriteBytes(bytearray);
-
-            if (NetManager.instance != null)
-            {
-                NetManager.instance.SendMessage(buff);
-            }
-        }
-
         public override void SendFBMsg(ulong msgid, FlatBufferBuilder builder)
         {
             // 这里做了优化处理，不从flatbuffer里面复制一份数据出来， 而是直接取数据, 减少一次拷贝
@@ -139,6 +124,15 @@ namespace gtmEngine
             buff.WriteShort(biglen);
             buff.WriteUlong(msgid);
             buff.WriteBytes(builder.DataBuffer.RawBuffer, msgpos, msglen);
+
+
+            string strout = "";
+            for (int i = msgpos; i < builder.DataBuffer.RawBuffer.Length; i++)
+            {
+                strout = strout + builder.DataBuffer.RawBuffer[i];
+            }
+            LogSystem.instance.Log(LogCategory.GameEngine, strout);
+
 
             if (NetManager.instance != null)
             {

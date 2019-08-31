@@ -57,7 +57,5 @@ namespace gtmInterface
         public virtual void UnRegisterFBMsg<T>(MsgProcDelegate<T> fbfunc) where T : struct, FlatBuffers.IFlatbufferObject { }
 
         public virtual void SendFBMsg(ulong msgid, FlatBufferBuilder builder) { }
-
-        public virtual void SendFBMsg(ulong msgid, byte[] bytearray) { }
     }
 }
