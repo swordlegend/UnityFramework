@@ -6,7 +6,7 @@ using System;
 using XLua;
 using System.Reflection;
 using System.Linq;
-
+using UnityEngine.Events;
 
 namespace gtmEditor
 {
@@ -105,6 +105,25 @@ namespace gtmEditor
                 return unityTypes.Concat(customTypes);
             }
         }
+
+        [CSharpCallLua]
+        public static List<Type> CSharpCallLua
+        {
+            get
+            {
+                List<Type> typelist = new List<Type>()
+                {
+                    typeof(UnityAction),
+                    typeof(UnityAction<>),
+                    typeof(UnityAction<,>),
+                    typeof(UnityAction<, ,>),
+                    typeof(UnityAction<, , ,>),
+                };
+
+                return typelist;
+            }
+        }
+
 
         //黑名单
         [BlackList]

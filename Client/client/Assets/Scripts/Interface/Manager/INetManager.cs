@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace gtmInterface
 {
@@ -17,6 +18,8 @@ namespace gtmInterface
         {
             get { return _instance; }
         }
+
+
 
         protected GameEvent<ulong, byte[]> m_onLuaMsgEvent = new GameEvent<ulong, byte[]>();
         /// <summary>

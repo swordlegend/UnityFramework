@@ -66,14 +66,20 @@ end
 
 function ui_test.onConnectServerBtnClick()
     print("ui_test.onConnectServerBtnClick");
+
+    global.INetManager:SendConnect("192.168.0.108", "8888");
 end
 
 function ui_test.onSendloginBtnClick()
     print("ui_test.onSendloginBtnClick");
+
+
 end
 
 function ui_test.onSendchatBtnClick()
     print("ui_test.onSendchatBtnClick");
+
+
 end
 
 function ui_test.onCloseBtnClick()
