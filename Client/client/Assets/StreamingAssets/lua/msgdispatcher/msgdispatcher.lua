@@ -14,7 +14,9 @@ msgdispatcher.msgType = {
 }
 
 ---@class builder
-msgdispatcher.builder = flatbuffers.Builder(1024)
+function msgdispatcher.newBuilder(len)
+    return flatbuffers.Builder(len)
+end
 
 msgdispatcher.curMsgType = msgdispatcher.msgType.flatbuffer;
 
@@ -37,9 +39,9 @@ msgdispatcher.unRegisterFbMsg = function(msg, handler)
 end
 
 -- 发送fb消息
-msgdispatcher.sendFbMsg = function(msg)
+msgdispatcher.sendFbMsg = function(msg, builder)
 
-    --local bufAsString = msgdispatcher.builder:Output();
+    --local bufAsString = builder:Output();
     --local msgid = msg.HashID;
     --local strwrite = string.pack("<L", msgid);
     --strwrite = strwrite .. bufAsString;
@@ -50,16 +52,9 @@ msgdispatcher.sendFbMsg = function(msg)
     --bytebuf:WriteBytes(package, 0, #package);
     --global.INetManager:SendMessage(bytebuf);
 
-    local bufAsString = msgdispatcher.builder:Output();
-    local bytebuf = global.ByteBuffer();
+    local msgbytes = builder:Output();
     local msgid = msg.HashID;
-    local msglen = #bufAsString + 8;
-    msglen = global.Converter.GetBigEndianUInt16(msglen);
-
-    bytebuf:WriteShort(msglen);
-    bytebuf:WriteUlong(msgid);
-    bytebuf:WriteBytes(bufAsString, 0, #bufAsString);
-    global.INetManager:SendMessage(bytebuf);
+    global.IMsgDispatcher:SendFBMsg(msgid, msgbytes);
 end
 
 -- fb消息分发
@@ -86,3 +81,18 @@ msgdispatcher.dispatcherFbMsg = function(msgid, bytearray)
 end
 
 return msgdispatcher;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--@class builder
+--msgdispatcher.builder = flatbuffers.Builder(1024)

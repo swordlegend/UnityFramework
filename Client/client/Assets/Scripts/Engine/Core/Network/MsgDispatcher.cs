@@ -112,19 +112,23 @@ namespace gtmEngine
             m_fbMsgProcDict.Remove(hashid);
         }
 
+        public override void SendFBMsg(ulong msgid, byte[] bytearray)
+        {
+            gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
+            UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
+            UInt16 biglen = Converter.GetBigEndian(lengh);
+            buff.WriteShort(biglen);
+            buff.WriteUlong(msgid);
+            buff.WriteBytes(bytearray);
+
+            if (NetManager.instance != null)
+            {
+                NetManager.instance.SendMessage(buff);
+            }
+        }
+
         public override void SendFBMsg(ulong msgid, FlatBufferBuilder builder)
         {
-            // 这个是从flatbuffer里面复制一份数据出来
-            //byte[] bytearray = builder.DataBuffer.ToSizedArray();
-
-            //gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
-            //UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
-            //UInt16 biglen = Converter.GetBigEndian(lengh);
-            //buff.WriteShort(biglen);
-            //buff.WriteUlong(msgid);
-            //buff.WriteBytes(bytearray);
-
-
             // 这里做了优化处理，不从flatbuffer里面复制一份数据出来， 而是直接取数据, 减少一次拷贝
             int msgpos = builder.DataBuffer.Position;
             int msglen = builder.DataBuffer.Length - builder.DataBuffer.Position;
@@ -154,3 +158,25 @@ namespace gtmEngine
         #endregion
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 这个是从flatbuffer里面复制一份数据出来
+//byte[] bytearray = builder.DataBuffer.ToSizedArray();
+
+//gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
+//UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
+//UInt16 biglen = Converter.GetBigEndian(lengh);
+//buff.WriteShort(biglen);
+//buff.WriteUlong(msgid);
+//buff.WriteBytes(bytearray);

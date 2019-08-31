@@ -48,7 +48,7 @@ end
 function testmodel.sendreqlogin_cs(_account, _password)
 
     --    ---@type builder
-    --local builder = msgdispatcher.builder;
+    --local builder = msgdispatcher.newBuilder(1024);
     --
     --local account = builder:CreateString(_account);
     --local password = builder:CreateString(_password);

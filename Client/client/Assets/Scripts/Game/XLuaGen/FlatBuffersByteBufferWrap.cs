@@ -21,7 +21,7 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(FlatBuffers.ByteBuffer);
-			Utils.BeginObjectRegister(type, L, translator, 0, 31, 2, 1);
+			Utils.BeginObjectRegister(type, L, translator, 0, 31, 3, 1);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Reset", _m_Reset);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Duplicate", _m_Duplicate);
@@ -58,6 +58,7 @@ namespace XLua.CSObjectWrap
 			
 			Utils.RegisterFunc(L, Utils.GETTER_IDX, "Position", _g_get_Position);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "Length", _g_get_Length);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "RawBuffer", _g_get_RawBuffer);
             
 			Utils.RegisterFunc(L, Utils.SETTER_IDX, "Position", _s_set_Position);
             
@@ -1125,6 +1126,20 @@ namespace XLua.CSObjectWrap
 			
                 FlatBuffers.ByteBuffer gen_to_be_invoked = (FlatBuffers.ByteBuffer)translator.FastGetCSObj(L, 1);
                 LuaAPI.xlua_pushinteger(L, gen_to_be_invoked.Length);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_RawBuffer(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                FlatBuffers.ByteBuffer gen_to_be_invoked = (FlatBuffers.ByteBuffer)translator.FastGetCSObj(L, 1);
+                LuaAPI.lua_pushstring(L, gen_to_be_invoked.RawBuffer);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
