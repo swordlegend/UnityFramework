@@ -32,7 +32,7 @@ loginmodel.reqlogin_cs = function(data)
     print(reqlogindata:Account());
     print(reqlogindata:Password());
 
-    local builder = msgdispatcher.builder;
+    local builder = msgdispatcher.newBuilder(1024);
     local account = builder:CreateString(reqlogindata:Account().." wow魔兽");
     local password = builder:CreateString(reqlogindata:Password().." skynet云风");
 
@@ -42,7 +42,7 @@ loginmodel.reqlogin_cs = function(data)
     local orc = rsplogin.End(builder);
     builder:Finish(orc);
 
-    msgdispatcher.sendFbMsg(id, rsplogin);
+    msgdispatcher.sendFbMsg(id, rsplogin, builder);
 end
 
 return loginmodel;

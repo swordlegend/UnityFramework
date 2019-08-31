@@ -20,7 +20,10 @@ msgdispatcher.msgType = {
     protobuf = 1,
 }
 
-msgdispatcher.builder = flatbuffers.Builder(1024)
+
+function msgdispatcher.newBuilder(len)
+    return flatbuffers.Builder(len)
+end
 
 msgdispatcher.curMsgType = msgdispatcher.msgType.flatbuffer;
 
@@ -43,9 +46,9 @@ msgdispatcher.unRegisterFbMsg = function(msg, handler)
 end
 
 -- 发送fb消息
-msgdispatcher.sendFbMsg = function(id, msg)
+msgdispatcher.sendFbMsg = function(id, msg, builder)
 
-    local bufAsString = msgdispatcher.builder:Output();
+    local bufAsString = builder:Output();
     local msgid = msg.HashID;
     local strwrite = string.pack("<L", msgid);
     strwrite = strwrite .. bufAsString;
@@ -88,3 +91,13 @@ msgdispatcher.dispatcherFbMsg = function(id, msg, sz)
 end
 
 return msgdispatcher;
+
+
+
+
+
+
+
+
+
+--msgdispatcher.builder = flatbuffers.Builder(1024)

@@ -29,7 +29,7 @@ chatmodel.reqchat_cs = function(data)
 
     print(reqchat:Say());
 
-    local builder = msgdispatcher.builder;
+    local builder = msgdispatcher.newBuilder(1024)
     local say = builder:CreateString(reqchat:Say() .. " balabala说话");
 
     rspchat.Start(builder);
@@ -37,7 +37,7 @@ chatmodel.reqchat_cs = function(data)
     local orc = rspchat.End(builder);
     builder:Finish(orc);
 
-    msgdispatcher.sendFbMsg(id, rspchat);
+    msgdispatcher.sendFbMsg(id, rspchat, builder);
 end
 
 return chatmodel;
