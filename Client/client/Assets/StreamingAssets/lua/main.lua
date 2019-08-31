@@ -2,13 +2,16 @@
 
 require "define"
 require "ui/ui_mgr"
-require "msgdispatcher/msgdispatcher"
 
 function main()
 
+    --- C#消息回调注册
+    local netmsgregister = require "msgdispatcher/netmsgregister"
+    netmsgregister.init();
+
+
     local testui = require("ui/ui_test/ui_test")
     testui.show();
-
 
 end
 

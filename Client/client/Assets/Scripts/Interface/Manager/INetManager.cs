@@ -18,6 +18,15 @@ namespace gtmInterface
             get { return _instance; }
         }
 
+        protected GameEvent<ulong, byte[]> m_onLuaMsgEvent = new GameEvent<ulong, byte[]>();
+        /// <summary>
+        /// lua事件回调
+        /// </summary>
+        public GameEvent<ulong, byte[]> onLuaMsgEvent
+        {
+            get { return m_onLuaMsgEvent; }
+        }
+
         /// <summary>
         /// 发送链接请求
         /// </summary>

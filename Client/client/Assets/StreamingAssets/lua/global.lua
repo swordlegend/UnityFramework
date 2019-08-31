@@ -25,7 +25,8 @@ global.UIManager = gtmGame.UIManager.instance;
 ---@class gtmGame.LuaManager
 global.LuaManager = gtmGame.LuaManager.instance;
 
-
+---@class gtmInterface.INetManager
+global.INetManager = gtmInterface.INetManager.instance;
 
 
 

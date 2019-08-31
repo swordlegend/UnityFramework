@@ -120,7 +120,9 @@ namespace gtmEngine
                 if (MsgDispatcher.instance != null)
                 {
                     MsgDispatcher.instance.Dispatcher(keyvaleupair.Key, keyvaleupair.Value);
-                }                     
+                }
+
+                m_onLuaMsgEvent.Invoke(keyvaleupair.Key, keyvaleupair.Value);
             }
         }
 
