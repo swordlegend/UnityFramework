@@ -58,7 +58,7 @@
 
 5. 为lua增加mvc的ui模块 (完成待完善)
 
-5. xlua集成flatbuffer通信协议 (全lua框架使用) 
+5. xlua集成flatbuffer通信协议 (全lua框架使用) (完成)
 
 11. lua游戏流程加入状态机管理 
 
