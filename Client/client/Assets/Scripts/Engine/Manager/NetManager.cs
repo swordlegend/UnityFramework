@@ -46,6 +46,8 @@ namespace gtmEngine
 
         public override void DoClose()
         {
+            base.DoClose();
+
             if (m_SocketClient == null)
                 return;
 

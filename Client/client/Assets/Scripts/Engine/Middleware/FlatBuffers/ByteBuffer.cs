@@ -155,6 +155,8 @@ namespace FlatBuffers
             _pos = 0;
         }
 
+        public byte[] RawBuffer { get { return _buffer.Buffer; } }
+
         // Create a new ByteBuffer on the same underlying data.
         // The new ByteBuffer's position will be same as this buffer's.
         public ByteBuffer Duplicate()

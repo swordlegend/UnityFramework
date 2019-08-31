@@ -362,7 +362,9 @@ namespace XLua.CSObjectWrap
                 gtmInterface.ByteBuffer gen_to_be_invoked = (gtmInterface.ByteBuffer)translator.FastGetCSObj(L, 1);
             
             
-                
+			    int gen_param_count = LuaAPI.lua_gettop(L);
+            
+                if(gen_param_count == 2&& (LuaAPI.lua_isnil(L, 2) || LuaAPI.lua_type(L, 2) == LuaTypes.LUA_TSTRING)) 
                 {
                     byte[] _v = LuaAPI.lua_tobytes(L, 2);
                     
@@ -372,10 +374,24 @@ namespace XLua.CSObjectWrap
                     
                     return 0;
                 }
+                if(gen_param_count == 4&& (LuaAPI.lua_isnil(L, 2) || LuaAPI.lua_type(L, 2) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 3)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 4)) 
+                {
+                    byte[] _buffer = LuaAPI.lua_tobytes(L, 2);
+                    int _index = LuaAPI.xlua_tointeger(L, 3);
+                    int _count = LuaAPI.xlua_tointeger(L, 4);
+                    
+                    gen_to_be_invoked.WriteBytes( _buffer, _index, _count );
+                    
+                    
+                    
+                    return 0;
+                }
                 
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
+            
+            return LuaAPI.luaL_error(L, "invalid arguments to gtmInterface.ByteBuffer.WriteBytes!");
             
         }
         

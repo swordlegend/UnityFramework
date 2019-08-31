@@ -1299,6 +1299,9 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(gtmInterface.ByteBuffer), gtmInterfaceByteBufferWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(gtmInterface.Converter), gtmInterfaceConverterWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(gtmInterface.IMsgDispatcher), gtmInterfaceIMsgDispatcherWrap.__Register);
         
         
@@ -1414,9 +1417,6 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(gtmEngine.LogSystem), gtmEngineLogSystemWrap.__Register);
-        
-        
-            translator.DelayWrapLoader(typeof(gtmEngine.Converter), gtmEngineConverterWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(gtmEngine.MsgDispatcher), gtmEngineMsgDispatcherWrap.__Register);

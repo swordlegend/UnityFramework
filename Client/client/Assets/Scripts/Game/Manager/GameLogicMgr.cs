@@ -8,9 +8,9 @@ namespace gtmGame
     {
         #region 变量
 
-        private LoginModel m_loginModel = new LoginModel();
+        //private LoginModel m_loginModel = new LoginModel();
 
-        private ChatModel m_chatModel = new ChatModel();
+        //private ChatModel m_chatModel = new ChatModel();
 
         #endregion
 
@@ -18,20 +18,20 @@ namespace gtmGame
 
         public void DoClose()
         {
-            m_loginModel.DoClose();
-            m_chatModel.DoClose();
+            //m_loginModel.DoClose();
+            //m_chatModel.DoClose();
         }
 
         public void DoInit()
         {
-            m_loginModel.DoInit();
-            m_chatModel.DoInit();
+            //m_loginModel.DoInit();
+            //m_chatModel.DoInit();
         }
 
         public void DoUpdate()
         {
-            m_loginModel.DoUpdate();
-            m_chatModel.DoUpdate();
+            //m_loginModel.DoUpdate();
+            //m_chatModel.DoUpdate();
         }
 
         #endregion

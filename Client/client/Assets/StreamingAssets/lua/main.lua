@@ -5,12 +5,14 @@ require "ui/ui_mgr"
 
 function main()
 
+    local clientmodelmgr = require("clientmodel.clientmodelmgr")
+    clientmodelmgr.register()
+
     --- C#消息回调注册
-    local netmsgregister = require "msgdispatcher/netmsgregister"
+    local netmsgregister = require "msgdispatcher.netmsgregister"
     netmsgregister.init();
 
-
-    local testui = require("ui/ui_test/ui_test")
+    local testui = require("ui.uiview.ui_test.ui_test")
     testui.show();
 
 end

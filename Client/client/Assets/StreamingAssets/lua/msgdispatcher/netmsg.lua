@@ -28,7 +28,7 @@ end
 
 function netmsg.Brocast(event, data)
     if not netmsg.events[event] then
-        error("brocast " .. event .. " has no event.")
+        print("brocast " .. event .. " has no event.")
     else
         netmsg.events[event]:fire(data)
     end

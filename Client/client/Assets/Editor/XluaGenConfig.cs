@@ -113,11 +113,8 @@ namespace gtmEditor
             {
                 List<Type> typelist = new List<Type>()
                 {
-                    typeof(UnityAction),
-                    typeof(UnityAction<>),
-                    typeof(UnityAction<,>),
-                    typeof(UnityAction<, ,>),
-                    typeof(UnityAction<, , ,>),
+                    typeof(Action),
+                    typeof(Action<ulong, byte[]>),
                 };
 
                 return typelist;

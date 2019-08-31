@@ -30,6 +30,16 @@ namespace gtmInterface
             get { return m_onLuaMsgEvent; }
         }
 
+
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        public override void DoClose()
+        {
+            m_onLuaMsgEvent.RemoveAllListeners();
+            m_onLuaMsgEvent.Invoke(0, null);
+        }
+
         /// <summary>
         /// 发送链接请求
         /// </summary>

@@ -23,7 +23,7 @@
 using System;
 
 
-namespace gtmEngine
+namespace gtmInterface
 {
     public class Converter
     {
@@ -39,6 +39,11 @@ namespace gtmEngine
             }
         }
 
+        public static Int32 GetBigEndianInt32(Int32 value)
+        {
+            return GetBigEndian(value);
+        }
+
         public static UInt16 GetBigEndian(UInt16 value)
         {
             if (BitConverter.IsLittleEndian)
@@ -49,6 +54,11 @@ namespace gtmEngine
             {
                 return value;
             }
+        }
+
+        public static UInt16 GetBigEndianUInt16(UInt16 value)
+        {
+            return GetBigEndian(value);
         }
 
         public static UInt32 GetBigEndian(UInt32 value)
@@ -63,6 +73,11 @@ namespace gtmEngine
             }
         }
 
+        public static UInt32 GetBigEndianUInt32(UInt32 value)
+        {
+            return GetBigEndian(value);
+        }
+
         public static Int64 GetBigEndian(Int64 value)
         {
             if (BitConverter.IsLittleEndian)
@@ -75,6 +90,11 @@ namespace gtmEngine
             }
         }
 
+        public static Int64 GetBigEndianInt64(Int64 value)
+        {
+            return GetBigEndian(value);
+        }
+
         public static Double GetBigEndian(Double value)
         {
             if (BitConverter.IsLittleEndian)
@@ -85,6 +105,11 @@ namespace gtmEngine
             {
                 return value;
             }
+        }
+
+        public static Double GetBigEndianDouble(Double value)
+        {
+            return GetBigEndian(value);
         }
 
         public static float GetBigEndian(float value)
@@ -100,6 +125,11 @@ namespace gtmEngine
             }
         }
 
+        public static float GetBigEndianFloat(float value)
+        {
+            return GetBigEndian(value);
+        }
+
         public static Int32 GetLittleEndian(Int32 value)
         {
             if (BitConverter.IsLittleEndian)
@@ -110,6 +140,11 @@ namespace gtmEngine
             {
                 return swapByteOrder(value);
             }
+        }
+
+        public static Int32 GetLittleEndianInt32(Int32 value)
+        {
+            return GetLittleEndian(value);
         }
 
         public static UInt32 GetLittleEndian(UInt32 value)
@@ -124,6 +159,11 @@ namespace gtmEngine
             }
         }
 
+        public static UInt32 GetLittleEndianUInt32(UInt32 value)
+        {
+            return GetLittleEndian(value);
+        }
+
         public static UInt16 GetLittleEndian(UInt16 value)
         {
             if (BitConverter.IsLittleEndian)
@@ -136,6 +176,11 @@ namespace gtmEngine
             }
         }
 
+        public static UInt16 GetLittleEndianUInt16(UInt16 value)
+        {
+            return GetLittleEndian(value);
+        }
+
         public static Double GetLittleEndian(Double value)
         {
             if (BitConverter.IsLittleEndian)
@@ -146,6 +191,11 @@ namespace gtmEngine
             {
                 return swapByteOrder(value);
             }
+        }
+
+        public static Double GetLittleEndianDouble(Double value)
+        {
+            return GetLittleEndian(value);
         }
 
         private static Int32 swapByteOrder(Int32 value)

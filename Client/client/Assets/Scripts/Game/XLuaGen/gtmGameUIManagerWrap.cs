@@ -21,7 +21,7 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(gtmGame.UIManager);
-			Utils.BeginObjectRegister(type, L, translator, 0, 6, 0, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 8, 0, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "DoClose", _m_DoClose);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "DoInit", _m_DoInit);
@@ -29,6 +29,8 @@ namespace XLua.CSObjectWrap
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetLayer", _m_GetLayer);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "CreateDialog", _m_CreateDialog);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "CloseDialog", _m_CloseDialog);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SendLoginMsg", _m_SendLoginMsg);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SendChatMsg", _m_SendChatMsg);
 			
 			
 			
@@ -233,6 +235,60 @@ namespace XLua.CSObjectWrap
                     string _layoutname = LuaAPI.lua_tostring(L, 2);
                     
                     gen_to_be_invoked.CloseDialog( _layoutname );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_SendLoginMsg(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.UIManager gen_to_be_invoked = (gtmGame.UIManager)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    
+                    gen_to_be_invoked.SendLoginMsg(  );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_SendChatMsg(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.UIManager gen_to_be_invoked = (gtmGame.UIManager)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    
+                    gen_to_be_invoked.SendChatMsg(  );
                     
                     
                     

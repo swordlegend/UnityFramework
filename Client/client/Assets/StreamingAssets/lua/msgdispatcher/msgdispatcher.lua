@@ -1,5 +1,3 @@
-
----@type flatbuffers
 local flatbuffers = require("3rd/flatbuffers");
 
 ---@type netmsg
@@ -15,15 +13,16 @@ msgdispatcher.msgType = {
     protobuf = 1,
 }
 
+---@class builder
 msgdispatcher.builder = flatbuffers.Builder(1024)
 
 msgdispatcher.curMsgType = msgdispatcher.msgType.flatbuffer;
 
 -- 消息分发
-msgdispatcher.dispatcher = function(id, str)
+msgdispatcher.dispatcher = function(msgid, bytearray)
 
     if msgdispatcher.curMsgType == msgdispatcher.msgType.flatbuffer then
-        msgdispatcher.dispatcherFbMsg(id, str);
+        msgdispatcher.dispatcherFbMsg(msgid, bytearray);
     end
 end
 
@@ -38,28 +37,35 @@ msgdispatcher.unRegisterFbMsg = function(msg, handler)
 end
 
 -- 发送fb消息
-msgdispatcher.sendFbMsg = function(id, msg)
+msgdispatcher.sendFbMsg = function(msg)
+
+    --local bufAsString = msgdispatcher.builder:Output();
+    --local msgid = msg.HashID;
+    --local strwrite = string.pack("<L", msgid);
+    --strwrite = strwrite .. bufAsString;
+    --
+    --local package = string.pack("<s2", strwrite)
+    --
+    --local bytebuf = global.ByteBuffer();
+    --bytebuf:WriteBytes(package, 0, #package);
+    --global.INetManager:SendMessage(bytebuf);
 
     local bufAsString = msgdispatcher.builder:Output();
+    local bytebuf = global.ByteBuffer();
     local msgid = msg.HashID;
-    local strwrite = string.pack("<L", msgid);
-    strwrite = strwrite .. bufAsString;
+    local msglen = #bufAsString + 8;
+    msglen = global.Converter.GetBigEndianUInt16(msglen);
 
-    local package = string.pack("<s2", strwrite)
-
-    socket.write(id, package)
+    bytebuf:WriteShort(msglen);
+    bytebuf:WriteUlong(msgid);
+    bytebuf:WriteBytes(bufAsString, 0, #bufAsString);
+    global.INetManager:SendMessage(bytebuf);
 end
 
 -- fb消息分发
-msgdispatcher.dispatcherFbMsg = function(id, msg, sz)
+msgdispatcher.dispatcherFbMsg = function(msgid, bytearray)
 
-    local str = netpack.tostring(msg, sz);
-
-    -- string.unpack默认是1
-    local msgid = string.unpack("<L", str);
-    local msgoffset = 8;
-
-    local msgbuf = flatbuffers.binaryArray.New(str);
+    local msgbuf = flatbuffers.binaryArray.New(bytearray);
 
     local eventlib = netmsg.getEvents(msgid);
     if not eventlib then
@@ -71,15 +77,12 @@ msgdispatcher.dispatcherFbMsg = function(id, msg, sz)
         return ;
     end
 
-    local msg = msgclass.init(msgbuf, msgoffset);
+    local msg = msgclass.init(msgbuf, 0);
     if not msg then
         return ;
     end
 
-    local data = {};
-    data.id = id;
-    data.msg = msg;
-    netmsg.Brocast(msgid, data);
+    netmsg.Brocast(msgid, msg);
 end
 
 return msgdispatcher;

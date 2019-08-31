@@ -2,7 +2,7 @@
 
 -- namespace: fbs
 
-local flatbuffers = require('flatbuffers')
+local flatbuffers = require('3rd.flatbuffers')
 
 ---@class RspLogin
 local RspLogin = {} -- the module

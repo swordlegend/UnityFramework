@@ -97,9 +97,12 @@ namespace gtmInterface
 
         public void WriteBytes(byte[] v)
         {
-            //Debug.Log("WriteBytes with uint 16 len" + v.Length);
-            //writer.Write((UInt16)(v.Length));
             m_Writer.Write(v);
+        }
+
+        public void WriteBytes(byte[] buffer, int index, int count)
+        {
+            m_Writer.Write(buffer, index, count);
         }
 
         public byte ReadByte()

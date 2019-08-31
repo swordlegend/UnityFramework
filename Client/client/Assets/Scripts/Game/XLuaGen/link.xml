@@ -518,6 +518,7 @@
 		<type fullname="gtmInterface.IFile" preserve="all"/>
 		<type fullname="gtmInterface.ILogSystem" preserve="all"/>
 		<type fullname="gtmInterface.ByteBuffer" preserve="all"/>
+		<type fullname="gtmInterface.Converter" preserve="all"/>
 		<type fullname="gtmInterface.IMsgDispatcher" preserve="all"/>
 		<type fullname="gtmInterface.IResourceLoad" preserve="all"/>
 		<type fullname="gtmInterface.IManager" preserve="all"/>
@@ -557,7 +558,6 @@
 		<type fullname="FlatBuffers.Struct" preserve="all"/>
 		<type fullname="FlatBuffers.Table" preserve="all"/>
 		<type fullname="gtmEngine.LogSystem" preserve="all"/>
-		<type fullname="gtmEngine.Converter" preserve="all"/>
 		<type fullname="gtmEngine.MsgDispatcher" preserve="all"/>
 		<type fullname="gtmEngine.NetManager" preserve="all"/>
 		<type fullname="gtmEngine.Net.SocketClient" preserve="all"/>

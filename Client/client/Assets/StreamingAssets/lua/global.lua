@@ -28,5 +28,16 @@ global.LuaManager = gtmGame.LuaManager.instance;
 ---@class gtmInterface.INetManager
 global.INetManager = gtmInterface.INetManager.instance;
 
+---@class gtmInterface.IMsgDispatcher
+global.IMsgDispatcher = gtmInterface.IMsgDispatcher.instance
 
+---@class gtmInterface.ByteBuffer
+global.ByteBuffer = gtmInterface.ByteBuffer
+
+---@class gtmInterface.Converter
+global.Converter = gtmInterface.Converter
+
+
+
+return global;
 
