@@ -40,6 +40,14 @@ namespace gtmGame
 
 
 
+
+
+
+
+
+
+
+
 //public string ipaddress = "192.168.0.108";
 
 //private void OnGUI()
