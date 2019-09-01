@@ -25,6 +25,10 @@ function msgregister.dipatcher(client_fd, msg, sz)
     msgdispatcher.dispatcherFbMsg(client_fd, msg, sz);
 end
 
+function msgregister.rspconnectsuc(client_fd)
+    loginmodel.rspconnectsuc_sc(client_fd)
+end
+
 service.init {
     command = msgregister,
     info = data

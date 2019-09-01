@@ -8,6 +8,9 @@ local reqlogin = require "ReqLogin";
 ---@type RspLogin
 local rsplogin = require "RspLogin";
 
+---@type RspConnectSuc
+local rspconnectsuc = require "RspConnectSuc";
+
 ---@class loginmodel
 loginmodel = {}
 
@@ -19,6 +22,16 @@ end
 
 loginmodel.unRegister = function()
     msgdispatcher.unRegisterFbMsg(reqlogin, loginmodel.reqlogin_cs);
+end
+
+function loginmodel.rspconnectsuc_sc(id)
+    local builder = msgdispatcher.newBuilder(1024);
+
+    rspconnectsuc.Start(builder)
+    local orc = rspconnectsuc.End(builder);
+    builder:Finish(orc);
+
+    msgdispatcher.sendFbMsg(id, rspconnectsuc, builder);
 end
 
 -- 消息

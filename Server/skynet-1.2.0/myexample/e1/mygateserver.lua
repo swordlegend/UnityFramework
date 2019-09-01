@@ -24,6 +24,9 @@ function handler.connect(fd, ipaddr)
     local agent = skynet.newservice("myagent", fd)
     --连接成功就启动一个agent来代理
     agents[fd] = agent
+
+    local msgregister = skynet.queryservice "msgregister"
+    skynet.call(msgregister, "lua", "rspconnectsuc", fd)
 end
 
 function handler.disconnect(fd)
