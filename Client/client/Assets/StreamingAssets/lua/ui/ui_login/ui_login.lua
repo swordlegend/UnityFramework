@@ -58,10 +58,8 @@ function ui_login.initui()
 
     local root = ui_login.dialog.rootDialog
 
-    ---@type CS.UnityEngine.UI.InputField
     ui_login.uiref.input_account = ui_login.dialog:GetInputFieldInChild(root, "input_account")
 
-    ---@type CS.UnityEngine.UI.InputField
     ui_login.uiref.input_password = ui_login.dialog:GetInputFieldInChild(root, "input_password")
 
     ui_login.uiref.btn_confirm = ui_login.dialog:GetButtonInChild(root, "btn_confirm")
