@@ -16,15 +16,6 @@ selectserverstate.evententer:Connect(function ()
     ui_selectserver.show()
 end)
 
-netmsgregister.eventConnetSuc:Connect(function ()
-    print("netmsgregister.eventConnetSuc")
-
-    --local ui_selectserver = require("ui.ui_selectserver.ui_selectserver")
-    --ui_selectserver.setVisible(false)
-    --
-    --gamestatemgr.changeState(global.gamestatetype.login)
-end)
-
 ---@class selectservermodel
 selectservermodel = {}
 

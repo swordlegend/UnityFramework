@@ -513,6 +513,7 @@
 		<type fullname="fbs.ReqChat" preserve="all"/>
 		<type fullname="fbs.ReqLogin" preserve="all"/>
 		<type fullname="fbs.RspChat" preserve="all"/>
+		<type fullname="fbs.RspConnectSuc" preserve="all"/>
 		<type fullname="fbs.RspLogin" preserve="all"/>
 		<type fullname="gtmInterface.GameEvent" preserve="all"/>
 		<type fullname="gtmInterface.IFile" preserve="all"/>

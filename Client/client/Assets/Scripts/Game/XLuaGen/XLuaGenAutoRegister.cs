@@ -1284,6 +1284,9 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(fbs.RspChat), fbsRspChatWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(fbs.RspConnectSuc), fbsRspConnectSucWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(fbs.RspLogin), fbsRspLoginWrap.__Register);
         
         
@@ -1427,14 +1430,16 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(gtmEngine.NetManager), gtmEngineNetManagerWrap.__Register);
         
+        }
+        
+        static void wrapInit9(LuaEnv luaenv, ObjectTranslator translator)
+        {
         
             translator.DelayWrapLoader(typeof(gtmEngine.Net.SocketClient), gtmEngineNetSocketClientWrap.__Register);
         
+        
+        
         }
-        
-        
-        
-        
         
         static void Init(LuaEnv luaenv, ObjectTranslator translator)
         {
@@ -1456,6 +1461,8 @@ namespace XLua.CSObjectWrap
             wrapInit7(luaenv, translator);
             
             wrapInit8(luaenv, translator);
+            
+            wrapInit9(luaenv, translator);
             
             
         }

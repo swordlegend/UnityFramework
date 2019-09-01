@@ -13,6 +13,9 @@ local reqlogin = require("msg.fbs.ReqLogin")
 ---@type RspLogin
 local rsplogin = require("msg.fbs.RspLogin")
 
+---@type RspConnectSuc
+local rspConnectSuc = require("msg.fbs.RspConnectSuc")
+
 --local loginstate = require("gamestate.loginstate")
 loginstate.evententer:Connect(function ()
     print("ui_login.show")
@@ -27,10 +30,12 @@ loginmodel = {}
 ---------------------------------------继承函数---------------------------------------
 
 function loginmodel.create()
+    msgdispatcher.registerFbMsg(rspConnectSuc, loginmodel.onRspConnectSuc_sc)
     msgdispatcher.registerFbMsg(rsplogin, loginmodel.onRspLogin_sc)
 end
 
 function loginmodel.close()
+    msgdispatcher.unRegisterFbMsg(rspConnectSuc, loginmodel.onRspConnectSuc_sc)
     msgdispatcher.unRegisterFbMsg(rsplogin, loginmodel.onRspLogin_sc)
 end
 
@@ -69,6 +74,15 @@ end
 function loginmodel.onRspLogin_sc(msg)
     print(msg:Account())
     print(msg:Password())
+end
+
+function loginmodel.onRspConnectSuc_sc(msg)
+    print("loginmodel.onRspConnectSuc_sc")
+
+    local ui_selectserver = require("ui.ui_selectserver.ui_selectserver")
+    ui_selectserver.close()
+
+    gamestatemgr.changeState(global.gamestatetype.login)
 end
 
 --------------------------------------------------------------------------------------

@@ -10,8 +10,6 @@ local event = require("base.eventlib");
 
 netmsgregister = {};
 
-netmsgregister.eventConnetSuc = event:new()
-
 
 -------------------------------------------事件----------------------------------------------------
 
@@ -20,12 +18,6 @@ function netmsgregister.onLuaMsgEvent(msgid, bytearray)
     --print("netmsgregister.onLuaMsgEvent msgid : "..msgid);
 
     msgdispatcher.dispatcher(msgid, bytearray)
-end
-
-function netmsgregister.onConnectSucEvent()
-    print("netmsgregister.onConnectSucEvent")
-
-    netmsgregister.eventConnetSuc:Fire()
 end
 
 --------------------------------------------------------------------------------------------------
@@ -43,12 +35,10 @@ end
 
 function netmsgregister.init()
     global.INetManager.onLuaMsgEvent:AddListener(netmsgregister.onLuaMsgEvent)
-    global.INetManager.onConnectSucEvent:AddListener(netmsgregister.onConnectSucEvent);
 end
 
 function netmsgregister.destroy()
     global.INetManager.onLuaMsgEvent:RemoveListener(netmsgregister.onLuaMsgEvent)
-    global.INetManager.onConnectSucEvent:RemoveListener(netmsgregister.onConnectSucEvent);
 end
 
 --------------------------------------------------------------------------------------------------

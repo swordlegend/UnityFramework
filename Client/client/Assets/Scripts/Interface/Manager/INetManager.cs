@@ -32,16 +32,6 @@ namespace gtmInterface
 
 
 
-        protected GameEvent m_onConnectSucEvent = new GameEvent();
-        /// <summary>
-        /// 连接成功事件
-        /// </summary>
-        public GameEvent onConnectSucEvent
-        {
-            get { return m_onConnectSucEvent; }
-        }
-
-
         /// <summary>
         /// 关闭
         /// </summary>
@@ -49,9 +39,6 @@ namespace gtmInterface
         {
             m_onLuaMsgEvent.RemoveAllListeners();
             m_onLuaMsgEvent.Invoke(0, null);
-
-            m_onConnectSucEvent.RemoveAllListeners();
-            m_onConnectSucEvent.Invoke();
         }
         
         /// <summary>

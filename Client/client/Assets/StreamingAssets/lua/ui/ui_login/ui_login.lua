@@ -69,7 +69,7 @@ end
 
 --- init event
 function ui_login.initEvent()
-    ui_login.dialog:AddBtnClickListener(ui_login.uiname.btn_confirm, ui_login.onConfirmBtnClick)
+    ui_login.dialog:AddBtnClickListener(ui_login.uiref.btn_confirm, ui_login.onConfirmBtnClick)
 end
 
 --------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ end
 function ui_login.onConfirmBtnClick()
     print("ui_login.onConfirmBtnClick")
 
-    ui_login.dialog:SetInteractable(ui_login.uiref.btn_confirm, false)
+    --ui_login.dialog:SetInteractable(ui_login.uiref.btn_confirm, false)
 
     local account = ui_login.uiref.input_account.text
     if not account then

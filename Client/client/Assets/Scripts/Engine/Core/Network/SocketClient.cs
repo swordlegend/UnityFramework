@@ -113,9 +113,6 @@ namespace gtmEngine.Net
             m_NetStream = m_Client.GetStream();
             m_NetStream.BeginRead(m_ByteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
             LogSystem.instance.Log(LogCategory.GameEngine, "======连接========");
-
-            if (NetManager.instance != null)
-                NetManager.instance.onConnectSucEvent.Invoke();
         }
 
         /// <summary>
