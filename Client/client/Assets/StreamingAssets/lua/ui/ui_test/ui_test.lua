@@ -5,7 +5,8 @@
 ---
 
 ---@class ui_test
-ui_test = {}
+ui_test = {
+}
 
 ui_test.uiname = "ui_panel_test"
 
