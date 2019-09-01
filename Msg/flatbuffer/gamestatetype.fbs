@@ -1,0 +1,10 @@
+
+namespace fbs;
+
+enum gamestatetype : uint16 
+{ 
+    invalid,
+    login,
+    register,
+    game,
+}
