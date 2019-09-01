@@ -7,8 +7,9 @@ echo off & color 0A
 
 set SRCDIR="../../Msg/flatbuffer/"
 set CSHARP_C_DSTDIR="../../Client/client/Assets/Scripts/Msg/"
-set LUA_C_DSTDIR="../../Client/client/Assets/Scripts/Lua/msg/"
+set LUA_C_DSTDIR="../../Client/client/Assets/StreamingAssets/lua/msg/"
 set LUA_S_DSTDIR="../../Server/skynet-1.2.0/game/msg/"
+set LUA_PREFIX="3rd."
 
 echo "SrcDir"
 echo %SRCDIR%
@@ -28,7 +29,7 @@ echo %LUA_S_DSTDIR%
 for /R %SRCDIR% %%f in (*.fbs) do ( 
     echo %%f
     flatc --csharp -o %CSHARP_C_DSTDIR% %%f
-    flatc --lua -o %LUA_C_DSTDIR% %%f
+    flatc --lua -o %LUA_C_DSTDIR% --lua-prefix %LUA_PREFIX% %%f
     flatc --lua -o %LUA_S_DSTDIR% %%f
 )
 

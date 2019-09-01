@@ -42,7 +42,7 @@ void FlatCompiler::LoadBinarySchema(flatbuffers::Parser &parser,
                                     const std::string &filename,
                                     const std::string &contents) {
   if (!parser.Deserialize(reinterpret_cast<const uint8_t *>(contents.c_str()),
-      contents.size())) {
+                          contents.size())) {
     Error("failed to load binary schema: " + filename, false, false);
   }
 }
@@ -121,6 +121,7 @@ std::string FlatCompiler::GetUsageString(const char *program_name) const {
     "  --goog-js-export   Uses goog.exports* for closure compiler exporting in JS.\n"
     "  --es6-js-export    Uses ECMAScript 6 export style lines in JS.\n"
     "  --go-namespace     Generate the overrided namespace in Golang.\n"
+    "  --lua-prefix       Add a lua require prefix.\n"
     "  --go-import        Generate the overrided import for flatbuffers in Golang\n"
     "                     (default is \"github.com/google/flatbuffers/go\").\n"
     "  --raw-binary       Allow binaries without file_indentifier to be read.\n"
@@ -222,13 +223,22 @@ int FlatCompiler::Compile(int argc, const char **argv) {
       } else if (arg == "--es6-js-export") {
         opts.use_goog_js_export_format = false;
         opts.use_ES6_js_export_format = true;
-      } else if (arg == "--go-namespace") {
+      } 
+      else if (arg == "--go-namespace") 
+      {
         if (++argi >= argc) Error("missing golang namespace" + arg, true);
         opts.go_namespace = argv[argi];
-      } else if (arg == "--go-import") {
-        if (++argi >= argc) Error("missing golang import" + arg, true);
-        opts.go_import = argv[argi];
-      } else if (arg == "--defaults-json") {
+      }
+      else if (arg == "--lua-prefix")
+      {
+        if (++argi >= argc) Error("missing lua prefix " + arg, true);
+        opts.lua_prefix = argv[argi];
+      }
+      else if (arg == "--go-import") {
+          if (++argi >= argc) Error("missing golang import" + arg, true);
+          opts.go_import = argv[argi];
+        }
+      else if (arg == "--defaults-json") {
         opts.output_default_scalars_in_json = true;
       } else if (arg == "--unknown-json") {
         opts.skip_unexpected_fields_in_json = true;
@@ -389,7 +399,8 @@ int FlatCompiler::Compile(int argc, const char **argv) {
                 "\" matches the schema, use --raw-binary to read this file"
                 " anyway.");
         } else if (!flatbuffers::BufferHasIdentifier(
-                       contents.c_str(), parser->file_identifier_.c_str(), opts.size_prefixed)) {
+                       contents.c_str(), parser->file_identifier_.c_str(),
+                       opts.size_prefixed)) {
           Error("binary \"" + filename +
                 "\" does not have expected file_identifier \"" +
                 parser->file_identifier_ +

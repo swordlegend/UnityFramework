@@ -40,7 +40,7 @@ namespace lua {
   class LuaGenerator : public BaseGenerator {
   public:
     LuaGenerator(const Parser &parser, const std::string &path,
-      const std::string &file_name)
+      const std::string &file_name, const std::string &lua_prefix)
       : BaseGenerator(parser, path, file_name, "" /* not used */,
         "" /* not used */) {
       static const char * const keywords[] = {
@@ -67,7 +67,9 @@ namespace lua {
         "until",
         "while"
       };
+
       keywords_.insert(std::begin(keywords), std::end(keywords));
+      this->lua_prefix = lua_prefix;
     }
 
     // Most field accessors need to retrieve and test the field offset first,
@@ -719,8 +721,9 @@ namespace lua {
       std::string &code = *code_ptr;
       code += std::string(Comment) + FlatBuffersGeneratedWarning() + "\n\n";
       code += std::string(Comment) + "namespace: " + name_space_name + "\n\n";
-      if (needs_imports) {
-        code += "local flatbuffers = require('flatbuffers')\n\n";
+      if (needs_imports) 
+      {
+        code += ("local flatbuffers = require('" + lua_prefix + "flatbuffers')\n\n");
       }
     }
 
@@ -749,13 +752,14 @@ namespace lua {
     }
   private:
     std::unordered_set<std::string> keywords_;
+    std::string lua_prefix;
   };
 
 }  // namespace lua
 
 bool GenerateLua(const Parser &parser, const std::string &path,
   const std::string &file_name) {
-  lua::LuaGenerator generator(parser, path, file_name);
+  lua::LuaGenerator generator(parser, path, file_name, parser.opts.lua_prefix);
   return generator.generate();
 }
 
