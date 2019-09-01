@@ -15,7 +15,7 @@ function main()
     local netmsgregister = require "msgdispatcher.netmsgregister"
     netmsgregister.init()
 
-    gamestatemgr.changeState(global.gamestatetype.login)
+    gamestatemgr.changeState(global.gamestatetype.selectserver)
 end
 
 main();

@@ -8,9 +8,10 @@ namespace fbs
 public enum gamestatetype : ushort
 {
  invalid = 0,
- login = 1,
- register = 2,
- game = 3,
+ selectserver = 1,
+ login = 2,
+ register = 3,
+ game = 4,
 };
 
 

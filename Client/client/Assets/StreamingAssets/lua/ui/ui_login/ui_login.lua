@@ -49,18 +49,27 @@ function ui_login.preClose()
     print("ui_login.preClose")
 
     ui_login.isShow = false;
+    ui_login.uiref = {};
 end
 
 --- initui
 function ui_login.initui()
     ui_login.uiref = {};
 
+    local root = ui_login.dialog.rootDialog
 
+    ---@type CS.UnityEngine.UI.InputField
+    ui_login.uiref.input_account = ui_login.dialog:GetInputFieldInChild(root, "input_account")
+
+    ---@type CS.UnityEngine.UI.InputField
+    ui_login.uiref.input_password = ui_login.dialog:GetInputFieldInChild(root, "input_password")
+
+    ui_login.uiref.btn_confirm = ui_login.dialog:GetButtonInChild(root, "btn_confirm")
 end
 
 --- init event
 function ui_login.initEvent()
-
+    ui_login.dialog:AddBtnClickListener(ui_login.uiname.btn_confirm, ui_login.onConfirmBtnClick)
 end
 
 --------------------------------------------------------------------------------------------------
@@ -78,7 +87,23 @@ end
 
 -------------------------------------------ui事件-------------------------------------------------
 
+function ui_login.onConfirmBtnClick()
+    print("ui_login.onConfirmBtnClick")
 
+    ui_login.dialog:SetInteractable(ui_login.uiref.btn_confirm, false)
+
+    local account = ui_login.uiref.input_account.text
+    if not account then
+        return
+    end
+
+    local password = ui_login.uiref.input_password.text
+    if not password then
+        return
+    end
+
+    loginmodel.sendreqlogin_cs(account, password)
+end
 
 --------------------------------------------------------------------------------------------------
 

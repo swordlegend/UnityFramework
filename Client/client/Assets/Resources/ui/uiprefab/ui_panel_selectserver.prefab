@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 645817747388741238}
   - component: {fileID: 1549408975632723044}
   m_Layer: 5
-  m_Name: input_account
+  m_Name: input_ip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +298,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u786E\u5B9A"
+  m_Text: "\u8FDE\u63A5\u670D\u52A1\u5668"
 --- !u!1 &2651660844459349309
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +495,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: account...
+  m_Text: ip...
 --- !u!1 &3492868590514263248
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 7849915637677876278}
   - component: {fileID: 5461966915955036503}
   m_Layer: 5
-  m_Name: input_password
+  m_Name: input_port
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -715,7 +715,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: password...
+  m_Text: port...
 --- !u!1 &8056538095723643798
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8056538095723643797}
   m_Layer: 5
-  m_Name: ui_panel_login
+  m_Name: ui_panel_selectserver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -189,6 +189,11 @@ namespace gtmGame
             return trans.GetComponent<T>();
         }
 
+        public InputField GetInputFieldInChild(GameObject parent, string name)
+        {
+            return GetComponentInChild<InputField>(parent, name);
+        }
+
         public Button GetButtonInChild(GameObject parent, string name)
         {
             return GetComponentInChild<Button>(parent, name);
@@ -202,6 +207,14 @@ namespace gtmGame
         public Text GetTextInChild(GameObject parent, string name)
         {
             return GetComponentInChild<Text>(parent, name);
+        }
+
+        public void SetInteractable(Selectable selectable, bool interactable)
+        {
+            if (selectable == null)
+                return;
+
+            selectable.interactable = interactable;
         }
 
         #endregion

@@ -10,7 +10,6 @@ gtmGame = CS.gtmGame;
 
 UnityEngine = CS.UnityEngine;
 
-
 global = {};
 
 ---@class gtmInterface.LogCategory

@@ -50,12 +50,12 @@ function ui_template.preClose()
     print("ui_template.preClose")
 
     ui_template.isShow = false;
+    ui_template.uiref = {};
 end
 
 --- initui
 function ui_template.initui()
     ui_template.uiref = {};
-
 
 end
 

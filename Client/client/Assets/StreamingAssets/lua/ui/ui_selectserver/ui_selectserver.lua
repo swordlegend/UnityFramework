@@ -7,7 +7,7 @@
 ---@class ui_selectserver
 ui_selectserver = {}
 
-ui_selectserver.uiname = "ui_selectserver"
+ui_selectserver.uiname = "ui_panel_selectserver"
 
 ---@type testmodel
 ui_selectserver.model = nil
@@ -50,18 +50,27 @@ function ui_selectserver.preClose()
     print("ui_selectserver.preClose")
 
     ui_selectserver.isShow = false;
+    ui_selectserver.uiref = {};
 end
 
 --- initui
 function ui_selectserver.initui()
     ui_selectserver.uiref = {};
 
+    local root = ui_selectserver.dialog.rootDialog
 
+    ---@type CS.UnityEngine.UI.InputField
+    ui_selectserver.uiref.input_ip = ui_selectserver.dialog:GetInputFieldInChild(root, "input_ip")
+
+    ---@type CS.UnityEngine.UI.InputField
+    ui_selectserver.uiref.input_port = ui_selectserver.dialog:GetInputFieldInChild(root, "input_port")
+
+    ui_selectserver.uiref.btn_confirm = ui_selectserver.dialog:GetButtonInChild(root, "btn_confirm")
 end
 
 --- init event
 function ui_selectserver.initEvent()
-
+    ui_selectserver.dialog:AddBtnClickListener(ui_selectserver.uiref.btn_confirm, ui_selectserver.onConfirmBtnClick)
 end
 
 --------------------------------------------------------------------------------------------------
@@ -79,7 +88,23 @@ end
 
 -------------------------------------------ui事件-------------------------------------------------
 
+function ui_selectserver.onConfirmBtnClick()
+    print("ui_login.onConfirmBtnClick")
 
+    local ip = ui_selectserver.uiref.input_ip.text
+    if not ip then
+        return
+    end
+
+    local port = ui_selectserver.uiref.input_port.text
+    if not port then
+        return
+    end
+
+    ui_selectserver.dialog:SetInteractable(ui_selectserver.uiref.btn_confirm, false)
+
+    global.INetManager:SendConnect(ip, port);
+end
 
 --------------------------------------------------------------------------------------------------
 

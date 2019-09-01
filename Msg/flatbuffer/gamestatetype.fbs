@@ -4,6 +4,7 @@ namespace fbs;
 enum gamestatetype : uint16 
 { 
     invalid,
+    selectserver,
     login,
     register,
     game,

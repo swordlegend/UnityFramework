@@ -50,6 +50,7 @@ function ui_register.preClose()
     print("ui_register.preClose")
 
     ui_register.isShow = false;
+    ui_register.uiref = {};
 end
 
 --- initui

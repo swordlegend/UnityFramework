@@ -8,6 +8,13 @@
 local msgdispatcher = require("msgdispatcher.msgdispatcher")
 
 
+selectserverstate.evententer:Connect(function ()
+    print("selectservermodel.show")
+
+    local ui_selectserver = require("ui.ui_selectserver.ui_selectserver")
+    ui_selectserver.show()
+end)
+
 ---@class selectservermodel
 selectservermodel = {}
 
