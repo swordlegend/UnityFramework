@@ -10,10 +10,13 @@ function main()
 
     --- C#消息回调注册
     local netmsgregister = require "msgdispatcher.netmsgregister"
-    netmsgregister.init();
+    netmsgregister.init()
 
-    local testui = require("ui.ui_test.ui_test")
-    testui.show();
+    local gamestatemgr = require("gamestate.gamestatemgr")
+    gamestatemgr.register()
+    
+    --- 第一个游戏状态
+    gamestatemgr.changeState()
 end
 
 main();
@@ -27,6 +30,11 @@ main();
 
 
 
+
+
+
+--local testui = require("ui.ui_test.ui_test")
+--testui.show();
 
 --local testui = require("3rd.flatbuffers")
 --local testui = require("3rd.flatbuffers")
