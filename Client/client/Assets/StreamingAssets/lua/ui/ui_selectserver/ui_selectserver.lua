@@ -17,6 +17,10 @@ ui_selectserver.model = nil
 
 function ui_selectserver.show()
 
+    if ui_selectserver.isShow then
+        return
+    end
+
     ---@type gtmGame.Dialog
     ui_selectserver.dialog = ui_mgr.createDialog(ui_selectserver.uiname, "ui_selectserver");
 
@@ -24,12 +28,28 @@ function ui_selectserver.show()
         print("ui_selectserver.dialog null uiname " .. ui_selectserver.uiname);
     end
 
+    ui_selectserver.isShow = true;
+
     ui_selectserver.initui();
     ui_selectserver.initEvent();
 end
 
 function ui_selectserver.close()
     ui_mgr.closeDialog(ui_selectserver.uiname);
+end
+
+function ui_selectserver.preShow()
+    print("ui_selectserver.preShow")
+end
+
+function ui_selectserver.preHide()
+    print("ui_selectserver.preHide")
+end
+
+function ui_selectserver.preClose()
+    print("ui_selectserver.preClose")
+
+    ui_selectserver.isShow = false;
 end
 
 --- initui

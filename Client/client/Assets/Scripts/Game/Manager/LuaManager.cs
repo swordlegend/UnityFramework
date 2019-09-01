@@ -11,10 +11,14 @@ namespace gtmGame
     {
         #region 变量
 
+        private XLua.LuaEnv m_luaEnv = null;
         /// <summary>
         /// lua环境
         /// </summary>
-        private XLua.LuaEnv m_luaEnv = null;
+        public XLua.LuaEnv luaEnv
+        {
+            get { return m_luaEnv; }
+        }
 
         #endregion
 

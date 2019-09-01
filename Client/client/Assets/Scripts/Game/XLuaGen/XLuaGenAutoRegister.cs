@@ -1368,6 +1368,9 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(gtmGame.LoginModel), gtmGameLoginModelWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(gtmGame.LuaFunction), gtmGameLuaFunctionWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(gtmGame.main), gtmGamemainWrap.__Register);
         
         
@@ -1427,9 +1430,11 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(gtmEngine.Net.SocketClient), gtmEngineNetSocketClientWrap.__Register);
         
-        
-        
         }
+        
+        
+        
+        
         
         static void Init(LuaEnv luaenv, ObjectTranslator translator)
         {

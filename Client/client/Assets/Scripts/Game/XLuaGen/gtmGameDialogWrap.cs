@@ -21,10 +21,11 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(gtmGame.Dialog);
-			Utils.BeginObjectRegister(type, L, translator, 0, 7, 1, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 8, 2, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Create", _m_Create);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Close", _m_Close);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SetVisible", _m_SetVisible);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SetParent", _m_SetParent);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AddBtnClickListener", _m_AddBtnClickListener);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetButtonInChild", _m_GetButtonInChild);
@@ -33,6 +34,7 @@ namespace XLua.CSObjectWrap
 			
 			
 			Utils.RegisterFunc(L, Utils.GETTER_IDX, "rootDialog", _g_get_rootDialog);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "visible", _g_get_visible);
             
 			
 			
@@ -93,8 +95,9 @@ namespace XLua.CSObjectWrap
                 
                 {
                     string _layoutname = LuaAPI.lua_tostring(L, 2);
+                    string _tablename = LuaAPI.lua_tostring(L, 3);
                     
-                    gen_to_be_invoked.Create( _layoutname );
+                    gen_to_be_invoked.Create( _layoutname, _tablename );
                     
                     
                     
@@ -122,6 +125,34 @@ namespace XLua.CSObjectWrap
                 {
                     
                     gen_to_be_invoked.Close(  );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_SetVisible(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    bool _visible = LuaAPI.lua_toboolean(L, 2);
+                    
+                    gen_to_be_invoked.SetVisible( _visible );
                     
                     
                     
@@ -292,6 +323,20 @@ namespace XLua.CSObjectWrap
 			
                 gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
                 translator.Push(L, gen_to_be_invoked.rootDialog);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_visible(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                gtmGame.Dialog gen_to_be_invoked = (gtmGame.Dialog)translator.FastGetCSObj(L, 1);
+                LuaAPI.lua_pushboolean(L, gen_to_be_invoked.visible);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }

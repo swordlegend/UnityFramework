@@ -541,6 +541,7 @@
 		<type fullname="gtmGame.ChatModel" preserve="all"/>
 		<type fullname="gtmGame.LoginData" preserve="all"/>
 		<type fullname="gtmGame.LoginModel" preserve="all"/>
+		<type fullname="gtmGame.LuaFunction" preserve="all"/>
 		<type fullname="gtmGame.main" preserve="all"/>
 		<type fullname="gtmGame.GameLogicMgr" preserve="all"/>
 		<type fullname="gtmGame.GameMgr" preserve="all"/>

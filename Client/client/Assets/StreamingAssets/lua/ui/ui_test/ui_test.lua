@@ -7,7 +7,7 @@
 ---@class ui_test
 ui_test = {}
 
-ui_test.uiname = "ui_test"
+ui_test.uiname = "ui_panel_test"
 
 ---@type testmodel
 ui_test.model = require("clientmodel.testmodel.testmodel")
@@ -17,6 +17,10 @@ ui_test.model = require("clientmodel.testmodel.testmodel")
 
 function ui_test.show()
 
+    if ui_test.isShow then
+        return
+    end
+
     ---@type gtmGame.Dialog
     ui_test.dialog = ui_mgr.createDialog(ui_test.uiname, "ui_test");
 
@@ -24,12 +28,28 @@ function ui_test.show()
         print("ui_test.dialog null uiname " .. ui_test.uiname);
     end
 
+    ui_test.isShow = true;
+
     ui_test.initui();
     ui_test.initEvent();
 end
 
 function ui_test.close()
     ui_mgr.closeDialog(ui_test.uiname);
+end
+
+function ui_test.preShow()
+    print("ui_test.preShow")
+end
+
+function ui_test.preHide()
+    print("ui_test.preHide")
+end
+
+function ui_test.preClose()
+    print("ui_test.preClose")
+
+    ui_test.isShow = false;
 end
 
 --- initui

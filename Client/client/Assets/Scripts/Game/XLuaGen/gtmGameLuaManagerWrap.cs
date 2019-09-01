@@ -21,7 +21,7 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(gtmGame.LuaManager);
-			Utils.BeginObjectRegister(type, L, translator, 0, 4, 0, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 4, 1, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "DoClose", _m_DoClose);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "DoInit", _m_DoInit);
@@ -29,7 +29,8 @@ namespace XLua.CSObjectWrap
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "LoadLuaFile", _m_LoadLuaFile);
 			
 			
-			
+			Utils.RegisterFunc(L, Utils.GETTER_IDX, "luaEnv", _g_get_luaEnv);
+            
 			
 			
 			Utils.EndObjectRegister(type, L, translator, null, null,
@@ -186,6 +187,20 @@ namespace XLua.CSObjectWrap
         
         
         
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_luaEnv(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                gtmGame.LuaManager gen_to_be_invoked = (gtmGame.LuaManager)translator.FastGetCSObj(L, 1);
+                translator.Push(L, gen_to_be_invoked.luaEnv);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
         
         
         

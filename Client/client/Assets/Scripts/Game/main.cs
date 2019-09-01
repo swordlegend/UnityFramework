@@ -30,6 +30,7 @@ namespace gtmGame
         {
             m_gameApp.DoClose();
         }
+
     }
 }
 
@@ -47,6 +48,23 @@ namespace gtmGame
 
 
 
+
+
+
+
+//bool visible = true;
+//private void OnGUI()
+//{
+//    if (GUI.Button(new Rect(0, 0, 300, 100), "ui_panel_test"))
+//    {
+//        Dialog dialog = UIManager.instance.GetDialog("ui_panel_test");
+//        visible = !visible;
+//        if (dialog != null)
+//        {
+//            dialog.SetVisible(visible);
+//        }
+//    }
+//}
 
 //public string ipaddress = "192.168.0.108";
 

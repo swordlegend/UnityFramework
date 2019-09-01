@@ -88,10 +88,23 @@ namespace gtmGame
                 return m_dialogDict[hashcode];
 
             Dialog dialog = new Dialog();
-            dialog.Create(layoutname);
+            dialog.Create(layoutname, luafilename);
             dialog.SetParent(UILayer.main);
             m_dialogDict.Add(hashcode, dialog);
             return dialog;
+        }
+
+        public Dialog GetDialog(string layoutname)
+        {
+            int hashcode = layoutname.GetHashCode();
+
+            Dialog dialog = null;
+            if (m_dialogDict.TryGetValue(hashcode, out dialog))
+            {
+                return dialog;
+            }
+
+            return null;
         }
 
         public void CloseDialog(string layoutname)

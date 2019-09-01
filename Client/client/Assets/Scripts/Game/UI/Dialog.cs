@@ -20,6 +20,36 @@ namespace gtmGame
             get { return m_rootLayout; }
         }
 
+
+
+        private bool m_bVisible = true;
+        /// <summary>
+        /// 可见性s
+        /// </summary>
+        public bool visible
+        {
+            get { return m_bVisible; }
+        }
+
+
+
+        /// <summary>
+        /// lua回调(界面显示)
+        /// </summary>
+        private LuaFunction m_preShow = new LuaFunction();
+
+        /// <summary>
+        /// lua回调(界面隐藏)
+        /// </summary>
+        private LuaFunction m_preHide = new LuaFunction();
+
+        /// <summary>
+        /// lua回调(界面关闭)
+        /// </summary>
+        private LuaFunction m_preClose = new LuaFunction();
+
+
+
         /// <summary>
         /// ui event dict
         /// </summary>
@@ -29,22 +59,74 @@ namespace gtmGame
 
         #region 函数
 
-        public void Create(string layoutname)
+        public void Create(string layoutname, string tablename)
         {
             GameObject prefab = ResouceLoadHelper.LoadUISync(layoutname);
             if (prefab == null)
                 return;
 
             m_rootLayout = GameObject.Instantiate(prefab);
+
+            InitAllLuaCallFunc(tablename);
         }
 
         public void Close()
         {
+            if (m_preClose != null)
+                m_preClose.Call<int>(0);
+
+            CloseAllLuaCallFunc();
             RemoveAllListener();
 
             if (m_rootLayout != null)
             {
                 GameObject.Destroy(m_rootLayout.gameObject);
+            }
+        }
+
+        private void CloseAllLuaCallFunc()
+        {
+            m_preShow.Close();
+            m_preHide.Close();
+            m_preClose.Close();
+        }
+
+        private void InitAllLuaCallFunc(string tablename)
+        {
+            m_preShow.InitFunction(tablename, "preShow");
+            m_preHide.InitFunction(tablename, "preHide");
+            m_preClose.InitFunction(tablename, "preClose");
+        }
+
+        public void SetVisible(bool visible)
+        {
+            if (visible)
+            {
+                if (m_bVisible != visible)
+                {
+                    m_bVisible = visible;
+
+                    if (m_preShow != null)
+                    {
+                        m_preShow.Call<int>(0);
+                    }
+
+                    m_rootLayout.SetActive(true);
+                }
+            }
+            else
+            {
+                if (m_bVisible != visible)
+                {
+                    m_bVisible = visible;
+
+                    if (m_preHide != null)
+                    {
+                        m_preHide.Call<int>(0);
+                    }
+
+                    m_rootLayout.SetActive(false);
+                }
             }
         }
 

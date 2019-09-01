@@ -17,6 +17,10 @@ ui_register.model = nil
 
 function ui_register.show()
 
+    if ui_register.isShow then
+        return;
+    end
+
     ---@type gtmGame.Dialog
     ui_register.dialog = ui_mgr.createDialog(ui_register.uiname, "ui_register");
 
@@ -24,12 +28,28 @@ function ui_register.show()
         print("ui_register.dialog null uiname " .. ui_register.uiname);
     end
 
+    ui_register.isShow = true;
+
     ui_register.initui();
     ui_register.initEvent();
 end
 
 function ui_register.close()
     ui_mgr.closeDialog(ui_register.uiname);
+end
+
+function ui_register.preShow()
+    print("ui_register.preShow")
+end
+
+function ui_register.preHide()
+    print("ui_register.preHide")
+end
+
+function ui_register.preClose()
+    print("ui_register.preClose")
+
+    ui_register.isShow = false;
 end
 
 --- initui

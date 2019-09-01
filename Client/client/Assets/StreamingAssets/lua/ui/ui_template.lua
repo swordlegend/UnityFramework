@@ -17,6 +17,10 @@ ui_template.model = nil
 
 function ui_template.show()
 
+    if ui_template.isShow then
+        return
+    end
+
     ---@type gtmGame.Dialog
     ui_template.dialog = ui_mgr.createDialog(ui_template.uiname, "ui_template");
 
@@ -24,12 +28,28 @@ function ui_template.show()
         print("ui_template.dialog null uiname " .. ui_template.uiname);
     end
 
+    ui_template.isShow = true;
+
     ui_template.initui();
     ui_template.initEvent();
 end
 
 function ui_template.close()
     ui_mgr.closeDialog(ui_template.uiname);
+end
+
+function ui_template.preShow()
+    print("ui_template.preShow")
+end
+
+function ui_template.preHide()
+    print("ui_template.preHide")
+end
+
+function ui_template.preClose()
+    print("ui_template.preClose")
+
+    ui_template.isShow = false;
 end
 
 --- initui
