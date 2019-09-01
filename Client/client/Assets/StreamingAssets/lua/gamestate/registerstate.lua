@@ -12,8 +12,8 @@ local event = require("base.eventlib")
 registerstate = baseclass(basestate)
 
 registerstate.evententer = event:new()
-registerstate.eventrefresh= event.new()
-registerstate.eventexit = event.new()
+registerstate.eventrefresh= event:new()
+registerstate.eventexit = event:new()
 
 function registerstate.new()
     print("registerstate.new")

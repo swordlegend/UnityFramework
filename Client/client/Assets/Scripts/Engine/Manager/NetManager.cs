@@ -48,10 +48,8 @@ namespace gtmEngine
         {
             base.DoClose();
 
-            if (m_SocketClient == null)
-                return;
-
-            m_SocketClient.OnRemove();
+            if (m_SocketClient != null)
+                m_SocketClient.OnRemove();
         }
 
         /// <summary>

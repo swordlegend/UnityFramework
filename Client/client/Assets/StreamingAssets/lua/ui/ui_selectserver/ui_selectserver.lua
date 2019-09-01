@@ -122,5 +122,16 @@ end
 
 
 
+-------------------------------------------函数-------------------------------------------------
+
+function ui_selectserver.setVisible(visible)
+    ui_selectserver.dialog:SetVisible(visible)
+end
+
+--------------------------------------------------------------------------------------------------
+
+
+
+
 
 return ui_selectserver;

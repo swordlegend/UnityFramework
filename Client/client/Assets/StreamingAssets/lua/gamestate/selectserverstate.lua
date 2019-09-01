@@ -12,8 +12,8 @@ local event = require("base.eventlib")
 selectserverstate = baseclass(basestate);
 
 selectserverstate.evententer = event:new()
-selectserverstate.eventrefresh= event.new()
-selectserverstate.eventexit = event.new()
+selectserverstate.eventrefresh= event:new()
+selectserverstate.eventexit = event:new()
 
 function selectserverstate.new()
     print("selectserverstate.new")

@@ -2,6 +2,11 @@
 
 namespace fbs;
 
+table RspConnectSuc
+{
+    
+}
+
 table ReqLogin
 {
     account:string;

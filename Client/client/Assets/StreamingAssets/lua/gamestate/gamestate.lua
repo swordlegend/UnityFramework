@@ -12,8 +12,8 @@ local event = require("base.eventlib")
 gamestate = baseclass(basestate)
 
 gamestate.evententer = event:new()
-gamestate.eventrefresh= event.new()
-gamestate.eventexit = event.new()
+gamestate.eventrefresh= event:new()
+gamestate.eventexit = event:new()
 
 function gamestate.new()
     print("gamestate.new")
