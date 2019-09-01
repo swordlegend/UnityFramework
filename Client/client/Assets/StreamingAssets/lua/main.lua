@@ -3,13 +3,12 @@
 require "define"
 require "ui/ui_mgr"
 
-
 function main()
 
     local clientmodelmgr = require("clientmodel.clientmodelmgr")
     clientmodelmgr.register()
 
-        --- C#消息回调注册
+    --- C#消息回调注册
     local netmsgregister = require "msgdispatcher.netmsgregister"
     netmsgregister.init();
 
