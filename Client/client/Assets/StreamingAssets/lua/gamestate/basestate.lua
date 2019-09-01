@@ -10,7 +10,7 @@ local baseclass = require("base.baseclass")
 basestate = baseclass();
 
 function basestate.new()
-    print("baseclass.New")
+    print("baseclass.new")
 end
 
 function basestate.onEnter()

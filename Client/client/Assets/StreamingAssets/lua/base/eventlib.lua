@@ -16,7 +16,6 @@ _M.Spawn = spawn
 _M.spawn = spawn
 
 function _M:new(name, event)
-    assert(self ~= nil and type(self) == "table" and self == _M, "Invalid EventLib table (make sure you're using ':' not '.')")
     local s = { }
     s.handlers = { }
     s.waiter = false

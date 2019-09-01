@@ -7,10 +7,16 @@
 ---@type msgdispatcher
 local msgdispatcher = require("msgdispatcher.msgdispatcher")
 
+--local loginstate = require("gamestate.loginstate")
+loginstate.evententer:Connect(function ()
+    print("ui_login.show")
+
+    local ui_login = require("ui.ui_login.ui_login")
+    ui_login.show()
+end)
 
 ---@class loginmodel
 loginmodel = {}
-
 
 ---------------------------------------继承函数---------------------------------------
 

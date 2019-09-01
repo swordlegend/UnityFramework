@@ -6,24 +6,35 @@
 
 local baseclass = require("base.baseclass")
 local basestate = require("gamestate.basestate")
+local event = require("base.eventlib")
 
 ---@class loginstate
 loginstate = baseclass(basestate);
 
+loginstate.evententer = event:new()
+loginstate.eventrefresh= event.new()
+loginstate.eventexit = event.new()
+
 function loginstate.new()
-    print("loginstate.New")
+    print("loginstate.new")
 end
 
 function loginstate.onEnter()
     print("loginstate.onEnter")
+
+    loginstate.evententer:Fire()
 end
 
 function loginstate.onExit()
     print("loginstate.onExit")
+
+    loginstate.eventexit:Fire()
 end
 
 function loginstate.onRefresh()
     print("loginstate.onRefresh")
+
+    loginstate.eventrefresh:Fire()
 end
 
 return loginstate

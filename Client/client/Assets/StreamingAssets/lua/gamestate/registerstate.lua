@@ -6,24 +6,35 @@
 
 local baseclass = require("base.baseclass")
 local basestate = require("gamestate.basestate")
+local event = require("base.eventlib")
 
 ---@class registerstate
 registerstate = baseclass(basestate)
 
+registerstate.evententer = event:new()
+registerstate.eventrefresh= event.new()
+registerstate.eventexit = event.new()
+
 function registerstate.new()
-    print("registerstate.New")
+    print("registerstate.new")
 end
 
 function registerstate.onEnter()
     print("registerstate.onEnter")
+
+    registerstate.evententer:Fire()
 end
 
 function registerstate.onExit()
     print("registerstate.onExit")
+
+    registerstate.eventexit:Fire()
 end
 
 function registerstate.onRefresh()
     print("registerstate.onRefresh")
+
+    registerstate.eventrefresh:Fire()
 end
 
 return registerstate

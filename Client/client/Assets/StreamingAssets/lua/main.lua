@@ -5,6 +5,9 @@ require "ui/ui_mgr"
 
 function main()
 
+    local gamestatemgr = require("gamestate.gamestatemgr")
+    gamestatemgr.register()
+
     local clientmodelmgr = require("clientmodel.clientmodelmgr")
     clientmodelmgr.register()
 
@@ -12,8 +15,6 @@ function main()
     local netmsgregister = require "msgdispatcher.netmsgregister"
     netmsgregister.init()
 
-    local gamestatemgr = require("gamestate.gamestatemgr")
-    gamestatemgr.register()
     gamestatemgr.changeState(global.gamestatetype.login)
 end
 
