@@ -4,3 +4,26 @@
 --- DateTime: 2019/9/1 12:19
 ---
 
+local baseclass = require("base.baseclass")
+local basestate = require("gamestate.basestate")
+
+---@class loginstate
+loginstate = baseclass(basestate);
+
+function loginstate.new()
+    print("loginstate.New")
+end
+
+function loginstate.onEnter()
+    print("loginstate.onEnter")
+end
+
+function loginstate.onExit()
+    print("loginstate.onExit")
+end
+
+function loginstate.onRefresh()
+    print("loginstate.onRefresh")
+end
+
+return loginstate

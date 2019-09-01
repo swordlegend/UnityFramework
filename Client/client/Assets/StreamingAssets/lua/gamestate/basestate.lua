@@ -4,3 +4,25 @@
 --- DateTime: 2019/9/1 12:19
 ---
 
+local baseclass = require("base.baseclass")
+
+---@class basestate
+basestate = baseclass();
+
+function basestate.new()
+    print("baseclass.New")
+end
+
+function basestate.onEnter()
+    print("baseclass.onEnter")
+end
+
+function basestate.onExit()
+    print("baseclass.onExit")
+end
+
+function basestate.onRefresh()
+    print("basestate.onRefresh")
+end
+
+return baseclass;

@@ -4,3 +4,26 @@
 --- DateTime: 2019/9/1 12:20
 ---
 
+local baseclass = require("base.baseclass")
+local basestate = require("gamestate.basestate")
+
+---@class registerstate
+registerstate = baseclass(basestate)
+
+function registerstate.new()
+    print("registerstate.New")
+end
+
+function registerstate.onEnter()
+    print("registerstate.onEnter")
+end
+
+function registerstate.onExit()
+    print("registerstate.onExit")
+end
+
+function registerstate.onRefresh()
+    print("registerstate.onRefresh")
+end
+
+return registerstate

@@ -4,15 +4,47 @@
 --- DateTime: 2019/9/1 12:21
 ---
 
+local loginstate = require("gamestate.loginstate")
+local registerstate = require("gamestate.registerstate")
+local gamestate = require("gamestate.gamestate")
+
 ---@class gamestatemgr
 gamestatemgr = {}
 
+gamestatemgr.statedict = {}
+
+gamestatemgr.curstate = nil
+
 function gamestatemgr.register()
-    
+    gamestatemgr.statedict[global.gamestatetype.login] = loginstate
+    gamestatemgr.statedict[global.gamestatetype.register] = registerstate
+    gamestatemgr.statedict[global.gamestatetype.game] = gamestate
+
+    print("gamestatemgr.register " .. #gamestatemgr.statedict)
 end
 
-function gamestatemgr.changeState()
+function gamestatemgr.unregister()
+    gamestatemgr.statedict = {}
+    gamestatemgr.curstate = nil
+end
 
+function gamestatemgr.changeState(statetype)
+
+    if gamestatemgr.curstate then
+        local prestate = gamestatemgr.statedict[gamestatemgr.curstate]
+        if prestate then
+            prestate.onExit()
+        end
+    end
+
+    gamestatemgr.curstate = statetype;
+
+    if gamestatemgr.curstate then
+        local curstate = gamestatemgr.statedict[gamestatemgr.curstate]
+        if curstate then
+            curstate.onEnter()
+        end
+    end
 end
 
 return gamestatemgr
