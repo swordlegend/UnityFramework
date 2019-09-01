@@ -37,7 +37,8 @@ global.ByteBuffer = gtmInterface.ByteBuffer
 ---@class gtmInterface.Converter
 global.Converter = gtmInterface.Converter
 
-
+---@class gamestatetype
+global.gamestatetype = require "msg.fbs.gamestatetype"
 
 return global;
 

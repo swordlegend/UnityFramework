@@ -14,9 +14,7 @@ function main()
 
     local gamestatemgr = require("gamestate.gamestatemgr")
     gamestatemgr.register()
-    
-    --- 第一个游戏状态
-    gamestatemgr.changeState()
+    gamestatemgr.changeState(global.gamestatetype.login)
 end
 
 main();

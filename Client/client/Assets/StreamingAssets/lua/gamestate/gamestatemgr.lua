@@ -8,7 +8,7 @@
 gamestatemgr = {}
 
 function gamestatemgr.register()
-
+    
 end
 
 function gamestatemgr.changeState()
