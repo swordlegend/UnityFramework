@@ -15,10 +15,6 @@ gamestate.evententer = event:new()
 gamestate.eventrefresh= event:new()
 gamestate.eventexit = event:new()
 
-function gamestate.new()
-    print("gamestate.new")
-end
-
 function gamestate.onEnter()
     print("gamestate.onEnter")
 

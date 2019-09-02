@@ -9,10 +9,6 @@ local baseclass = require("base.baseclass")
 ---@class basestate
 basestate = baseclass();
 
-function basestate.new()
-    print("baseclass.new")
-end
-
 function basestate.onEnter()
     print("baseclass.onEnter")
 end

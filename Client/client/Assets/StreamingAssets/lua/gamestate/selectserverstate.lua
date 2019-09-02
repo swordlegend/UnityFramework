@@ -15,10 +15,6 @@ selectserverstate.evententer = event:new()
 selectserverstate.eventrefresh= event:new()
 selectserverstate.eventexit = event:new()
 
-function selectserverstate.new()
-    print("selectserverstate.new")
-end
-
 function selectserverstate.onEnter()
     print("selectserverstate.onEnter")
 

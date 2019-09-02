@@ -15,10 +15,6 @@ loginstate.evententer = event:new()
 loginstate.eventrefresh= event:new()
 loginstate.eventexit = event:new()
 
-function loginstate.new()
-    print("loginstate.new")
-end
-
 function loginstate.onEnter()
     print("loginstate.onEnter")
 

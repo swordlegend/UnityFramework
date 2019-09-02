@@ -15,10 +15,6 @@ registerstate.evententer = event:new()
 registerstate.eventrefresh= event:new()
 registerstate.eventexit = event:new()
 
-function registerstate.new()
-    print("registerstate.new")
-end
-
 function registerstate.onEnter()
     print("registerstate.onEnter")
 
