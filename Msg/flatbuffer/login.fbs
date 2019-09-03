@@ -1,5 +1,5 @@
 
-
+include "logincommon.fbs";
 namespace fbs;
 
 table RspConnectSuc
@@ -18,5 +18,49 @@ table RspLogin
     account:string;
     password:string;
 }
+
+table ReqLoginAccount
+{
+    account:string;
+    password:string;
+}
+
+table RspLoginAccount
+{
+    ok:bool;
+}
+
+table RspLoginZoneList
+{
+    zonelist:[LoginZoneList];
+}
+
+table ReqLoginSelectZone
+{
+    zoneid:uint16;
+}
+
+table RspLoginSelectZone
+{
+    ok:bool;
+}
+
+table RepLoginGame
+{
+
+}
+
+table RspLoginGame
+{
+    ok:bool;
+}
+
+table RspLoginRoleList
+{
+
+}
+
+
+
 
 

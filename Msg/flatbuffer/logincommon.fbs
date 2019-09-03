@@ -1,0 +1,16 @@
+
+
+namespace fbs;
+
+table LoginZoneList
+{
+    id:uint16;
+    name:string;
+    ip:string;
+    port:string;
+}
+
+
+
+
+
