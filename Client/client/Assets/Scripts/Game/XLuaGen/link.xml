@@ -510,6 +510,7 @@
 		<type fullname="ResourcePathLoad" preserve="all"/>
 		<type fullname="DontUnload" preserve="all"/>
 		<type fullname="ResouceLoadHelper" preserve="all"/>
+		<type fullname="fbs.LoginZoneList" preserve="all"/>
 		<type fullname="fbs.ReqChat" preserve="all"/>
 		<type fullname="fbs.ReqLogin" preserve="all"/>
 		<type fullname="fbs.RspChat" preserve="all"/>

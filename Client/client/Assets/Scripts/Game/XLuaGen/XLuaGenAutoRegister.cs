@@ -1271,12 +1271,15 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(ResouceLoadHelper), ResouceLoadHelperWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(fbs.ReqChat), fbsReqChatWrap.__Register);
+            translator.DelayWrapLoader(typeof(fbs.LoginZoneList), fbsLoginZoneListWrap.__Register);
         
         }
         
         static void wrapInit8(LuaEnv luaenv, ObjectTranslator translator)
         {
+        
+            translator.DelayWrapLoader(typeof(fbs.ReqChat), fbsReqChatWrap.__Register);
+        
         
             translator.DelayWrapLoader(typeof(fbs.ReqLogin), fbsReqLoginWrap.__Register);
         
@@ -1427,13 +1430,13 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(gtmEngine.MsgDispatcher), gtmEngineMsgDispatcherWrap.__Register);
         
-        
-            translator.DelayWrapLoader(typeof(gtmEngine.NetManager), gtmEngineNetManagerWrap.__Register);
-        
         }
         
         static void wrapInit9(LuaEnv luaenv, ObjectTranslator translator)
         {
+        
+            translator.DelayWrapLoader(typeof(gtmEngine.NetManager), gtmEngineNetManagerWrap.__Register);
+        
         
             translator.DelayWrapLoader(typeof(gtmEngine.Net.SocketClient), gtmEngineNetSocketClientWrap.__Register);
         
