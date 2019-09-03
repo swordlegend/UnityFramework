@@ -11,7 +11,10 @@ set LUA_C_DSTDIR="../../Client/client/Assets/StreamingAssets/lua/msg/"
 set LUA_S_DSTDIR="../../Server/skynet-1.2.0/game/msg/"
 set LUA_PREFIX="3rd."
 
-echo ""
+set LUA_C_DSTDIR_FROM_CSHARP_C_DSTDIR="../../StreamingAssets/lua/msg/"
+set LUA_S_DSTDIR_FROM_LUA_C_DSTDIR="../../../../../../Server/skynet-1.2.0/game/msg/"
+
+echo "--------------------------------------------------------------------------"
 echo "SrcDir"
 echo %SRCDIR%
 
@@ -24,7 +27,7 @@ echo %LUA_C_DSTDIR%
 echo "Lua_Server_DstDir"
 echo %LUA_S_DSTDIR%
 
-echo ""
+echo "--------------------------------------------------------------------------"
 echo "delete CSHARP_C_DSTDIR"
 rd /s /q %CSHARP_C_DSTDIR%
 
@@ -40,7 +43,7 @@ rd /s /q %LUA_S_DSTDIR%
 
 :: 括号中是通配符,可以指定后缀名,*.*表示所有文件
 
-echo ""
+echo "--------------------------------------------------------------------------"
 for /R %SRCDIR% %%f in (*.fbs) do ( 
     echo %%f
     flatc --csharp -o %CSHARP_C_DSTDIR% %%f
@@ -48,17 +51,17 @@ for /R %SRCDIR% %%f in (*.fbs) do (
     flatc --lua -o %LUA_S_DSTDIR% %%f
 )
 
-echo ""
+echo "--------------------------------------------------------------------------"
 echo "svn add CSHARP_C_DSTDIR"
 cd %CSHARP_C_DSTDIR%
 svn add . --no-ignore --force
 
-echo "svn add LUA_C_DSTDIR"
-cd %LUA_C_DSTDIR%
+echo "svn add LUA_C_DSTDIR_FROM_CSHARP_C_DSTDIR"
+cd %LUA_C_DSTDIR_FROM_CSHARP_C_DSTDIR%
 svn add . --no-ignore --force
 
-echo "svn add LUA_S_DSTDIR"
-cd %LUA_S_DSTDIR%
+echo "svn add LUA_S_DSTDIR_FROM_LUA_C_DSTDIR"
+cd %LUA_S_DSTDIR_FROM_LUA_C_DSTDIR%
 svn add . --no-ignore --force
 
 pause
