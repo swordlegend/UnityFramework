@@ -10,17 +10,17 @@ local event = require("base.eventlib")
 ---@class basestate
 local basestate = luaclass();
 
-function basestate:onEnter()
+function basestate.onEnter()
     print("baseclass.onEnter")
 
 end
 
-function basestate:onExit()
+function basestate.onExit()
     print("baseclass.onExit")
 
 end
 
-function basestate:onRefresh()
+function basestate.onRefresh()
     print("basestate.onRefresh")
 
 end
