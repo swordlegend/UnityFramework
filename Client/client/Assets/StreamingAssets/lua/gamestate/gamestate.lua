@@ -4,12 +4,12 @@
 --- DateTime: 2019/9/1 12:20
 ---
 
-local baseclass = require("base.baseclass")
+--local baseclass = require("base.luaclass")
 local basestate = require("gamestate.basestate")
 local event = require("base.eventlib")
 
 ---@class gamestate
-gamestate = baseclass(basestate)
+gamestate = luaclass(basestate)
 
 gamestate.evententer = event:new()
 gamestate.eventrefresh= event:new()
@@ -33,4 +33,4 @@ function gamestate.onRefresh()
     gamestate.eventrefresh:Fire()
 end
 
-return gamestate
+return gamestate:new()

@@ -4,12 +4,12 @@
 --- DateTime: 2019/9/1 12:19
 ---
 
-local baseclass = require("base.baseclass")
+--local baseclass = require("base.luaclass")
 local basestate = require("gamestate.basestate")
 local event = require("base.eventlib")
 
 ---@class selectserverstate
-selectserverstate = baseclass(basestate);
+selectserverstate = luaclass(basestate);
 
 selectserverstate.evententer = event:new()
 selectserverstate.eventrefresh= event:new()
@@ -33,4 +33,4 @@ function selectserverstate.onRefresh()
     selectserverstate.eventrefresh:Fire()
 end
 
-return selectserverstate
+return selectserverstate:new()

@@ -4,10 +4,13 @@
 --- DateTime: 2019/9/1 12:19
 ---
 
-local baseclass = require("base.baseclass")
+--local baseclass = require("base.luaclass")
+local event = require("base.eventlib")
 
 ---@class basestate
-basestate = baseclass();
+basestate = luaclass(function(self)
+    self.eventTest = event:new()
+end);
 
 function basestate.onEnter()
     print("baseclass.onEnter")

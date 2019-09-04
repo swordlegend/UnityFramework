@@ -4,6 +4,8 @@
 --- DateTime: 2019/9/1 12:21
 ---
 
+require("base.luaclass")
+
 local loginstate = require("gamestate.loginstate")
 local registerstate = require("gamestate.registerstate")
 local gamestate = require("gamestate.gamestate")

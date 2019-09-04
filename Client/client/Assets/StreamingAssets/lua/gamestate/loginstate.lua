@@ -4,12 +4,12 @@
 --- DateTime: 2019/9/1 12:19
 ---
 
-local baseclass = require("base.baseclass")
+--local baseclass = require("base.luaclass")
 local basestate = require("gamestate.basestate")
 local event = require("base.eventlib")
 
 ---@class loginstate
-loginstate = baseclass(basestate);
+loginstate = luaclass(basestate);
 
 loginstate.evententer = event:new()
 loginstate.eventrefresh= event:new()
@@ -33,4 +33,4 @@ function loginstate.onRefresh()
     loginstate.eventrefresh:Fire()
 end
 
-return loginstate
+return loginstate:new()
