@@ -1278,10 +1278,19 @@ namespace XLua.CSObjectWrap
         static void wrapInit8(LuaEnv luaenv, ObjectTranslator translator)
         {
         
+            translator.DelayWrapLoader(typeof(fbs.RepLoginGame), fbsRepLoginGameWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(fbs.ReqChat), fbsReqChatWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(fbs.ReqLogin), fbsReqLoginWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(fbs.ReqLoginAccount), fbsReqLoginAccountWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(fbs.ReqLoginSelectZone), fbsReqLoginSelectZoneWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(fbs.RspChat), fbsRspChatWrap.__Register);
@@ -1291,6 +1300,21 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(fbs.RspLogin), fbsRspLoginWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(fbs.RspLoginAccount), fbsRspLoginAccountWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(fbs.RspLoginGame), fbsRspLoginGameWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(fbs.RspLoginRoleList), fbsRspLoginRoleListWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(fbs.RspLoginSelectZone), fbsRspLoginSelectZoneWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(fbs.RspLoginZoneList), fbsRspLoginZoneListWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(gtmInterface.GameEvent), gtmInterfaceGameEventWrap.__Register);
@@ -1406,6 +1430,10 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(FlatBuffers.ByteBufferUtil), FlatBuffersByteBufferUtilWrap.__Register);
         
+        }
+        
+        static void wrapInit9(LuaEnv luaenv, ObjectTranslator translator)
+        {
         
             translator.DelayWrapLoader(typeof(FlatBuffers.FlatBufferBuilder), FlatBuffersFlatBufferBuilderWrap.__Register);
         
@@ -1430,10 +1458,6 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(gtmEngine.MsgDispatcher), gtmEngineMsgDispatcherWrap.__Register);
         
-        }
-        
-        static void wrapInit9(LuaEnv luaenv, ObjectTranslator translator)
-        {
         
             translator.DelayWrapLoader(typeof(gtmEngine.NetManager), gtmEngineNetManagerWrap.__Register);
         

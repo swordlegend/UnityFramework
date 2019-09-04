@@ -17,7 +17,7 @@ local rsplogin = require("msg.fbs.RspLogin")
 local rspConnectSuc = require("msg.fbs.RspConnectSuc")
 
 local loginstate = require("gamestate.loginstate")
-loginstate.eventTest:Connect(function ()
+loginstate.evententer:Connect(function ()
     print("ui_login.show")
 
     local ui_login = require("ui.ui_login.ui_login")

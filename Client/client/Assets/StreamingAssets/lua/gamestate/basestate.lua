@@ -5,23 +5,38 @@
 ---
 
 --local baseclass = require("base.luaclass")
+
 local event = require("base.eventlib")
 
 ---@class basestate
-basestate = luaclass(function(self)
-    self.eventTest = event:new()
+local basestate = luaclass(function(self)
+    self.evententer = event:new()
+    self.eventrefresh= event:new()
+    self.eventexit = event:new()
 end);
 
 function basestate.onEnter()
     print("baseclass.onEnter")
+
+    if basestate.evententer then
+        basestate.evententer:Fire()
+    end
 end
 
 function basestate.onExit()
     print("baseclass.onExit")
+
+    if basestate.eventexit then
+        basestate.eventexit:Fire()
+    end
 end
 
 function basestate.onRefresh()
     print("basestate.onRefresh")
+
+    if basestate.eventrefresh then
+        basestate.eventrefresh:Fire()
+    end
 end
 
-return baseclass;
+return basestate;

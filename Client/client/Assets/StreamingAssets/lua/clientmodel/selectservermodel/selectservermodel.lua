@@ -9,6 +9,7 @@ local msgdispatcher = require("msgdispatcher.msgdispatcher")
 
 local netmsgregister = require("msgdispatcher.netmsgregister")
 
+local selectserverstate = require("gamestate.selectserverstate")
 selectserverstate.evententer:Connect(function ()
     print("selectservermodel.show")
 
