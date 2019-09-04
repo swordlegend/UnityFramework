@@ -5,26 +5,37 @@
 ---
 
 local basestate = require("gamestate.basestate")
+local event = require("base.eventlib")
 
 ---@class selectserverstate
-local selectserverstate = luaclass(basestate);
+local selectserverstate = luaclass(basestate)
+
+selectserverstate.evententer = event:new()
+selectserverstate.eventrefresh = event:new()
+selectserverstate.eventexit = event:new()
 
 function selectserverstate.onEnter()
     print("selectserverstate.onEnter")
 
-    basestate.onEnter()
+    if selectserverstate.evententer then
+        selectserverstate.evententer:Fire()
+    end
 end
 
 function selectserverstate.onExit()
     print("selectserverstate.onExit")
 
-    basestate.onExit()
+    if selectserverstate.eventexit then
+        selectserverstate.eventexit:Fire()
+    end
 end
 
 function selectserverstate.onRefresh()
     print("selectserverstate.onRefresh")
 
-    basestate.onRefresh()
+    if selectserverstate.eventrefresh then
+        selectserverstate.eventrefresh:Fire()
+    end
 end
 
 return selectserverstate:new()
