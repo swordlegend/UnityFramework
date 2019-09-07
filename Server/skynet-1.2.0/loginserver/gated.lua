@@ -81,7 +81,7 @@ end
 
 -- call by self (when gate open)
 function server.register_handler(name)
-	servername = name
+	local servername = name
 	skynet.call(loginservice, "lua", "register_gate", servername, skynet.self())
 end
 
