@@ -41,16 +41,6 @@ end
 -- 发送fb消息
 msgdispatcher.sendFbMsg = function(msg, builder)
 
-    --local bufAsString = builder:Output();
-    --local msgid = msg.HashID;
-    --local strwrite = string.pack("<L", msgid);
-    --strwrite = strwrite .. bufAsString;
-    --local package = string.pack("<s2", strwrite)
-    --local bytebuf = global.ByteBuffer();
-    --bytebuf:WriteBytes(package, 0, #package);
-    --global.INetManager:SendMessage(bytebuf);
-
-
     local msgbytes = builder:Output();
     local msgid = msg.HashID;
     local msglen = #msgbytes + 8;
@@ -68,12 +58,12 @@ msgdispatcher.dispatcherFbMsg = function(msgid, bytearray)
 
     local msgbuf = flatbuffers.binaryArray.New(bytearray);
 
-    local eventlib = netmsg.getEvents(msgid);
+    local eventlib = netmsg.findNetData(msgid);
     if not eventlib then
         return ;
     end
 
-    local msgclass = eventlib.event;
+    local msgclass = eventlib.msgclass;
     if not msgclass then
         return ;
     end
@@ -99,6 +89,16 @@ return msgdispatcher;
 
 
 
+
+
+--local bufAsString = builder:Output();
+--local msgid = msg.HashID;
+--local strwrite = string.pack("<L", msgid);
+--strwrite = strwrite .. bufAsString;
+--local package = string.pack("<s2", strwrite)
+--local bytebuf = global.ByteBuffer();
+--bytebuf:WriteBytes(package, 0, #package);
+--global.INetManager:SendMessage(bytebuf);
 
 --@class builder
 --msgdispatcher.builder = flatbuffers.Builder(1024)

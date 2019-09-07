@@ -1,47 +1,58 @@
-
-
-local EventLib = require "base/eventlib"
+local event = require "base/event"
 
 ---@class netmsg
-local netmsg = {}
+netmsg = {}
 
-netmsg.events = {}
+netmsg.netdatalist = {}
 
-function netmsg.getEvents(msgid)
+function netmsg.findNetData(msgid)
+    return netmsg.netdatalist[msgid];
+end
 
-    return netmsg.events[msgid];
+function netmsg.genNetData(msgid, msg)
+    local netdata = netmsg.findNetData(msgid)
+    if netdata then
+        return netdata;
+    end
+
+    local newnetdata = {}
+    newnetdata.msgclass = msg
+    newnetdata.event = event:new()
+    netmsg.netdatalist[msgid] = newnetdata
+
+    return newnetdata
 end
 
 function netmsg.AddListener(msg, handler)
 
     local msgid = msg.HashID;
-
-    if not netmsg.events[msgid] then
-
-        --create the netmsg with name
-        netmsg.events[msgid] = EventLib:new(msgid, msg)
+    local eventdata = netmsg.genNetData(msgid, msg)
+    if not eventdata then
+        error(true, "netmsg.AddListener  " .. msgid)
     end
 
-    --conn this handler
-    netmsg.events[msgid]:connect(handler)
+    eventdata.event:AddHandler(handler)
 end
 
-function netmsg.Brocast(event, data)
-    if not netmsg.events[event] then
-        print("brocast " .. event .. " has no event.")
+function netmsg.Brocast(msgid, data)
+
+    local netdata = netmsg.findNetData(msgid)
+    if not netdata then
+        print("brocast " .. msgid .. " has no event.")
     else
-        netmsg.events[event]:fire(data)
+        netdata.event(data)
     end
 end
 
 function netmsg.RemoveListener(msg, handler)
 
     local msgid = msg.HashID;
+    local netdata = netmsg.findNetData(msgid)
 
-    if not netmsg.events[msgid] then
+    if not netdata then
         error("remove " .. msgid .. " has no event.")
     else
-        netmsg.events[msgid]:disconnect(handler)
+        netdata.event:RemoveHandler(handler)
     end
 end
 

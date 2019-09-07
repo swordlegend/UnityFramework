@@ -6,9 +6,9 @@
 
 local msgdispatcher = require("msgdispatcher.msgdispatcher")
 
-local event = require("base.eventlib");
-
 netmsgregister = {};
+
+
 
 
 -------------------------------------------事件----------------------------------------------------
