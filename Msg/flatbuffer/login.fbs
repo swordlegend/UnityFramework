@@ -30,6 +30,17 @@ table RspLoginAccount
     ok:bool;
 }
 
+table ReqRegisterAccount
+{
+    account:string;
+    password:string;
+}
+
+table RspRegisterAccount
+{
+    ok:bool;
+}
+
 table RspLoginZoneList
 {
     zonelist:[LoginZoneList];
