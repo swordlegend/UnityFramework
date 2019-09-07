@@ -5,37 +5,26 @@
 ---
 
 local basestate = require("gamestate.basestate")
-local event = require("base.eventlib")
 
 ---@class registerstate
 local registerstate = luaclass(basestate)
 
-registerstate.evententer = event:new()
-registerstate.eventrefresh = event:new()
-registerstate.eventexit = event:new()
-
-function registerstate.onEnter()
+function registerstate:onEnter()
     print("registerstate.onEnter")
 
-    if registerstate.evententer then
-        registerstate.evententer:Fire()
-    end
+    basestate:onEnter(self)
 end
 
-function registerstate.onExit()
+function registerstate:onExit()
     print("registerstate.onExit")
 
-    if registerstate.eventexit then
-        registerstate.eventexit:Fire()
-    end
+    basestate:onExit(self)
 end
 
-function registerstate.onRefresh()
+function registerstate:onRefresh()
     print("registerstate.onRefresh")
 
-    if registerstate.eventrefresh then
-        registerstate.eventrefresh:Fire()
-    end
+    basestate:onRefresh(self)
 end
 
 return registerstate:new()

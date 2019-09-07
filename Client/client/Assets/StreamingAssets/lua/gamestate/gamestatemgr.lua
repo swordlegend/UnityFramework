@@ -38,7 +38,7 @@ function gamestatemgr.changeState(statetype)
     if gamestatemgr.curstate then
         local prestate = gamestatemgr.statedict[gamestatemgr.curstate]
         if prestate then
-            prestate.onExit()
+            prestate:onExit()
         end
     end
 
@@ -47,7 +47,7 @@ function gamestatemgr.changeState(statetype)
     if gamestatemgr.curstate then
         local curstate = gamestatemgr.statedict[gamestatemgr.curstate]
         if curstate then
-            curstate.onEnter()
+            curstate:onEnter()
         end
     end
 end

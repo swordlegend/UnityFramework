@@ -10,7 +10,7 @@ local msgdispatcher = require("msgdispatcher.msgdispatcher")
 local netmsgregister = require("msgdispatcher.netmsgregister")
 
 local selectserverstate = require("gamestate.selectserverstate")
-selectserverstate.evententer:Connect(function ()
+selectserverstate.evententer:AddHandler(function()
     print("selectservermodel.show")
 
     local ui_selectserver = require("ui.ui_selectserver.ui_selectserver")
