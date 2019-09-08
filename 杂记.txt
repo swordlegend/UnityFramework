@@ -26,6 +26,8 @@ HttpWebResponse
 LogCategory
     GameLogic
 
+export PATH=${PATH}:/usr/local/mysql/bin
+
 
 ------------------------------------8/25----------------------------------
 
