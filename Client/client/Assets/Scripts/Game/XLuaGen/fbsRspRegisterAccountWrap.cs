@@ -196,10 +196,10 @@ namespace XLua.CSObjectWrap
             
 			    int gen_param_count = LuaAPI.lua_gettop(L);
             
-                if(gen_param_count == 2&& translator.Assignable<FlatBuffers.FlatBufferBuilder>(L, 1)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 2)) 
+                if(gen_param_count == 2&& translator.Assignable<FlatBuffers.FlatBufferBuilder>(L, 1)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 2)) 
                 {
                     FlatBuffers.FlatBufferBuilder _builder = (FlatBuffers.FlatBufferBuilder)translator.GetObject(L, 1, typeof(FlatBuffers.FlatBufferBuilder));
-                    bool _ok = LuaAPI.lua_toboolean(L, 2);
+                    byte _ok = (byte)LuaAPI.xlua_tointeger(L, 2);
                     
                         FlatBuffers.Offset<fbs.RspRegisterAccount> gen_ret = fbs.RspRegisterAccount.CreateRspRegisterAccount( _builder, _ok );
                         translator.Push(L, gen_ret);
@@ -266,7 +266,7 @@ namespace XLua.CSObjectWrap
                 
                 {
                     FlatBuffers.FlatBufferBuilder _builder = (FlatBuffers.FlatBufferBuilder)translator.GetObject(L, 1, typeof(FlatBuffers.FlatBufferBuilder));
-                    bool _ok = LuaAPI.lua_toboolean(L, 2);
+                    byte _ok = (byte)LuaAPI.xlua_tointeger(L, 2);
                     
                     fbs.RspRegisterAccount.AddOk( _builder, _ok );
                     
@@ -332,7 +332,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
                 fbs.RspRegisterAccount gen_to_be_invoked;translator.Get(L, 1, out gen_to_be_invoked);
-                LuaAPI.lua_pushboolean(L, gen_to_be_invoked.Ok);
+                LuaAPI.xlua_pushinteger(L, gen_to_be_invoked.Ok);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }

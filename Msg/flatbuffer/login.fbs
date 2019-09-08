@@ -21,7 +21,7 @@ table ReqRegisterAccount
 
 table RspRegisterAccount
 {
-    ok:bool;
+    ok:uint8;
 }
 
 table RspLoginZoneList

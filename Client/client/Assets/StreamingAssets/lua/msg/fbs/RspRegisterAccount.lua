@@ -36,13 +36,13 @@ end
 function RspRegisterAccount_mt:Ok()
     local o = self.view:Offset(4)
     if o ~= 0 then
-        return (self.view:Get(flatbuffers.N.Bool, o + self.view.pos) ~= 0)
+        return self.view:Get(flatbuffers.N.Uint8, o + self.view.pos)
     end
-    return false
+    return 0
 end
 
 function RspRegisterAccount.Start(builder) builder:StartObject(1) end
-function RspRegisterAccount.AddOk(builder, ok) builder:PrependBoolSlot(0, ok, 0) end
+function RspRegisterAccount.AddOk(builder, ok) builder:PrependUint8Slot(0, ok, 0) end
 function RspRegisterAccount.End(builder) return builder:EndObject() end
 
 return RspRegisterAccount -- return the module
