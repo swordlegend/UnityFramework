@@ -20,14 +20,14 @@ local loginzonelist = require("LoginZoneList")
 local zonelist = {
     {
         id = 1,
-        name = "macbook",
-        ip = "192.168.0.108",
+        name = "vultr",
+        ip = "207.246.94.233",
         port = "6000"
     },
     {
         id = 2,
-        name = "vultr",
-        ip = "207.246.94.233",
+        name = "macbook",
+        ip = "192.168.0.108",
         port = "6000"
     }
 }
