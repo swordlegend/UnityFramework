@@ -112,7 +112,7 @@ function ui_login.onConfirmBtnClick()
         return
     end
 
-    ui_login.model.sendreqlogin_cs(account, password)
+    ui_login.model.sendreqloginacc_cs(account, password)
 end
 
 --------------------------------------------------------------------------------------------------

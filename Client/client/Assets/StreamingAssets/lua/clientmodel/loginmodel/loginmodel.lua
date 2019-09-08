@@ -7,29 +7,19 @@
 ---@type msgdispatcher
 local msgdispatcher = require("msgdispatcher.msgdispatcher")
 
----@type ReqLogin
-local reqlogin = require("msg.fbs.ReqLogin")
+local reqloginacc = require("msg.fbs.ReqLoginAccount")
 
----@type RspLogin
-local rsplogin = require("msg.fbs.RspLogin")
+local rsploginacc = require("msg.fbs.RspLoginAccount")
 
----@type RspConnectSuc
-local rspConnectSuc = require("msg.fbs.RspConnectSuc")
+local reqregacc = require("msg.fbs.ReqRegisterAccount")
 
-local loginstate = require("gamestate.loginstate")
-loginstate.evententer:AddHandler(function()
-    print("ui_login.show")
-
-    local ui_login = require("ui.ui_login.ui_login")
-    ui_login.show()
-end)
+local rspregacc = require("msg.fbs.RspRegisterAccount")
 
 ---@class loginmodel
 loginmodel = {}
 
-
 local loginstate = require("gamestate.loginstate")
-loginstate.evententer:AddHandler(function ()
+loginstate.evententer:AddHandler(function()
     print("loginstate.evententer")
 
     global.INetManager:SendConnect("192.168.0.108", 5000)
@@ -41,13 +31,13 @@ end)
 ---------------------------------------继承函数---------------------------------------
 
 function loginmodel.create()
-    msgdispatcher.registerFbMsg(rspConnectSuc, loginmodel.onRspConnectSuc_sc)
-    msgdispatcher.registerFbMsg(rsplogin, loginmodel.onRspLogin_sc)
+    msgdispatcher.registerFbMsg(rsploginacc, loginmodel.onRspLoginAcc_sc)
+    msgdispatcher.registerFbMsg(rspregacc, loginmodel.onRspRegAcc_sc)
 end
 
 function loginmodel.close()
-    msgdispatcher.unRegisterFbMsg(rspConnectSuc, loginmodel.onRspConnectSuc_sc)
-    msgdispatcher.unRegisterFbMsg(rsplogin, loginmodel.onRspLogin_sc)
+    msgdispatcher.unRegisterFbMsg(rsploginacc, loginmodel.onRspLoginAcc_sc)
+    msgdispatcher.unRegisterFbMsg(rspregacc, loginmodel.onRspRegAcc_sc)
 end
 
 --------------------------------------------------------------------------------------
@@ -64,7 +54,24 @@ end
 
 ---------------------------------------消息事件---------------------------------------
 
-function loginmodel.sendreqlogin_cs(_account, _password)
+function loginmodel.sendreqregacc_cs(_account, _password)
+    ---@type builder
+    local builder = msgdispatcher.newBuilder(1024);
+
+    local account = builder:CreateString(_account);
+    local password = builder:CreateString(_password);
+
+    reqregacc.Start(builder)
+    reqregacc.AddAccount(builder, account)
+    reqregacc.AddPassword(builder, password)
+    
+    local orc = reqregacc.End(builder)
+    builder:Finish(orc)
+
+    msgdispatcher.sendFbMsg(reqregacc, builder)
+end
+
+function loginmodel.sendreqloginacc_cs(_account, _password)
 
     ---@type builder
     local builder = msgdispatcher.newBuilder(1024);
@@ -72,28 +79,36 @@ function loginmodel.sendreqlogin_cs(_account, _password)
     local account = builder:CreateString(_account);
     local password = builder:CreateString(_password);
 
-    reqlogin.Start(builder)
-    reqlogin.AddAccount(builder, account)
-    reqlogin.AddPassword(builder, password)
+    reqloginacc.Start(builder)
+    reqloginacc.AddAccount(builder, account)
+    reqloginacc.AddPassword(builder, password)
 
-    local orc = reqlogin.End(builder)
+    local orc = reqloginacc.End(builder)
     builder:Finish(orc)
 
-    msgdispatcher.sendFbMsg(reqlogin, builder)
+    msgdispatcher.sendFbMsg(reqloginacc, builder)
 end
 
-function loginmodel.onRspLogin_sc(msg)
-    print(msg:Account())
-    print(msg:Password())
+function loginmodel.onRspLoginAcc_sc(msg)
+    local strok = ""
+    if msg.ok then
+        strok = "true"
+    else
+        strok = "false"
+    end
+
+    print("onRspLoginAcc_sc " .. strok)
 end
 
-function loginmodel.onRspConnectSuc_sc(msg)
-    print("loginmodel.onRspConnectSuc_sc")
+function loginmodel.onRspRegAcc_sc(msg)
+    local strok = ""
+    if msg.ok then
+        strok = "true"
+    else
+        strok = "false"
+    end
 
-    local ui_selectserver = require("ui.ui_selectserver.ui_selectserver")
-    ui_selectserver.close()
-
-    gamestatemgr.changeState(global.gamestatetype.login)
+    print("onRspRegAcc_sc " .. strok)
 end
 
 --------------------------------------------------------------------------------------
@@ -103,6 +118,20 @@ end
 
 
 
+
+
+
+-------------------------------------外部调用-------------------------------------------
+
+local loginstate = require("gamestate.loginstate")
+loginstate.evententer:AddHandler(function()
+    print("ui_login.show")
+
+    local ui_login = require("ui.ui_login.ui_login")
+    ui_login.show()
+end)
+
+--------------------------------------------------------------------------------------
 
 
 return loginmodel;

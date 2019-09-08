@@ -14,12 +14,12 @@ namespace gtmGame
 
         public void DoInit()
         {
-            IMsgDispatcher.instance.RegisterFBMsg<fbs.RspLogin>(RspLogin_SC);
+            
         }
 
         public void DoClose()
         {
-            IMsgDispatcher.instance.UnRegisterFBMsg<fbs.RspLogin>(RspLogin_SC);
+            
         }
 
         public void DoUpdate()
@@ -31,11 +31,7 @@ namespace gtmGame
 
         #region 消息
 
-        private void RspLogin_SC(fbs.RspLogin msg)
-        {
-            ILogSystem.instance.Log(LogCategory.GameLogic, msg.Account);
-            ILogSystem.instance.Log(LogCategory.GameLogic, msg.Password);
-        }
+
 
         #endregion
     }

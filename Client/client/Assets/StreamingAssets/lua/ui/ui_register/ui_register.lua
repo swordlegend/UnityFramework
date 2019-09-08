@@ -90,7 +90,17 @@ end
 function ui_register.onRegisterBtnClick()
     print("ui_register.onRegisterBtnClick")
 
+    local account = ui_register.uiref.input_account.text
+    if not account then
+        return
+    end
 
+    local password = ui_register.uiref.input_password.text
+    if not password then
+        return
+    end
+
+    loginmodel.sendreqregacc_cs(account, password)
 end
 
 function ui_register.onCloseBtnClick()

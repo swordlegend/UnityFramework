@@ -2,23 +2,6 @@
 include "logincommon.fbs";
 namespace fbs;
 
-table RspConnectSuc
-{
-    
-}
-
-table ReqLogin
-{
-    account:string;
-    password:string;
-}
-
-table RspLogin
-{
-    account:string;
-    password:string;
-}
-
 table ReqLoginAccount
 {
     account:string;

@@ -1284,22 +1284,16 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(fbs.ReqChat), fbsReqChatWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(fbs.ReqLogin), fbsReqLoginWrap.__Register);
-        
-        
             translator.DelayWrapLoader(typeof(fbs.ReqLoginAccount), fbsReqLoginAccountWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(fbs.ReqLoginSelectZone), fbsReqLoginSelectZoneWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(fbs.ReqRegisterAccount), fbsReqRegisterAccountWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(fbs.RspChat), fbsRspChatWrap.__Register);
-        
-        
-            translator.DelayWrapLoader(typeof(fbs.RspConnectSuc), fbsRspConnectSucWrap.__Register);
-        
-        
-            translator.DelayWrapLoader(typeof(fbs.RspLogin), fbsRspLoginWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(fbs.RspLoginAccount), fbsRspLoginAccountWrap.__Register);
@@ -1315,6 +1309,9 @@ namespace XLua.CSObjectWrap
         
         
             translator.DelayWrapLoader(typeof(fbs.RspLoginZoneList), fbsRspLoginZoneListWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(fbs.RspRegisterAccount), fbsRspRegisterAccountWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(gtmInterface.GameEvent), gtmInterfaceGameEventWrap.__Register);
@@ -1430,13 +1427,13 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(FlatBuffers.ByteBufferUtil), FlatBuffersByteBufferUtilWrap.__Register);
         
+        
+            translator.DelayWrapLoader(typeof(FlatBuffers.FlatBufferBuilder), FlatBuffersFlatBufferBuilderWrap.__Register);
+        
         }
         
         static void wrapInit9(LuaEnv luaenv, ObjectTranslator translator)
         {
-        
-            translator.DelayWrapLoader(typeof(FlatBuffers.FlatBufferBuilder), FlatBuffersFlatBufferBuilderWrap.__Register);
-        
         
             translator.DelayWrapLoader(typeof(FlatBuffers.FlatBufferConstants), FlatBuffersFlatBufferConstantsWrap.__Register);
         

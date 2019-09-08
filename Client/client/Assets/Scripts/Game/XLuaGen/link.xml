@@ -513,17 +513,16 @@
 		<type fullname="fbs.LoginZoneList" preserve="all"/>
 		<type fullname="fbs.RepLoginGame" preserve="all"/>
 		<type fullname="fbs.ReqChat" preserve="all"/>
-		<type fullname="fbs.ReqLogin" preserve="all"/>
 		<type fullname="fbs.ReqLoginAccount" preserve="all"/>
 		<type fullname="fbs.ReqLoginSelectZone" preserve="all"/>
+		<type fullname="fbs.ReqRegisterAccount" preserve="all"/>
 		<type fullname="fbs.RspChat" preserve="all"/>
-		<type fullname="fbs.RspConnectSuc" preserve="all"/>
-		<type fullname="fbs.RspLogin" preserve="all"/>
 		<type fullname="fbs.RspLoginAccount" preserve="all"/>
 		<type fullname="fbs.RspLoginGame" preserve="all"/>
 		<type fullname="fbs.RspLoginRoleList" preserve="all"/>
 		<type fullname="fbs.RspLoginSelectZone" preserve="all"/>
 		<type fullname="fbs.RspLoginZoneList" preserve="all"/>
+		<type fullname="fbs.RspRegisterAccount" preserve="all"/>
 		<type fullname="gtmInterface.GameEvent" preserve="all"/>
 		<type fullname="gtmInterface.IFile" preserve="all"/>
 		<type fullname="gtmInterface.ILogSystem" preserve="all"/>
