@@ -7,9 +7,7 @@
 require("base.luaclass")
 
 local loginstate = require("gamestate.loginstate")
-local registerstate = require("gamestate.registerstate")
 local gamestate = require("gamestate.gamestate")
-local selectserverstate = require("gamestate.selectserverstate")
 
 ---@class gamestatemgr
 gamestatemgr = {}
@@ -21,9 +19,7 @@ gamestatemgr.curstate = nil
 function gamestatemgr.register()
 
     gamestatemgr.statedict[global.gamestatetype.login] = loginstate
-    gamestatemgr.statedict[global.gamestatetype.register] = registerstate
     gamestatemgr.statedict[global.gamestatetype.game] = gamestate
-    gamestatemgr.statedict[global.gamestatetype.selectserver] = selectserverstate
 
     print("gamestatemgr.register " .. #gamestatemgr.statedict)
 end

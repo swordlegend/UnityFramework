@@ -10,7 +10,7 @@ ui_login = {}
 ui_login.uiname = "ui_panel_login"
 
 ---@type testmodel
-ui_login.model = nil
+ui_login.model = loginmodel
 
 ----------------------------------------------内置-------------------------------------------------
 
@@ -63,11 +63,14 @@ function ui_login.initui()
     ui_login.uiref.input_password = ui_login.dialog:GetInputFieldInChild(root, "input_password")
 
     ui_login.uiref.btn_confirm = ui_login.dialog:GetButtonInChild(root, "btn_confirm")
+
+    ui_login.uiref.btn_register = ui_login.dialog:GetButtonInChild(root, "btn_register")
 end
 
 --- init event
 function ui_login.initEvent()
     ui_login.dialog:AddBtnClickListener(ui_login.uiref.btn_confirm, ui_login.onConfirmBtnClick)
+    ui_login.dialog:AddBtnClickListener(ui_login.uiref.btn_register, ui_login.onRegisterBtnClick)
 end
 
 --------------------------------------------------------------------------------------------------
@@ -85,6 +88,13 @@ end
 
 -------------------------------------------ui事件-------------------------------------------------
 
+function ui_login.onRegisterBtnClick()
+    print("ui_login.onRegisterBtnClick")
+
+    local ui_register = require("ui.ui_register.ui_register")
+    ui_register.show()
+end
+
 function ui_login.onConfirmBtnClick()
     print("ui_login.onConfirmBtnClick")
 
@@ -100,7 +110,7 @@ function ui_login.onConfirmBtnClick()
         return
     end
 
-    loginmodel.sendreqlogin_cs(account, password)
+    ui_login.model.sendreqlogin_cs(account, password)
 end
 
 --------------------------------------------------------------------------------------------------

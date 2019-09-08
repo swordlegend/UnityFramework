@@ -27,6 +27,17 @@ end)
 ---@class loginmodel
 loginmodel = {}
 
+
+local loginstate = require("gamestate.loginstate")
+loginstate.evententer:AddHandler(function ()
+    print("loginstate.evententer")
+
+    global.INetManager:SendConnect("192.168.0.108", 5000)
+
+    local ui_login = require("ui.ui_login.ui_login")
+    ui_login.show()
+end)
+
 ---------------------------------------继承函数---------------------------------------
 
 function loginmodel.create()

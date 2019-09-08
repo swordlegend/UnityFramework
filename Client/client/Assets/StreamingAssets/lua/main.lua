@@ -11,11 +11,11 @@ function main()
     local clientmodelmgr = require("clientmodel.clientmodelmgr")
     clientmodelmgr.register()
 
-    --- C#消息回调注册
+    -- C#消息回调注册
     local netmsgregister = require "msgdispatcher.netmsgregister"
     netmsgregister.init()
 
-    gamestatemgr.changeState(global.gamestatetype.selectserver)
+    gamestatemgr.changeState(global.gamestatetype.login)
 end
 
 main();
@@ -30,7 +30,8 @@ main();
 
 
 
-
+-- 连接登录服务器
+--global.INetManager:SendConnect("192.168.0.108", 5000)
 
 --local testui = require("ui.ui_test.ui_test")
 --testui.show();

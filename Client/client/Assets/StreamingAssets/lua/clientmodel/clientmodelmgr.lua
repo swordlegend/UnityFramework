@@ -5,8 +5,6 @@
 ---
 
 local loginmodel = require("clientmodel.loginmodel.loginmodel")
-local registermodel = require("clientmodel.registermodel.registermodel")
-local selectservermodel = require("clientmodel.selectservermodel.selectservermodel")
 
 ---@class clientmodelmgr
 clientmodelmgr = {}
@@ -14,14 +12,10 @@ clientmodelmgr = {}
 
 function clientmodelmgr.register()
     loginmodel.create()
-    registermodel.create()
-    selectservermodel.create()
 end
 
 function clientmodelmgr.unregister()
     loginmodel.close()
-    registermodel.close()
-    selectservermodel.close()
 end
 
 

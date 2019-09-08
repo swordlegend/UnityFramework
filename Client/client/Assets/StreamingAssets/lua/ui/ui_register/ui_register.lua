@@ -7,10 +7,10 @@
 ---@class ui_register
 ui_register = {}
 
-ui_register.uiname = "ui_register"
+ui_register.uiname = "ui_panel_register"
 
 ---@type testmodel
-ui_register.model = nil
+ui_register.model = loginmodel
 
 
 ----------------------------------------------内置-------------------------------------------------
@@ -18,7 +18,7 @@ ui_register.model = nil
 function ui_register.show()
 
     if ui_register.isShow then
-        return;
+        return ;
     end
 
     ---@type gtmGame.Dialog
@@ -57,12 +57,19 @@ end
 function ui_register.initui()
     ui_register.uiref = {};
 
+    local root = ui_register.dialog.rootDialog
+    ui_register.uiref.input_account = ui_register.dialog:GetInputFieldInChild(root, "input_account")
+    ui_register.uiref.input_password = ui_register.dialog:GetInputFieldInChild(root, "input_password")
 
+    ui_register.uiref.btn_register = ui_register.dialog:GetButtonInChild(root, "btn_register")
+    ui_register.uiref.btn_close = ui_register.dialog:GetButtonInChild(root, "btn_close")
 end
 
 --- init event
 function ui_register.initEvent()
 
+    ui_register.dialog:AddBtnClickListener(ui_register.uiref.btn_register, ui_register.onRegisterBtnClick)
+    ui_register.dialog:AddBtnClickListener(ui_register.uiref.btn_close, ui_register.onCloseBtnClick)
 end
 
 --------------------------------------------------------------------------------------------------
@@ -80,7 +87,17 @@ end
 
 -------------------------------------------ui事件-------------------------------------------------
 
+function ui_register.onRegisterBtnClick()
+    print("ui_register.onRegisterBtnClick")
 
+
+end
+
+function ui_register.onCloseBtnClick()
+    print("ui_register.onCloseBtnClick")
+
+    ui_register.close()
+end
 
 --------------------------------------------------------------------------------------------------
 
