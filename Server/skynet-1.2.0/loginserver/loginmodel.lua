@@ -13,6 +13,25 @@ local reqloginacc = require("ReqLoginAccount")
 
 local rsploginacc = require("RspLoginAccount")
 
+local rsploginzonelist = require("RspLoginZoneList")
+
+local loginzonelist = require("LoginZoneList")
+
+local zonelist = {
+    {
+        id = 1,
+        name = "macbook",
+        ip = "192.168.0.108",
+        port = "6000"
+    },
+    {
+        id = 2,
+        name = "vultr",
+        ip = "207.246.94.233",
+        port = "6000"
+    }
+}
+
 ---@class loginmodel
 loginmodel = {}
 
@@ -50,7 +69,8 @@ loginmodel.onReqLoginAcc_cs = function(data)
     end
 
     -- rsploginacc
-    local builder = msgdispatcher.newBuilder(1024);
+
+    local builder = msgdispatcher.newBuilder(1024)
     rsploginacc.Start(builder)
     rsploginacc.AddOk(builder, 1)
 
@@ -59,6 +79,43 @@ loginmodel.onReqLoginAcc_cs = function(data)
 
     msgdispatcher.sendFbMsg(id, rsploginacc, builder)
 
+    -- rsploginzonelist
+
+    builder = msgdispatcher.newBuilder(1024)
+
+    local zonelistcnt = #zonelist
+
+    local zonetemplistorc = {}
+    for idx = 1, zonelistcnt do
+        local zone = zonelist[idx]
+
+        local strname = builder:CreateString(zone.name)
+        local strip = builder:CreateString(zone.ip)
+        local strport = builder:CreateString(zone.port)
+
+        loginzonelist.Start(builder)
+        loginzonelist.AddId(builder, zone.id)
+        loginzonelist.AddName(builder, strname)
+        loginzonelist.AddIp(builder, strip)
+        loginzonelist.AddPort(builder, strport)
+
+        local zoneorc = loginzonelist.End(builder)
+        table.insert(zonetemplistorc, zoneorc)
+    end
+
+    rsploginzonelist.StartZonelistVector(builder, zonelistcnt)
+    for idx = 1, #zonetemplistorc do
+        builder:PrependUOffsetTRelative(zonetemplistorc[idx])
+    end
+    local zonelistorc = builder:EndVector(zonelistcnt)
+
+    rsploginzonelist.Start(builder)
+    rsploginzonelist.AddZonelist(builder, zonelistorc)
+
+    local orc = rsploginzonelist.End(builder)
+    builder:Finish(orc)
+
+    msgdispatcher.sendFbMsg(id, rsploginzonelist, builder)
 end
 
 loginmodel.onReqRegAcc_cs = function(data)
