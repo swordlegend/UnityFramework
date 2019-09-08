@@ -100,7 +100,7 @@ function ui_register.onRegisterBtnClick()
         return
     end
 
-    loginmodel.sendreqregacc_cs(account, password)
+    ui_register.model.sendreqregacc_cs(account, password)
 end
 
 function ui_register.onCloseBtnClick()

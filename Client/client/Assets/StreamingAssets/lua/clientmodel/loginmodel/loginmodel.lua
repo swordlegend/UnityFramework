@@ -56,15 +56,15 @@ end
 
 function loginmodel.sendreqregacc_cs(_account, _password)
     ---@type builder
-    local builder = msgdispatcher.newBuilder(1024);
+    local builder = msgdispatcher.newBuilder(1024)
 
-    local account = builder:CreateString(_account);
-    local password = builder:CreateString(_password);
+    local account = builder:CreateString(_account)
+    local password = builder:CreateString(_password)
 
     reqregacc.Start(builder)
     reqregacc.AddAccount(builder, account)
     reqregacc.AddPassword(builder, password)
-    
+
     local orc = reqregacc.End(builder)
     builder:Finish(orc)
 
@@ -74,10 +74,10 @@ end
 function loginmodel.sendreqloginacc_cs(_account, _password)
 
     ---@type builder
-    local builder = msgdispatcher.newBuilder(1024);
+    local builder = msgdispatcher.newBuilder(1024)
 
-    local account = builder:CreateString(_account);
-    local password = builder:CreateString(_password);
+    local account = builder:CreateString(_account)
+    local password = builder:CreateString(_password)
 
     reqloginacc.Start(builder)
     reqloginacc.AddAccount(builder, account)
