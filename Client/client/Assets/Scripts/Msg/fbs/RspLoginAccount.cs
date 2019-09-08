@@ -18,17 +18,17 @@ public struct RspLoginAccount : IFlatbufferObject
   public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
   public RspLoginAccount __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public bool Ok { get { int o = __p.__offset(4); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public byte Ok { get { int o = __p.__offset(4); return o != 0 ? __p.bb.Get(o + __p.bb_pos) : (byte)0; } }
 
   public static Offset<RspLoginAccount> CreateRspLoginAccount(FlatBufferBuilder builder,
-      bool ok = false) {
+      byte ok = 0) {
     builder.StartObject(1);
     RspLoginAccount.AddOk(builder, ok);
     return RspLoginAccount.EndRspLoginAccount(builder);
   }
 
   public static void StartRspLoginAccount(FlatBufferBuilder builder) { builder.StartObject(1); }
-  public static void AddOk(FlatBufferBuilder builder, bool ok) { builder.AddBool(0, ok, false); }
+  public static void AddOk(FlatBufferBuilder builder, byte ok) { builder.AddByte(0, ok, 0); }
   public static Offset<RspLoginAccount> EndRspLoginAccount(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<RspLoginAccount>(o);

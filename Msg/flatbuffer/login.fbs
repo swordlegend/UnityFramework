@@ -10,7 +10,7 @@ table ReqLoginAccount
 
 table RspLoginAccount
 {
-    ok:bool = false;
+    ok:uint8;
 }
 
 table ReqRegisterAccount
