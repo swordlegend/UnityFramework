@@ -88,13 +88,15 @@ end
 
 function loginmodel.onRspLoginAcc_sc(msg)
     local strok = ""
-    if msg.ok then
+    if msg.Ok then
         strok = "true"
     else
         strok = "false"
     end
 
     print("onRspLoginAcc_sc " .. strok)
+
+
 end
 
 function loginmodel.onRspRegAcc_sc(msg)
