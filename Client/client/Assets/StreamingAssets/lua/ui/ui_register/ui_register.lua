@@ -51,6 +51,8 @@ function ui_register.preClose()
 
     ui_register.isShow = false;
     ui_register.uiref = {};
+
+    ui_register.removeEvent()
 end
 
 --- initui
@@ -70,6 +72,12 @@ function ui_register.initEvent()
 
     ui_register.dialog:AddBtnClickListener(ui_register.uiref.btn_register, ui_register.onRegisterBtnClick)
     ui_register.dialog:AddBtnClickListener(ui_register.uiref.btn_close, ui_register.onCloseBtnClick)
+
+    loginmodel.onRegAccEvent:AddHandler(ui_register.onRegAccEvent)
+end
+
+function ui_register.removeEvent()
+    loginmodel.onRegAccEvent:RemoveHandler(ui_register.onRegAccEvent)
 end
 
 --------------------------------------------------------------------------------------------------
@@ -115,6 +123,28 @@ end
 --------------------------------------------------------------------------------------------------
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------外部事件----------------------------------------------
+
+function ui_register.onRegAccEvent(self)
+    ui_register.close()
+
+    local ui_login = require("ui.ui_login.ui_login")
+    ui_login.show()
+end
+
+--------------------------------------------------------------------------------------------------
 
 
 

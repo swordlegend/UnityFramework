@@ -51,6 +51,8 @@ function ui_template.preClose()
 
     ui_template.isShow = false;
     ui_template.uiref = {};
+
+    ui_template.removeEvent()
 end
 
 --- initui
@@ -61,6 +63,11 @@ end
 
 --- init event
 function ui_template.initEvent()
+
+end
+
+--- remove event
+function ui_template.removeEvent()
 
 end
 

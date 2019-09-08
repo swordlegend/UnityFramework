@@ -50,6 +50,8 @@ function ui_login.preClose()
 
     ui_login.isShow = false;
     ui_login.uiref = {};
+
+    ui_login.removeEvent()
 end
 
 --- initui
@@ -71,8 +73,12 @@ end
 function ui_login.initEvent()
     ui_login.dialog:AddBtnClickListener(ui_login.uiref.btn_confirm, ui_login.onConfirmBtnClick)
     ui_login.dialog:AddBtnClickListener(ui_login.uiref.btn_register, ui_login.onRegisterBtnClick)
+
 end
 
+function ui_login.removeEvent()
+
+end
 --------------------------------------------------------------------------------------------------
 
 
@@ -122,6 +128,17 @@ end
 
 
 
+
+
+
+
+
+
+---------------------------------------------外部事件----------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------------
 
 
 

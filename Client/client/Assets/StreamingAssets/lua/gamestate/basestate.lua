@@ -18,7 +18,7 @@ function basestate:onEnter(self)
     print("baseclass.onEnter")
 
     if self.evententer then
-        self.evententer(self)
+        self.evententer()
     end
 end
 
@@ -26,7 +26,7 @@ function basestate:onExit(self)
     print("baseclass.onExit")
 
     if self.eventexit then
-        self.eventexit(self)
+        self.eventexit()
     end
 end
 
@@ -34,7 +34,7 @@ function basestate:onRefresh(self)
     print("basestate.onRefresh")
 
     if self.eventrefresh then
-        self.eventrefresh(self)
+        self.eventrefresh()
     end
 end
 

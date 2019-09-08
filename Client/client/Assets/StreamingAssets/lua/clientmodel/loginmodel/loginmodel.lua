@@ -15,29 +15,26 @@ local reqregacc = require("msg.fbs.ReqRegisterAccount")
 
 local rspregacc = require("msg.fbs.RspRegisterAccount")
 
+---@type event
+local event = require("base.event")
+
 ---@class loginmodel
 loginmodel = {}
-
-local loginstate = require("gamestate.loginstate")
-loginstate.evententer:AddHandler(function()
-    print("loginstate.evententer")
-
-    global.INetManager:SendConnect("192.168.0.108", 5000)
-
-    local ui_login = require("ui.ui_login.ui_login")
-    ui_login.show()
-end)
 
 ---------------------------------------继承函数---------------------------------------
 
 function loginmodel.create()
     msgdispatcher.registerFbMsg(rsploginacc, loginmodel.onRspLoginAcc_sc)
     msgdispatcher.registerFbMsg(rspregacc, loginmodel.onRspRegAcc_sc)
+
+    loginmodel.onRegAccEvent = event:new()
 end
 
 function loginmodel.close()
     msgdispatcher.unRegisterFbMsg(rsploginacc, loginmodel.onRspLoginAcc_sc)
     msgdispatcher.unRegisterFbMsg(rspregacc, loginmodel.onRspRegAcc_sc)
+
+    loginmodel.onRegAccEvent:Clear()
 end
 
 --------------------------------------------------------------------------------------
@@ -102,13 +99,17 @@ end
 
 function loginmodel.onRspRegAcc_sc(msg)
     local strok = ""
-    if msg.ok then
+    if msg.Ok then
         strok = "true"
     else
         strok = "false"
     end
 
     print("onRspRegAcc_sc " .. strok)
+
+    if msg.Ok then
+        loginmodel.onRegAccEvent(loginmodel.onRegAccEvent)
+    end
 end
 
 --------------------------------------------------------------------------------------
@@ -125,7 +126,9 @@ end
 
 local loginstate = require("gamestate.loginstate")
 loginstate.evententer:AddHandler(function()
-    print("ui_login.show")
+    print("loginstate.evententer")
+
+    global.INetManager:SendConnect("192.168.0.108", 5000)
 
     local ui_login = require("ui.ui_login.ui_login")
     ui_login.show()

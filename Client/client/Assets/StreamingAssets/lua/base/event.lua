@@ -19,7 +19,7 @@ function event.__call(self, ...)
     if self.funlist then
         for k, v in ipairs(self.funlist) do
             local val = ...
-            v(self, ...)
+            v(...)
         end
     end
 
@@ -34,7 +34,7 @@ function event.__call(self, ...)
     end
 
     if self.temppremovefunlist then
-        for k, v in ipairs(self.tempaddfunlist) do
+        for k, v in ipairs(self.temppremovefunlist) do
             self:RemoveHandler(v)
         end
 
