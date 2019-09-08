@@ -97,6 +97,9 @@ function ui_register.onCloseBtnClick()
     print("ui_register.onCloseBtnClick")
 
     ui_register.close()
+
+    local ui_login = require("ui.ui_login.ui_login")
+    ui_login.show()
 end
 
 --------------------------------------------------------------------------------------------------

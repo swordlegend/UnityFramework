@@ -91,6 +91,8 @@ end
 function ui_login.onRegisterBtnClick()
     print("ui_login.onRegisterBtnClick")
 
+    ui_login.close()
+
     local ui_register = require("ui.ui_register.ui_register")
     ui_register.show()
 end
