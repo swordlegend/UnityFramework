@@ -74,10 +74,11 @@ function ui_login.initEvent()
     ui_login.dialog:AddBtnClickListener(ui_login.uiref.btn_confirm, ui_login.onConfirmBtnClick)
     ui_login.dialog:AddBtnClickListener(ui_login.uiref.btn_register, ui_login.onRegisterBtnClick)
 
+    loginmodel.onLoginZoneListEvent:AddHandler(ui_login.onLoginZoneListEvent)
 end
 
 function ui_login.removeEvent()
-
+    loginmodel.onLoginZoneListEvent:RemoveHandler(ui_login.onLoginZoneListEvent)
 end
 --------------------------------------------------------------------------------------------------
 
@@ -136,7 +137,14 @@ end
 
 ---------------------------------------------外部事件----------------------------------------------
 
+function ui_login.onLoginZoneListEvent()
+    print("ui_login.onLoginZoneListEvent")
 
+    ui_login.close()
+
+    local ui_selectserver = require("ui.ui_selectserver.ui_selectserver")
+    ui_selectserver.show()
+end
 
 --------------------------------------------------------------------------------------------------
 

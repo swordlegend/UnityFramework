@@ -137,7 +137,9 @@ end
 
 ---------------------------------------------外部事件----------------------------------------------
 
-function ui_register.onRegAccEvent(self)
+function ui_register.onRegAccEvent()
+    print("ui_register.onRegAccEvent")
+
     ui_register.close()
 
     local ui_login = require("ui.ui_login.ui_login")

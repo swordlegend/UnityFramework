@@ -4,3 +4,37 @@
 --- DateTime: 2019/9/1 6:32
 ---
 
+---@class logindata
+logindata = {}
+
+logindata.zonelist = {}
+
+function logindata.clear()
+    logindata.clearZoneList()
+end
+
+function logindata.clearZoneList()
+    logindata.zonelist = {}
+end
+
+function logindata.addZoneData(id, name, ip, port)
+
+    local zonedata = {}
+    zonedata.id = id
+    zonedata.name = name
+    zonedata.ip = ip
+    zonedata.port = port
+
+    table.insert(logindata.zonelist, zonedata)
+end
+
+function logindata.getZoneListCnt()
+    return #logindata.zonelist
+end
+
+function logindata.getZoneData(index)
+    local zonedata = logindata.zonelist[index]
+    return zonedata
+end
+
+return logindata

@@ -68,9 +68,9 @@
 
 2. 生成消息文件使用命令行自动添加svn	 (完成)
 
-2. 服务器loginserver		
+2. 服务器loginserver			(完成)
 
-3. 服务器gateserver		
+3. 服务器gateserver			
 
 6. 登录系统客户端功能		
 

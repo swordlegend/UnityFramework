@@ -17,6 +17,8 @@ local rspregacc = require("msg.fbs.RspRegisterAccount")
 
 local rsploginzonelist = require("msg.fbs.RspLoginZoneList")
 
+local logindata = require("clientmodel.loginmodel.logindata")
+
 ---@type event
 local event = require("base.event")
 
@@ -31,6 +33,7 @@ function loginmodel.create()
     msgdispatcher.registerFbMsg(rsploginzonelist, loginmodel.onRspLoginZoneList_sc)
 
     loginmodel.onRegAccEvent = event:new()
+    loginmodel.onLoginZoneListEvent = event:new()
 end
 
 function loginmodel.close()
@@ -39,6 +42,7 @@ function loginmodel.close()
     msgdispatcher.unRegisterFbMsg(rsploginzonelist, loginmodel.onRspLoginZoneList_sc)
 
     loginmodel.onRegAccEvent:Clear()
+    loginmodel.onLoginZoneListEvent:Clear()
 end
 
 --------------------------------------------------------------------------------------
@@ -93,16 +97,21 @@ end
 function loginmodel.onRspLoginZoneList_sc(msg)
     print("loginmodel.onRspLoginZoneList_sc")
 
+    logindata.clearZoneList()
+
     local zonelen = msg:ZonelistLength()
     for i = 1, zonelen do
         local zonelist = msg:Zonelist(i)
         if zonelist then
-            print("" .. zonelist:Id())
-            print(zonelist:Name())
-            print(zonelist:Ip())
-            print(zonelist:Port())
+            local id = zonelist:Id()
+            local name = zonelist:Name()
+            local ip = zonelist:Ip()
+            local port = zonelist:Port()
+            logindata.addZoneData(id, name, ip, port)
         end
     end
+
+    loginmodel.onLoginZoneListEvent()
 end
 
 function loginmodel.onRspLoginAcc_sc(msg)
@@ -127,7 +136,7 @@ function loginmodel.onRspRegAcc_sc(msg)
     print("onRspRegAcc_sc " .. strok)
 
     if msg.Ok then
-        loginmodel.onRegAccEvent(loginmodel.onRegAccEvent)
+        loginmodel.onRegAccEvent()
     end
 end
 

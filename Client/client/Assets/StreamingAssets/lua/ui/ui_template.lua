@@ -22,20 +22,21 @@ function ui_template.show()
     end
 
     ---@type gtmGame.Dialog
-    ui_template.dialog = ui_mgr.createDialog(ui_template.uiname, "ui_template");
+    ui_template.dialog = ui_mgr.createDialog(ui_template.uiname, "ui_template")
 
     if not ui_template.dialog then
-        print("ui_template.dialog null uiname " .. ui_template.uiname);
+        print("ui_template.dialog null uiname " .. ui_template.uiname)
     end
 
-    ui_template.isShow = true;
+    ui_template.isShow = true
 
-    ui_template.initui();
-    ui_template.initEvent();
+    ui_template.initui()
+    ui_template.initEvent()
+    ui_template.initData()
 end
 
 function ui_template.close()
-    ui_mgr.closeDialog(ui_template.uiname);
+    ui_mgr.closeDialog(ui_template.uiname)
 end
 
 function ui_template.preShow()
@@ -49,15 +50,16 @@ end
 function ui_template.preClose()
     print("ui_template.preClose")
 
-    ui_template.isShow = false;
-    ui_template.uiref = {};
+    ui_template.isShow = false
+    ui_template.uiref = {}
 
     ui_template.removeEvent()
+    ui_template.clearData()
 end
 
 --- initui
 function ui_template.initui()
-    ui_template.uiref = {};
+    ui_template.uiref = {}
 
 end
 
@@ -68,6 +70,14 @@ end
 
 --- remove event
 function ui_template.removeEvent()
+
+end
+
+function ui_template.initData()
+
+end
+
+function ui_template.clearData()
 
 end
 
@@ -102,7 +112,32 @@ end
 
 
 
+---------------------------------------------外部事件----------------------------------------------
 
 
 
-return ui_template;
+--------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------函数------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+return ui_template

@@ -189,6 +189,27 @@ namespace gtmGame
             return trans.GetComponent<T>();
         }
 
+        public GameObject GetGameObjectInChild(GameObject parent, string name)
+        {
+            if (parent == null)
+                return null;
+
+            Transform parenttrans = parent.transform;
+            if (parenttrans == null)
+                return null;
+
+            Transform trans = parenttrans.Find(name);
+            if (trans == null)
+                return null;
+
+            return trans.gameObject;
+        }
+
+        public ScrollRect GetScrollRectInChild(GameObject parent, string name)
+        {
+            return GetComponentInChild<ScrollRect>(parent, name);
+        }
+
         public InputField GetInputFieldInChild(GameObject parent, string name)
         {
             return GetComponentInChild<InputField>(parent, name);
@@ -215,6 +236,18 @@ namespace gtmGame
                 return;
 
             selectable.interactable = interactable;
+        }
+
+        public void SetText(Text text, string info)
+        {
+            if (text == null) return;
+            text.text = info;
+        }
+
+        public void SetGameObjectVisible(GameObject go, bool visible)
+        {
+            if (go == null) return;
+            go.SetActive(visible);
         }
 
         #endregion
