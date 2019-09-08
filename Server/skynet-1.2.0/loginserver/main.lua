@@ -18,7 +18,7 @@ skynet.start(function()
     skynet.call(msgregister, "lua", "register", "")
 
     skynet.uniqueservice "dbmanager"
-    
+
     local gateserver = skynet.newservice("mygateserver") --启动刚才写的网关服务
 
     skynet.call(gateserver, "lua", "open", {--需要给网关服务发送open消息，来启动监听
