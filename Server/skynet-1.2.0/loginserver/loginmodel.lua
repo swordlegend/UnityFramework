@@ -3,10 +3,10 @@
 local msgdispatcher = require "msgdispatcher";
 
 ---@type ReqRegisterAccount
-local reqregacc = require("game.msg.fbs.ReqRegisterAccount")
+local reqregacc = require("ReqRegisterAccount")
 
 ---@type RspRegisterAccount
-local rspregacc = require("game.msg.fbs.RspRegisterAccount")
+local rspregacc = require("RspRegisterAccount")
 
 ---@class loginmodel
 loginmodel = {}
@@ -33,7 +33,7 @@ loginmodel.onReqRegAcc_cs = function(data)
 
     local builder = msgdispatcher.newBuilder(1024);
     rspregacc.Start(builder)
-    rspregacc.AddOk(builder, true)
+    rspregacc.AddOk(builder, 1)
     local orc = rspregacc.End(builder);
     builder:Finish(orc);
 
