@@ -122,6 +122,7 @@ std::string FlatCompiler::GetUsageString(const char *program_name) const {
     "  --es6-js-export    Uses ECMAScript 6 export style lines in JS.\n"
     "  --go-namespace     Generate the overrided namespace in Golang.\n"
     "  --lua-prefix       Add a lua require prefix.\n"
+    "  --lua-memdata-prefix   Add a lua member data require prefix.\n"
     "  --go-import        Generate the overrided import for flatbuffers in Golang\n"
     "                     (default is \"github.com/google/flatbuffers/go\").\n"
     "  --raw-binary       Allow binaries without file_indentifier to be read.\n"
@@ -233,6 +234,11 @@ int FlatCompiler::Compile(int argc, const char **argv) {
       {
         if (++argi >= argc) Error("missing lua prefix " + arg, true);
         opts.lua_prefix = argv[argi];
+      }
+      else if (arg == "--lua-memdata-prefix")
+      {
+        if (++argi >= argc) Error("missing lua member data prefix " + arg, true);
+        opts.lua_memdata_prefix = argv[argi];
       }
       else if (arg == "--go-import") {
           if (++argi >= argc) Error("missing golang import" + arg, true);

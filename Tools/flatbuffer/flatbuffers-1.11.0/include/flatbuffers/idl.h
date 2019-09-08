@@ -434,6 +434,7 @@ struct IDLOptions {
   std::string go_import;
   std::string go_namespace;
   std::string lua_prefix;
+  std::string lua_memdata_prefix;
   bool reexport_ts_modules;
   bool js_ts_short_names;
   bool protobuf_ascii_alike;

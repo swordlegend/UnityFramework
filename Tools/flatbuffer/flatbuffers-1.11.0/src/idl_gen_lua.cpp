@@ -40,7 +40,8 @@ namespace lua {
   class LuaGenerator : public BaseGenerator {
   public:
     LuaGenerator(const Parser &parser, const std::string &path,
-      const std::string &file_name, const std::string &lua_prefix)
+                const std::string &file_name, const std::string &lua_prefix,
+                const std::string &lua_memdata_prefix)
       : BaseGenerator(parser, path, file_name, "" /* not used */,
         "" /* not used */) {
       static const char * const keywords[] = {
@@ -70,6 +71,7 @@ namespace lua {
 
       keywords_.insert(std::begin(keywords), std::end(keywords));
       this->lua_prefix = lua_prefix;
+      this->lua_memdata_prefix = lua_memdata_prefix;
     }
 
     // Most field accessors need to retrieve and test the field offset first,
@@ -269,7 +271,7 @@ namespace lua {
       else {
         code += std::string(Indent) + Indent + "local x = " + SelfData + ":Indirect(o + " + SelfDataPos + ")\n";
       }
-      code += std::string(Indent) + Indent + "local obj = require('" + TypeNameWithNamespace(field) + "').New()\n";
+      code += std::string(Indent) + Indent + "local obj = require('" + lua_memdata_prefix + TypeNameWithNamespace(field) + "').New()\n";
       code += std::string(Indent) + Indent + "obj:Init(" + SelfDataBytes + ", x)\n";
       code += std::string(Indent) + Indent + "return obj\n";
       code += std::string(Indent) + End;
@@ -333,7 +335,7 @@ namespace lua {
       if (!(vectortype.struct_def->fixed)) {
         code += std::string(Indent) + Indent + "x = " + SelfData + ":Indirect(x)\n";
       }
-      code += std::string(Indent) + Indent + "local obj = require('" + TypeNameWithNamespace(field) + "').New()\n";
+      code += std::string(Indent) + Indent + "local obj = require('" + lua_memdata_prefix + TypeNameWithNamespace(field) + "').New()\n";
       code += std::string(Indent) + Indent + "obj:Init(" + SelfDataBytes + ", x)\n";
       code += std::string(Indent) + Indent + "return obj\n";
       code += std::string(Indent) + End;
@@ -753,13 +755,14 @@ namespace lua {
   private:
     std::unordered_set<std::string> keywords_;
     std::string lua_prefix;
+    std::string lua_memdata_prefix;
   };
 
 }  // namespace lua
 
 bool GenerateLua(const Parser &parser, const std::string &path,
   const std::string &file_name) {
-  lua::LuaGenerator generator(parser, path, file_name, parser.opts.lua_prefix);
+  lua::LuaGenerator generator(parser, path, file_name, parser.opts.lua_prefix, parser.opts.lua_memdata_prefix);
   return generator.generate();
 }
 

@@ -39,7 +39,7 @@ function RspLoginZoneList_mt:Zonelist(j)
         local x = self.view:Vector(o)
         x = x + ((j-1) * 4)
         x = self.view:Indirect(x)
-        local obj = require('fbs.LoginZoneList').New()
+        local obj = require('msg.fbs.LoginZoneList').New()
         obj:Init(self.view.bytes, x)
         return obj
     end
