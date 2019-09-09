@@ -12,7 +12,7 @@ local netpack = require "skynet.netpack"
 skynet.start(function()
 
     -- 启动函数里调用Skynet API开发各种服务
-    print("======loginserver start=======")
+    print("======gameserver start=======")
 
     local msgregister = skynet.uniqueservice "msgregister"
     skynet.call(msgregister, "lua", "register", "")
@@ -21,15 +21,15 @@ skynet.start(function()
     skynet.call(dbmanager, "lua", "open", {
         host = "127.0.0.1",
         port = 3306,
-        database = "unityframe_account",
+        database = "unityframe_game",
         user = "root",
         password = "12345678",
-        name = ".unityframe_account",
+        name = ".unityframe_game",
     })
 
     local gateserver = skynet.newservice("mygateserver") --启动刚才写的网关服务
     skynet.call(gateserver, "lua", "open", {--需要给网关服务发送open消息，来启动监听
-        port = 5000, --监听的端口
+        port = 6000, --监听的端口
         maxclient = 4096, --客户端最大连接数
         nodelay = true, --是否延迟TCP
     })
