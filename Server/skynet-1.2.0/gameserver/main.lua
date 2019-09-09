@@ -17,15 +17,15 @@ skynet.start(function()
     local msgregister = skynet.uniqueservice "msgregister"
     skynet.call(msgregister, "lua", "register", "")
 
-    local dbmanager = skynet.uniqueservice "dbmanager"
-    skynet.call(dbmanager, "lua", "open", {
-        host = "127.0.0.1",
-        port = 3306,
-        database = "unityframe_game",
-        user = "root",
-        password = "12345678",
-        name = ".unityframe_game",
-    })
+    --local dbmanager = skynet.uniqueservice "dbmanager"
+    --skynet.call(dbmanager, "lua", "open", {
+    --    host = "127.0.0.1",
+    --    port = 3306,
+    --    database = "unityframe_game",
+    --    user = "root",
+    --    password = "12345678",
+    --    name = ".unityframe_game",
+    --})
 
     local gateserver = skynet.newservice("mygateserver") --启动刚才写的网关服务
     skynet.call(gateserver, "lua", "open", {--需要给网关服务发送open消息，来启动监听
