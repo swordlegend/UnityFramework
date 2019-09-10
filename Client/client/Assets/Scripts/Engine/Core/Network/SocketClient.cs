@@ -50,6 +50,16 @@ namespace gtmEngine.Net
         /// </summary>
         private byte[] m_ByteBuffer = new byte[MAX_READ];
 
+        /// <summary>
+        /// ip
+        /// </summary>
+        private string m_ip;
+
+        /// <summary>
+        /// port
+        /// </summary>
+        private int m_port;
+
         #endregion
 
         #region 函数
@@ -88,6 +98,9 @@ namespace gtmEngine.Net
         /// </summary>
         void ConnectServer(string host, int port)
         {
+            m_ip = host;
+            m_port = port;
+
             m_Client = null;
             m_Client = new TcpClient();
             m_Client.SendTimeout = 1000;
@@ -112,7 +125,8 @@ namespace gtmEngine.Net
         {
             m_NetStream = m_Client.GetStream();
             m_NetStream.BeginRead(m_ByteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
-            LogSystem.instance.Log(LogCategory.GameEngine, "======连接========");
+
+            LogSystem.instance.Log(LogCategory.GameEngine, "======连接=" + m_ip + "=" + m_port + "=======");
         }
 
         /// <summary>

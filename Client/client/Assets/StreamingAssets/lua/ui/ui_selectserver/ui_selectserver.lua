@@ -151,7 +151,8 @@ function ui_selectserver.onLoginGameEvent()
 
     ui_selectserver.close()
 
-
+    local ui_selrole = require("ui.ui_selrole.ui_selrole")
+    ui_selrole.show()
 end
 
 --------------------------------------------------------------------------------------------------

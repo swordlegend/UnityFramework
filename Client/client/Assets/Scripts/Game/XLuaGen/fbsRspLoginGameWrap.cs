@@ -330,8 +330,8 @@ namespace XLua.CSObjectWrap
         {
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			
-                fbs.RspLoginGame gen_to_be_invoked;translator.Get(L, 1, out gen_to_be_invoked);
+
+                fbs.RspLoginGame gen_to_be_invoked; translator.Get(L, 1, out gen_to_be_invoked);
                 LuaAPI.xlua_pushinteger(L, gen_to_be_invoked.Ok);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
