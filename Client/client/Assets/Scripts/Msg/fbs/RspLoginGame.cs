@@ -18,17 +18,17 @@ public struct RspLoginGame : IFlatbufferObject
   public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
   public RspLoginGame __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public bool Ok { get { int o = __p.__offset(4); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public byte Ok { get { int o = __p.__offset(4); return o != 0 ? __p.bb.Get(o + __p.bb_pos) : (byte)0; } }
 
   public static Offset<RspLoginGame> CreateRspLoginGame(FlatBufferBuilder builder,
-      bool ok = false) {
+      byte ok = 0) {
     builder.StartObject(1);
     RspLoginGame.AddOk(builder, ok);
     return RspLoginGame.EndRspLoginGame(builder);
   }
 
   public static void StartRspLoginGame(FlatBufferBuilder builder) { builder.StartObject(1); }
-  public static void AddOk(FlatBufferBuilder builder, bool ok) { builder.AddBool(0, ok, false); }
+  public static void AddOk(FlatBufferBuilder builder, byte ok) { builder.AddByte(0, ok, 0); }
   public static Offset<RspLoginGame> EndRspLoginGame(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<RspLoginGame>(o);

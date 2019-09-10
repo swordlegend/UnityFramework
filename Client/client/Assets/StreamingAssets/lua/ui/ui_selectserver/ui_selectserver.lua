@@ -78,11 +78,13 @@ function ui_selectserver.initEvent()
     ui_selectserver.dialog:AddBtnClickListener(ui_selectserver.uiref.btn_confirm, ui_selectserver.onConfirmBtnClick)
     ui_selectserver.dialog:AddBtnClickListener(ui_selectserver.uiref.btn_server, ui_selectserver.onServerBtnClick)
     ui_selectserver.dialog:AddBtnClickListener(ui_selectserver.uiref.btn_close, ui_selectserver.onCloseBtnClick)
+
+    loginmodel.onLoginGameEvent:AddHandler(ui_selectserver.onLoginGameEvent)
 end
 
 --- remove event
 function ui_selectserver.removeEvent()
-
+    loginmodel.onLoginGameEvent:RemoveHandler(ui_selectserver.onLoginGameEvent)
 end
 
 function ui_selectserver.initData()
@@ -118,6 +120,7 @@ function ui_selectserver.onConfirmBtnClick()
         return
     end
 
+    loginmodel.reqlogingame_cs()
 end
 
 function ui_selectserver.onServerBtnClick()
@@ -143,7 +146,13 @@ end
 
 ---------------------------------------------外部事件----------------------------------------------
 
+function ui_selectserver.onLoginGameEvent()
+    print("ui_selectserver.onLoginGameEvent")
 
+    ui_selectserver.close()
+
+
+end
 
 --------------------------------------------------------------------------------------------------
 

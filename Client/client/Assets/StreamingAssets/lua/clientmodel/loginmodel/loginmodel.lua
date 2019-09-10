@@ -17,6 +17,10 @@ local rspregacc = require("msg.fbs.RspRegisterAccount")
 
 local rsploginzonelist = require("msg.fbs.RspLoginZoneList")
 
+local reqlogingame = require("msg.fbs.RepLoginGame")
+
+local rsplogingame = require("msg.fbs.RspLoginGame")
+
 local logindata = require("clientmodel.loginmodel.logindata")
 
 ---@type event
@@ -31,18 +35,22 @@ function loginmodel.create()
     msgdispatcher.registerFbMsg(rsploginacc, loginmodel.onRspLoginAcc_sc)
     msgdispatcher.registerFbMsg(rspregacc, loginmodel.onRspRegAcc_sc)
     msgdispatcher.registerFbMsg(rsploginzonelist, loginmodel.onRspLoginZoneList_sc)
+    msgdispatcher.registerFbMsg(rsplogingame, loginmodel.onRspLoginGame_sc)
 
     loginmodel.onRegAccEvent = event:new()
     loginmodel.onLoginZoneListEvent = event:new()
+    loginmodel.onLoginGameEvent = event:new()
 end
 
 function loginmodel.close()
     msgdispatcher.unRegisterFbMsg(rsploginacc, loginmodel.onRspLoginAcc_sc)
     msgdispatcher.unRegisterFbMsg(rspregacc, loginmodel.onRspRegAcc_sc)
     msgdispatcher.unRegisterFbMsg(rsploginzonelist, loginmodel.onRspLoginZoneList_sc)
+    msgdispatcher.unRegisterFbMsg(rsplogingame, loginmodel.onRspLoginGame_sc)
 
     loginmodel.onRegAccEvent:Clear()
     loginmodel.onLoginZoneListEvent:Clear()
+    loginmodel.onLoginGameEvent:Clear()
 end
 
 --------------------------------------------------------------------------------------
@@ -122,7 +130,7 @@ function loginmodel.onRspLoginAcc_sc(msg)
         strok = "false"
     end
 
-    print("onRspLoginAcc_sc " .. strok)
+    print("loginmodel.onRspLoginAcc_sc " .. strok)
 end
 
 function loginmodel.onRspRegAcc_sc(msg)
@@ -133,11 +141,37 @@ function loginmodel.onRspRegAcc_sc(msg)
         strok = "false"
     end
 
-    print("onRspRegAcc_sc " .. strok)
+    print("loginmodel.onRspRegAcc_sc " .. strok)
 
     if msg.Ok then
         loginmodel.onRegAccEvent()
     end
+end
+
+function loginmodel.onRspLoginGame_sc(msg)
+    local strok = ""
+    if msg.Ok then
+        strok = "true"
+    else
+        strok = "false"
+    end
+
+    print("loginmodel.onRspLoginGame_sc" .. strok)
+
+    if msg.Ok then
+        loginmodel.onLoginGameEvent()
+    end
+end
+
+function loginmodel.reqlogingame_cs()
+    ---@type builder
+    local builder = msgdispatcher.newBuilder(1024)
+
+    reqlogingame.Start(builder)
+    local orc = reqlogingame.End(builder)
+    builder:Finish(orc)
+
+    msgdispatcher.sendFbMsg(reqlogingame, builder)
 end
 
 --------------------------------------------------------------------------------------

@@ -46,7 +46,7 @@ table RepLoginGame
 
 table RspLoginGame
 {
-    ok:bool;
+    ok:uint8;
 }
 
 table RspLoginRoleList
