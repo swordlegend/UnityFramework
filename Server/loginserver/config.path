@@ -1,4 +1,4 @@
-root = "./"
+root = "./skynet-1.2.0/"
 luaservice = root.."service/?.lua;"..root.."../loginserver/?.lua"
 lualoader = root .. "lualib/loader.lua"
 lua_path = root.."lualib/?.lua;"..root.."lualib/?/init.lua;"..root.."game/msg/fbs/?.lua;"..root.."../loginserver/?.lua"
