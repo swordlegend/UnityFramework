@@ -8,12 +8,12 @@ echo off & color 0A
 set SRCDIR="../../Msg/flatbuffer/"
 set CSHARP_C_DSTDIR="../../Client/client/Assets/Scripts/Msg/"
 set LUA_C_DSTDIR="../../Client/client/Assets/StreamingAssets/lua/msg/"
-set LUA_S_DSTDIR="../../Server/skynet-1.2.0/game/msg/"
+set LUA_S_DSTDIR="../../Server/msg/"
 set LUA_PREFIX="3rd."
 set LUA_MEMDATA_PREFIX="msg."
 
 set LUA_C_DSTDIR_FROM_CSHARP_C_DSTDIR="../../StreamingAssets/lua/msg/"
-set LUA_S_DSTDIR_FROM_LUA_C_DSTDIR="../../../../../../Server/skynet-1.2.0/game/msg/"
+set LUA_S_DSTDIR_FROM_LUA_C_DSTDIR="../../../../../../Server/msg/"
 
 echo "--------------------------------------------------------------------------"
 echo "SrcDir"
