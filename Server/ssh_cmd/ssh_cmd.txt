@@ -49,7 +49,12 @@ kill -9 PID
 
 // 运行自己的测试例子
 
-cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/Server/skynet-1.2.0/
+cd /Users/xieliujian/Desktop/xieliujian/unityframework.git
+cd /Users/xieliujian/Desktop/xieliujian/unityframework.git/trunk/Server
+
+
+./skynet-1.2.0/skynet loginserver/config
+./skynet-1.2.0/skynet gameserver/config
 
 ./skynet myexamples/e1/config
 
